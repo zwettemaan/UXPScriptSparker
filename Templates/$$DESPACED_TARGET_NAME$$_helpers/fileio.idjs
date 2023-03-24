@@ -1,0 +1,94 @@
+var $$SHORTCODE$$ = {};
+
+(function() {
+
+if (! $$SHORTCODE$$.UXP) {
+    $$SHORTCODE$$.UXP = require("uxp");
+}
+
+if (! $$SHORTCODE$$.tokenDict)
+$$SHORTCODE$$.tokenDict = {};
+
+//----
+
+$$SHORTCODE$$.alert = function alert(msg) {
+    
+    const theDialog = app.dialogs.add();
+    const col = theDialog.dialogColumns.add();
+    const colText = col.staticTexts.add();
+    colText.staticLabel = "" + msg;
+    theDialog.canCancel = false;
+    theDialog.show();
+    theDialog.destroy();
+
+    return;
+}
+
+$$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAvailable(error) {
+
+    if ($$SHORTCODE$$.logError) {
+        $$SHORTCODE$$.logError(error);
+    }
+    else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
+
+        try {
+            const desktop = uxp.storage.localFileSystem.getFolder(uxp.storage.domains.userDesktop);
+            const logFile = desktop + "/criticalErrors.log";
+            await logFile.write(error);            
+        }
+        catch (err) {
+
+            try {
+                console.log(error);
+            }
+            catch (err) {   
+            }
+
+        }
+    }
+}
+
+if (dreamweaver) {
+
+    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
+        try {
+            var fullPath = extensionDir + scriptPath;
+            var script = DWfile.read(fullPath);
+            eval(script);
+        }
+        catch (err) {           
+            $$SHORTCODE$$.errorBeforeLoggingAvailable("runtime.jsx loadScript throws " + err + " for " + fullPath);  
+        }
+    }
+
+}
+else {
+
+    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
+        try {
+            var fullPath = extensionDir + scriptPath;
+            var file = File(fullPath);
+            file.open("r");
+            var script = file.read();
+            file.close();
+            eval(script);
+        }
+        catch (err) {           
+            $$SHORTCODE$$.errorBeforeLoggingAvailable("runtime.jsx loadScript throws " + err + " for " + fullPath);  
+        }
+    }
+
+}
+
+//----
+
+})();
+
+exports.loadModule = function(globalSpace) {
+
+    for (var member in $$SHORTCODE$$) {
+        globalSpace[member] = $$SHORTCODE$$[member];        
+    }
+
+    return globalSpace;    
+}

@@ -1,0 +1,24 @@
+﻿$include "infoheader.iidjs"
+
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+require("./$$DESPACED_TARGET_NAME$$_helpers/runtime.idjs")($$SHORTCODE$$);
+
+try 
+{
+    await main();
+} 
+catch (error)
+{
+    $$SHORTCODE$$.alert(error);
+}
+
+async function main(){
+
+	$$SHORTCODE$$.initScript();
+
+	$$SHORTCODE$$.alert(JSON.stringify(y));
+
+}
