@@ -36,8 +36,8 @@ IS_ADVANCED_TARGET_CC_LANGUAGE_CODE=1
 TARGET_NAME="UXPScript Sparker"
 HELP_TARGET_NAME="Human readable script name (e.g. for use in documentation)."
 
-SHORTCODE="UXPK"
-HELP_SHORTCODE="Some variable name for global object used to store jsx globals. Helps avoiding variable name clashes."
+SHORTCODE="UXPS"
+HELP_SHORTCODE="Some variable name for global object used to store UXPScript globals. Helps avoiding variable name clashes."
 
 TARGET_DIRNAME=UXPScriptSparker
 HELP_TARGET_DIRNAME="This is a subfolder name used to store the script in the user scripts folder, and to store preferences in ~/Library/Preferences or %APPDATA%"

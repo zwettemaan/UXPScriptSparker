@@ -3,13 +3,13 @@
 # bring the project back to a 'clean slate'.
 #
 
-if [ "${JSXP_COMMANDS_DIR}" == "" -o ! -d "${JSXP_COMMANDS_DIR}" ]; then
-    export JSXP_COMMANDS_DIR=`dirname "$0"`/
+if [ "${UXPS_COMMANDS_DIR}" == "" -o ! -d "${UXPS_COMMANDS_DIR}" ]; then
+    export UXPS_COMMANDS_DIR=`dirname "$0"`/
 fi
 
-pushd "${JSXP_COMMANDS_DIR}" > /dev/null
+pushd "${UXPS_COMMANDS_DIR}" > /dev/null
 
-export JSXP_COMMANDS_DIR=`pwd`/
+export UXPS_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 

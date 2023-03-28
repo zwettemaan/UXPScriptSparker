@@ -1,6 +1,6 @@
 # Mac-specific tools
 
-Immediately after unzipping the JSXSparker folder, right-click 
+Immediately after unzipping the UXPScriptSparker folder, right-click 
 'initialSetupConfigApp.command' and select 'Open' from the contextual 
 menu. In the resulting dialog, allow the script to run.
 

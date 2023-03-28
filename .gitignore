@@ -1,6 +1,5 @@
 .DS_Store
-/*.jsx
-/*.js
+/*.idjs
 /ReadMe for *.md
 /BuildSettings/
 /*_helpers/

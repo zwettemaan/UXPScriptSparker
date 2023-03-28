@@ -4,7 +4,7 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-require("./$$DESPACED_TARGET_NAME$$_helpers/runtime.idjs")($$SHORTCODE$$);
+require("./$$DESPACED_TARGET_NAME$$_helpers/runtime.idjs").loadModule($$SHORTCODE$$);
 
 try 
 {
@@ -19,6 +19,6 @@ async function main(){
 
 	$$SHORTCODE$$.initScript();
 
-	$$SHORTCODE$$.alert(JSON.stringify(y));
+	$$SHORTCODE$$.alert("Hello World");
 
 }

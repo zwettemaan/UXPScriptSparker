@@ -42,6 +42,6 @@ dependencies:
 - Mac OS X 10.12 or Windows 10.x or higher
 - VSCode with the Adobe ExtendScript Debugger plug-in installed
 
-Make sure to consult the [JSXSparker Documentation](https://github.com/zwettemaan/UXPScriptSparker/wiki/UXPScriptSparker-Documentation)
+Make sure to consult the [UXPScriptSparker Documentation](https://github.com/zwettemaan/UXPScriptSparker/wiki/UXPScriptSparker-Documentation)
 
 This project uses the Sparker application. More info here: https://github.com/zwettemaan/Sparker

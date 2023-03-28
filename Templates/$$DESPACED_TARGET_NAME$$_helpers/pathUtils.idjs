@@ -1,4 +1,6 @@
-﻿// Don't use 'var $$SHORTCODE$$' - some engines call this within a non-global scope
+﻿(function() {
+
+// Don't use 'var $$SHORTCODE$$' - some engines call this within a non-global scope
 // if using var we end up defining this in the wrong scope
 
 if ("undefined" == typeof $$SHORTCODE$$) {
@@ -33,7 +35,7 @@ $$SHORTCODE$$.path.basename = function basename(filepath, separator) {
 
     $endif
     return endSegment;
-};
+}
 
 $$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
     
@@ -61,7 +63,7 @@ $$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath) {
     
@@ -84,7 +86,7 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.exists = function exists(filepath) {
 
@@ -102,7 +104,7 @@ $$SHORTCODE$$.path.exists = function exists(filepath) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 
@@ -124,7 +126,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 
     $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
@@ -168,4 +170,18 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     
     $endif  
     return success;
-};
+}
+
+
+})();
+
+exports.loadModule = function(nameSpace) {
+
+    for (var member in $$SHORTCODE$$) {
+        nameSpace[member] = $$SHORTCODE$$[member];        
+    }
+
+    return nameSpace;    
+}
+
+

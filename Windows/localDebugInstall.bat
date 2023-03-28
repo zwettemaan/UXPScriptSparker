@@ -6,11 +6,11 @@ REM
 REM Setup the panel so we can run it in a live debug session 
 REM
 
-IF "%JSXP_COMMANDS_DIR%" == "" (
-    SET JSXP_COMMANDS_DIR=%~dp0
+IF "%UXPS_COMMANDS_DIR%" == "" (
+    SET UXPS_COMMANDS_DIR=%~dp0
 )
 
-PUSHD "%JSXP_COMMANDS_DIR%.."
+PUSHD "%UXPS_COMMANDS_DIR%.."
 SET PROJECT_ROOT_DIR=%cd%\
 POPD
 

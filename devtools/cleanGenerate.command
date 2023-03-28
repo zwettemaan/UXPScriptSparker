@@ -3,15 +3,15 @@
 # Do not run this unless you're absolutely sure
 #
 
-export JSXP_DEV_TOOLS_DIR=`dirname "$0"`
+export UXPS_DEV_TOOLS_DIR=`dirname "$0"`
 
-pushd "$JSXP_DEV_TOOLS_DIR" > /dev/null
+pushd "$UXPS_DEV_TOOLS_DIR" > /dev/null
 
-export JSXP_DEV_TOOLS_DIR=`pwd`/
+export UXPS_DEV_TOOLS_DIR=`pwd`/
 
-export PROJECT_ROOT_DIR=`dirname "$JSXP_DEV_TOOLS_DIR"`/
+export PROJECT_ROOT_DIR=`dirname "$UXPS_DEV_TOOLS_DIR"`/
 
-export JSXP_COMMANDS_DIR="${PROJECT_ROOT_DIR}Mac/"
+export UXPS_COMMANDS_DIR="${PROJECT_ROOT_DIR}Mac/"
 
 #
 # Don't even try if the project has not been generated

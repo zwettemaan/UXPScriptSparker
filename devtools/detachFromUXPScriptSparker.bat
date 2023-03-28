@@ -2,17 +2,17 @@
 SETLOCAL EnableDelayedExpansion
 
 REM
-REM Remove all the JSXSparker templates and generation software
+REM Remove all the UXPScriptSparker templates and generation software
 REM so the project becomes stand-alone
 REM
 
-SET JSXP_DEV_TOOLS_DIR=%~dp0
+SET UXPS_DEV_TOOLS_DIR=%~dp0
 
-PUSHD %JSXP_DEV_TOOLS_DIR%..
+PUSHD %UXPS_DEV_TOOLS_DIR%..
 SET PROJECT_ROOT_DIR=%cd%\
 POPD
 
-SET JSXP_COMMANDS_DIR=%PROJECT_ROOT_DIR%Windows\
+SET UXPS_COMMANDS_DIR=%PROJECT_ROOT_DIR%Windows\
 
 REM
 REM Don't even try if the project has not been generated
@@ -22,7 +22,7 @@ SET REPLY=
 IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
 
     ECHO.
-    ECHO This is an unconfigured JSXSparker project.
+    ECHO This is an unconfigured UXPScriptSparker project.
     ECHO Make sure to read the documentation and then run SparkerConfig as instructed.
     ECHO Aborting.
     ECHO.
@@ -30,15 +30,15 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
 ) ELSE (
 
     ECHO.
-    ECHO This project will now stand on its own, and become independent of JSXSparker.
+    ECHO This project will now stand on its own, and become independent of UXPScriptSparker.
     ECHO.
-    ECHO This operation will delete all template files and JSXSparker configuration
-    ECHO software, and if necessary also detach the project from the JSXSparker git repo.
+    ECHO This operation will delete all template files and UXPScriptSparker configuration
+    ECHO software, and if necessary also detach the project from the UXPScriptSparker git repo.
     ECHO.
     ECHO Type 'YES' at the prompt only if you're sure you want to do this.
     ECHO.
 
-    SET /P REPLY=Remove all JSXSparker templating software and any ties to the JSXSparker git repository [YES/NO]?: 
+    SET /P REPLY=Remove all UXPScriptSparker templating software and any ties to the UXPScriptSparker git repository [YES/NO]?: 
 
     IF "!REPLY!" == "YES" (
 
@@ -54,10 +54,10 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
         RD /s /q "Mac\ Do not forget to de-quarantine!.txt" >NUL 2>&1
         DEL Windows\SparkerConfig.exe
         RD /s /q Windows\SparkerConfig\ Libs >NUL 2>&1
-        SET JSXP_DELETE_MYSELF="YES"
+        SET UXPS_DELETE_MYSELF="YES"
 
         ECHO.
-        ECHO All ties to the JSXSparker Github project have now been broken. This
+        ECHO All ties to the UXPScriptSparker Github project have now been broken. This
         ECHO project is now a standalone project and can be put into a git repository
         ECHO as a brand new project.
         ECHO.
@@ -69,6 +69,6 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
 SET /P FINALIZE=Press [Enter] to finalize
 
 IF "!REPLY!" == "YES" (
-    RD /s /q "%JSXP_DEV_TOOLS_DIR%" >NUL 2>&1
+    RD /s /q "%UXPS_DEV_TOOLS_DIR%" >NUL 2>&1
 )
 

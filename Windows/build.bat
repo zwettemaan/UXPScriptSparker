@@ -3,15 +3,15 @@ REM
 REM Create a distributable copy in the builds folder
 REM
 
-IF "%JSXP_COMMANDS_DIR%" == "" (
-    SET JSXP_COMMANDS_DIR=%~dp0
+IF "%UXPS_COMMANDS_DIR%" == "" (
+    SET UXPS_COMMANDS_DIR=%~dp0
 )
 
-PUSHD "%JSXP_COMMANDS_DIR%.."
+PUSHD "%UXPS_COMMANDS_DIR%.."
 SET PROJECT_ROOT_DIR=%cd%\
 POPD
 
-CALL "%JSXP_COMMANDS_DIR%setTarget.bat"
+CALL "%UXPS_COMMANDS_DIR%setTarget.bat"
 
 PUSHD "%PROJECT_ROOT_DIR%"
 

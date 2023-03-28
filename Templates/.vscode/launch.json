@@ -9,31 +9,6 @@ $if "$$TARGET_APP_FULL_SPECIFIER$$" != ""
             "targetSpecifier": "$$TARGET_APP_FULL_SPECIFIER$$",
 $endif            
             "program": "${workspaceFolder}/$$DESPACED_TARGET_NAME$$.$$TARGET_FILENAME_EXTENSION$$",
-$if "$$USE_PERSISTENT_ENGINE$$" != "ON"
-$if "$$TARGET_APP$$" == "Premiere Pro"
-            "engineName": "NewWorld",
-$elif "$$TARGET_APP$$" == "Bridge"
-            "engineName": "MainEngine",
-$elif "$$TARGET_APP$$" == "Adobe Media Encoder"
-            "engineName": "NewWorld",
-$else
-            "engineName": "main",
-$endif            
-$else
-$if "$$TARGET_APP$$" == "InDesign"
-            "engineName": "$$SHORTCODE$$_Engine",
-$elif "$$TARGET_APP$$" == "InCopy"
-            "engineName": "$$SHORTCODE$$_Engine",
-$elif "$$TARGET_APP$$" == "Premiere Pro"
-            "engineName": "NewWorld",
-$elif "$$TARGET_APP$$" == "Bridge"
-            "engineName": "MainEngine",
-$elif "$$TARGET_APP$$" == "Adobe Media Encoder"
-            "engineName": "NewWorld",
-$else
-            "engineName": "main",
-$endif            
-$endif
             "dontBreakOnErrors": false,
             "extensionMode": "passive",
             "stopOnEntry": false

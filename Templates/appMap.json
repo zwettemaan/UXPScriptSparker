@@ -7,12 +7,9 @@
         * TARGET_APP_FULL_SPECIFIER: need a '64' suffix with InCopy
         */
         "TARGET_APP_FULL_SPECIFIER": "$$TARGET_APP_SPECIFIER$$-$$TARGET_APP_SPECIFIER_VERSION$$64",
-        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_FILENAME_EXTENSION": "idjs",
         "TARGET_APP_SCRIPT_DIR_MAC": "~/Library/Preferences/Adobe $$TARGET_APP$$/Version $$TARGET_INCOPY_VERSION$$/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/Scripts Panel/",
         "TARGET_APP_SCRIPT_DIR_WINDOWS": "%APPDATA%\\Adobe\\$$TARGET_APP$$\\Version $$TARGET_INCOPY_VERSION$$\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\Scripts Panel\\",
-        "DOC_LINKS": [
-            "https://www.adobe.io/apis/creativecloud/bridge.html"
-        ],
         /*
         * TARGET_APP_SPECIFIER_VERSION matches TARGET_CC_VERSION, so no need to have a separate
         * entry for TARGET_APP_SPECIFIER_VERSION
@@ -29,7 +26,7 @@
         * TARGET_APP_FULL_SPECIFIER: need a '64' suffix with InDesign
         */
         "TARGET_APP_FULL_SPECIFIER": "$$TARGET_APP_SPECIFIER$$-$$TARGET_APP_SPECIFIER_VERSION$$64",
-        "TARGET_FILENAME_EXTENSION": "jsx",
+        "TARGET_FILENAME_EXTENSION": "idjs",
         "TARGET_APP_SCRIPT_DIR_MAC": "~/Library/Preferences/Adobe $$TARGET_APP$$/Version $$TARGET_INDESIGN_VERSION$$/$$TARGET_CC_LANGUAGE_CODE$$/Scripts/Scripts Panel/",
         "TARGET_APP_SCRIPT_DIR_WINDOWS": "%APPDATA%\\Adobe\\$$TARGET_APP$$\\Version $$TARGET_INDESIGN_VERSION$$\\$$TARGET_CC_LANGUAGE_CODE$$\\Scripts\\Scripts Panel\\",
         /*

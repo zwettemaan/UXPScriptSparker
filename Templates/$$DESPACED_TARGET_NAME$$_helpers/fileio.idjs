@@ -1,27 +1,38 @@
-var $$SHORTCODE$$ = {};
-
 (function() {
 
-if (! $$SHORTCODE$$.UXP) {
-    $$SHORTCODE$$.UXP = require("uxp");
+// Don't use 'var $$SHORTCODE$$' - some engines call this within a non-global scope
+// if using var we end up defining this in the wrong scope
+
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
 }
 
-if (! $$SHORTCODE$$.tokenDict)
-$$SHORTCODE$$.tokenDict = {};
+if (! $$SHORTCODE$$.tokenDict) {
+    $$SHORTCODE$$.tokenDict = {};
+}
 
-//----
+$$SHORTCODE$$.openFile = async function openFile(filePath) {
 
-$$SHORTCODE$$.alert = function alert(msg) {
-    
-    const theDialog = app.dialogs.add();
-    const col = theDialog.dialogColumns.add();
-    const colText = col.staticTexts.add();
-    colText.staticLabel = "" + msg;
-    theDialog.canCancel = false;
-    theDialog.show();
-    theDialog.destroy();
+    if ($$SHORTCODE$$.logError) {
+        $$SHORTCODE$$.logError(error);
+    }
+    else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
 
-    return;
+        try {
+            const desktop = uxp.storage.localFileSystem.getFolder(uxp.storage.domains.userDesktop);
+            const logFile = desktop + "/criticalErrors.log";
+            await logFile.write(error);            
+        }
+        catch (err) {
+
+            try {
+                console.log(error);
+            }
+            catch (err) {   
+            }
+
+        }
+    }
 }
 
 $$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAvailable(error) {
@@ -48,47 +59,13 @@ $$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAva
     }
 }
 
-if (dreamweaver) {
-
-    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-        try {
-            var fullPath = extensionDir + scriptPath;
-            var script = DWfile.read(fullPath);
-            eval(script);
-        }
-        catch (err) {           
-            $$SHORTCODE$$.errorBeforeLoggingAvailable("runtime.jsx loadScript throws " + err + " for " + fullPath);  
-        }
-    }
-
-}
-else {
-
-    $$SHORTCODE$$.loadScript = function(extensionDir, scriptPath) {
-        try {
-            var fullPath = extensionDir + scriptPath;
-            var file = File(fullPath);
-            file.open("r");
-            var script = file.read();
-            file.close();
-            eval(script);
-        }
-        catch (err) {           
-            $$SHORTCODE$$.errorBeforeLoggingAvailable("runtime.jsx loadScript throws " + err + " for " + fullPath);  
-        }
-    }
-
-}
-
-//----
-
 })();
 
-exports.loadModule = function(globalSpace) {
+exports.loadModule = function(nameSpace) {
 
     for (var member in $$SHORTCODE$$) {
-        globalSpace[member] = $$SHORTCODE$$[member];        
+        nameSpace[member] = $$SHORTCODE$$[member];        
     }
 
-    return globalSpace;    
+    return nameSpace;    
 }

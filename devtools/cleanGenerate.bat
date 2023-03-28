@@ -7,13 +7,13 @@ REM
 
 SETLOCAL EnableDelayedExpansion
 
-SET JSXP_DEV_TOOLS_DIR=%~dp0
+SET UXSP_DEV_TOOLS_DIR=%~dp0
 
-PUSHD %JSXP_DEV_TOOLS_DIR%..
+PUSHD %UXSP_DEV_TOOLS_DIR%..
 SET PROJECT_ROOT_DIR=%cd%\
 POPD
 
-SET JSXP_COMMANDS_DIR=%PROJECT_ROOT_DIR%Windows\
+SET UXSP_COMMANDS_DIR=%PROJECT_ROOT_DIR%Windows\
 
 REM
 REM Don't even try if the project has not been generated
@@ -27,7 +27,7 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
 
     PUSHD "%PROJECT_ROOT_DIR%"
 
-    CALL "%JSXP_COMMANDS_DIR%setTarget.bat"
+    CALL "%UXSP_COMMANDS_DIR%setTarget.bat"
 
     ECHO.
     ECHO WARNING WARNING WARNING
@@ -42,7 +42,7 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
 
     IF "!REPLY!" == "YES" (
 
-        CALL "%JSXP_COMMANDS_DIR%clean.bat" NESTED
+        CALL "%UXSP_COMMANDS_DIR%clean.bat" NESTED
 
         ECHO.
         ECHO Removing generated files

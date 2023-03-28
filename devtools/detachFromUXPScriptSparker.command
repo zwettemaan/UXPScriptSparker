@@ -1,19 +1,19 @@
 #
-# Remove all the JSXSparker templates and generation software
+# Remove all the UXPScriptSparker templates and generation software
 # so the project becomes stand-alone
 #
 
-export JSXP_DEV_TOOLS_DIR=`dirname "$0"`/
+export UXPS_DEV_TOOLS_DIR=`dirname "$0"`/
 
-pushd "$JSXP_DEV_TOOLS_DIR" > /dev/null
+pushd "$UXPS_DEV_TOOLS_DIR" > /dev/null
 
-export JSXP_DEV_TOOLS_DIR=`pwd`/
+export UXPS_DEV_TOOLS_DIR=`pwd`/
 
-export PROJECT_ROOT_DIR=`dirname "$JSXP_DEV_TOOLS_DIR"`/
+export PROJECT_ROOT_DIR=`dirname "$UXPS_DEV_TOOLS_DIR"`/
 
 cd "$PROJECT_ROOT_DIR"
 
-export JSX_DELETE_MYSELF=0
+export UXPS_DELETE_MYSELF=0
 
 #
 # Don't even try if the project has not been generated
@@ -21,7 +21,7 @@ export JSX_DELETE_MYSELF=0
 if [ ! -d "./BuildSettings" ]; then
 
     echo ""
-    echo "This is an unconfigured JSXSparker project."
+    echo "This is an unconfigured UXPScriptSparker project."
     echo "Make sure to read the documentation and then run SparkerConfig as instructed."
     echo "Aborting."
     echo ""
@@ -29,9 +29,9 @@ if [ ! -d "./BuildSettings" ]; then
 else
 
     echo ""
-    echo "This project will now stand on its own, and become independent of JSXSparker"
-    echo "This operation will delete all templates files and JSXSparker configuration"
-    echo "software, and (if necessary) detach the project from the JSXSparker git repo."
+    echo "This project will now stand on its own, and become independent of UXPScriptSparker"
+    echo "This operation will delete all templates files and UXPScriptSparker configuration"
+    echo "software, and (if necessary) detach the project from the UXPScriptSparker git repo."
     echo ""
     echo "Type 'YES' at the prompt only if you're sure you want to do this."
 
@@ -49,10 +49,10 @@ else
         rm -rf "Mac/ Do not forget to de-quarantine!.txt"
         rm -f Windows/SparkerConfig.exe
         rm -rf Windows/SparkerConfig\ Libs
-        export JSX_DELETE_MYSELF=1
+        export UXPS_DELETE_MYSELF=1
 
         echo ""
-        echo "All ties to the JSXSparker Github project have now been broken. This"
+        echo "All ties to the UXPScriptSparker Github project have now been broken. This"
         echo "project is now a standalone project and can be put into a git repository"
         echo "as a brand new project."
         echo ""
@@ -67,6 +67,6 @@ echo ""
 
 popd > /dev/null
 
-if [ "$JSX_DELETE_MYSELF" == "1" ]; then
-    rm -rf "$JSXP_DEV_TOOLS_DIR"
+if [ "$UXPS_DELETE_MYSELF" == "1" ]; then
+    rm -rf "$UXPS_DEV_TOOLS_DIR"
 fi
