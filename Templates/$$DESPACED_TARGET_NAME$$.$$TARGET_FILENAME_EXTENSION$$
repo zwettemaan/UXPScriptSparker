@@ -6,16 +6,14 @@ if ("undefined" == typeof $$SHORTCODE$$) {
 
 require("./$$DESPACED_TARGET_NAME$$_helpers/runtime.idjs").loadModule($$SHORTCODE$$);
 
-try 
-{
+try {
     await main();
 } 
-catch (error)
-{
+catch (error) {
     $$SHORTCODE$$.alert(error);
 }
 
-async function main(){
+async function main() {
 
 	$$SHORTCODE$$.initScript();
 
