@@ -4,7 +4,7 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-require("./$$DESPACED_TARGET_NAME$$_helpers/runtime.idjs").loadModule($$SHORTCODE$$);
+require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$);
 
 try {
     await main();

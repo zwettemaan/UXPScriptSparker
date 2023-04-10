@@ -1,7 +1,7 @@
 (function() {
 
-// Don't use 'var $$SHORTCODE$$' - some engines call this within a non-global scope
-// if using var we end up defining this in the wrong scope
+// Don't use 'var $$SHORTCODE$$' 
+// Using var we might end up defining this in the wrong scope
 
 if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
@@ -27,14 +27,5 @@ $$SHORTCODE$$.C.LOG_TRACE                     = 4;
 /* Add any global constants */
 
 })();
-
-exports.loadModule = function(nameSpace) {
-
-    for (var member in $$SHORTCODE$$) {
-        nameSpace[member] = $$SHORTCODE$$[member];        
-    }
-
-    return nameSpace;    
-}
 
 

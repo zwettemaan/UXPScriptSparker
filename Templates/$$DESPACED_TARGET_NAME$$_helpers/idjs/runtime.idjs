@@ -1,7 +1,7 @@
 (function() {
 
-// Don't use 'var $$SHORTCODE$$' - some engines call this within a non-global scope
-// if using var we end up defining this in the wrong scope
+// Don't use 'var $$SHORTCODE$$'
+// Using var we might end up defining this in the wrong scope
 
 if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
@@ -10,12 +10,13 @@ if ("undefined" == typeof $$SHORTCODE$$) {
 $$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
-    "./globals.idjs",
-    "./tweakableSettings.idjs",
-    "./pathUtils.idjs",
+    "../shared/globals.js",
+    "../shared/tweakableSettings.js",
+    "../shared/pathUtils.js",
+    "../shared/utils.js",
     "./utils.idjs",
     "./fileio.idjs",
-    "./init.idjs"
+    "../shared/init.js"
 ];
 
 $$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAvailable(error) {
@@ -44,16 +45,20 @@ $$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAva
 
 })();
 
-exports.loadModule = function(nameSpace) {
+exports.loadModules = function loadModules(nameSpace) {
 
     for (var pathIdx = 0; pathIdx < $$SHORTCODE$$.relativeFilePathsToLoad.length; pathIdx++) {
         var path = $$SHORTCODE$$.relativeFilePathsToLoad[pathIdx];
-        var module = require(path).loadModule(nameSpace);
+        require(path);
     }
 
     for (var member in $$SHORTCODE$$) {
         nameSpace[member] = $$SHORTCODE$$[member];        
     }
 
+    if ($$SHORTCODE$$.RUN_TESTS) {
+
+    }
+    
     return nameSpace;    
 }

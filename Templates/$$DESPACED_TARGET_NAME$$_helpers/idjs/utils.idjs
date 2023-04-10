@@ -1,0 +1,65 @@
+﻿(function() {
+
+// Don't use 'var $$SHORTCODE$$' 
+// Using var we might end up defining this in the wrong scope
+
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+$$SHORTCODE$$.alert = function alert(msg) {
+    
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    const theDialog = app.dialogs.add();
+    const col = theDialog.dialogColumns.add();
+    const colText = col.staticTexts.add();
+    colText.staticLabel = "" + msg;
+    theDialog.canCancel = false;
+    theDialog.show();
+    theDialog.destroy();
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+}
+
+$$SHORTCODE$$.checkMac = function checkMac() {    
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    retVal = window.navigator.platform == "darwin";
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.checkWindows = function checkWindows() {    
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    retVal = window.navigator.platform.toLowerCase().indexOf("win") != -1;
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+})();

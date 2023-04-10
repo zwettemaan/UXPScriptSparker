@@ -4,8 +4,8 @@
 
 (function() {
 
-// Don't use 'var $$SHORTCODE$$' - some engines call this within a non-global scope
-// if using var we end up defining this in the wrong scope
+// Don't use 'var $$SHORTCODE$$'
+// Using var we might end up defining this in the wrong scope
 
 if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
@@ -25,19 +25,12 @@ $else
 $$SHORTCODE$$.S.LOG_ENTRY_EXIT                = false;
 $endif
 
+$$SHORTCODE$$.RUN_TESTS                       = true;
+
 /* Add any global settings, defaults... here */
 
 /* ... */
 
 })();
-
-exports.loadModule = function(nameSpace) {
-
-    for (var member in $$SHORTCODE$$) {
-        nameSpace[member] = $$SHORTCODE$$[member];        
-    }
-
-    return nameSpace;    
-}
 
 
