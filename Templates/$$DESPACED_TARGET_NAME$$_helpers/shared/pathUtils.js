@@ -1,14 +1,38 @@
 ﻿(function() {
 
-// Don't use 'var $$SHORTCODE$$' 
-// Using var we might end up defining this in the wrong scope
-
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
 if (! $$SHORTCODE$$.path) {
 	$$SHORTCODE$$.path = {};
+}
+
+if (! $$SHORTCODE$$.tests.path) {
+    $$SHORTCODE$$.tests.path = {};
+}
+
+$$SHORTCODE$$.tests.path.basename = function test_basename() {
+
+    var retVal = true;
+
+    do {
+        var expected;
+        var filePath;
+
+        expected = "kris";
+        filePath = "/Users/kris";
+        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+            retVal = false;
+        }
+
+        expected = "kris";
+        filePath = "/Users/kris/";
+        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+            retVal = false;
+        }
+
+
+    }
+    while (false);
+
+    return retVal;
 }
 
 $$SHORTCODE$$.path.basename = function basename(filepath, separator) {

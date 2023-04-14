@@ -1,70 +1,44 @@
 ﻿//
-// This code is exclusively UXPScript. It provides UXPScript-specific 
-// implementations utils API.
+// This file mirrors the API of js/utils.js
 //
-// utils.js depends on these functions being implemented
-// When adding new functionality here, make sure to also 
-// add corresponding tests to the utils_verifyDependencies()
-//
+
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
 
 (function() {
 
-$$SHORTCODE$$.alert = function alert(msg) {
+$$SHORTCODE$$.checkMac = function checkMac() {
     
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    const theDialog = app.dialogs.add();
-    const col = theDialog.dialogColumns.add();
-    const colText = col.staticTexts.add();
-    colText.staticLabel = "" + msg;
-    theDialog.canCancel = false;
-    theDialog.show();
-    theDialog.destroy();
+    var retVal = $.os.substr(0,3) == "Mac";
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
-
-    $endif
-}
-
-$$SHORTCODE$$.checkMac = function checkMac() {    
-
-    var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
-    $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    retVal = window.navigator.platform == "darwin";
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-
-    $endif
     return retVal;
+};
+
+if ($$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG === undefined) {
+    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
 }
 
-$$SHORTCODE$$.checkWindows = function checkWindows() {    
+// Call this from JavaScript side via CSInterface
 
-    var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+$$SHORTCODE$$.fetchAccumulatedESTKToChromeConsoleLog = function() {
 
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
+    var retVal = $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG;
 
-    retVal = window.navigator.platform.toLowerCase().indexOf("win") != -1;
+    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-
-    $endif
     return retVal;
-}
+};
 
-$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, s) {
+$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     var savedInLogger = $$SHORTCODE$$.inLogger;
 
@@ -78,6 +52,11 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, s) {
             $$SHORTCODE$$.inLogger = true;
             
             var prefix = "";
+
+            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE && $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
+                // Make sure we can tell the difference between the message origins
+                prefix += "ES>>";
+            }
 
             if (! message) {
 
@@ -106,11 +85,21 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, s) {
                 }
             }
             
-            var logLine = prefix + message;
+            var estkLogLine = prefix + message;
                     
-            if ($$SHORTCODE$$.S.LOG_TO_UXPDEVTOOL_CONSOLE) {
-                console.log(logLine); 
+            if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
+                $.writeln(estkLogLine); 
             }
+
+            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
+
+                if ("string" != typeof $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG) {
+                    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
+                }
+
+                $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG += estkLogLine + "\n";
+            }
+
         }
         catch (err) {
         }

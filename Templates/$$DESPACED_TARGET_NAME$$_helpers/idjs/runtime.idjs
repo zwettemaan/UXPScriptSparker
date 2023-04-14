@@ -1,34 +1,96 @@
 (function() {
 
-// Don't use 'var $$SHORTCODE$$'
-// Using var we might end up defining this in the wrong scope
+// Don't use `var $$SHORTCODE$$`
+// By using `var` we will end up defining this in the wrong scope
 
 if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-$$SHORTCODE$$.LOG_CRITICAL_ERRORS = false;
+if (! $$SHORTCODE$$.tests) {
+    $$SHORTCODE$$.tests = {};
+}
+
+if (! $$SHORTCODE$$.UXP) {
+    $$SHORTCODE$$.UXP = require("uxp");
+}
 
 $$SHORTCODE$$.relativeFilePathsToLoad = [
+
+    "../shared/appMapper.js",
+
+    "../api/globals.js",
     "../shared/globals.js",
+    "./globals.idjs",
+
+    "../api/tweakableSettings.js",
     "../shared/tweakableSettings.js",
-    "../shared/pathUtils.js",
+
+    "../api/utils.js",
     "../shared/utils.js",
     "./utils.idjs",
+
+    "../api/pathUtils.js",
+    "../shared/pathUtils.js",
+
     "./fileio.idjs",
     "../shared/init.js"
 ];
 
-$$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAvailable(error) {
+$$SHORTCODE$$.initScript = function initScript(completionCallback) {
+
+    var retVal = false;
+
+    do {
+        try {
+
+            if (! $$SHORTCODE$$.dirs) {
+                $$SHORTCODE$$.dirs = {};
+            }
+
+            $$SHORTCODE$$.fs.getFolder($$SHORTCODE$$.storage.domains.userDesktop).then(
+                function(desktopFolder) {
+
+                    $$SHORTCODE$$.dirs.RAW_DESKTOP = desktopFolder.nativePath;
+
+                    $$SHORTCODE$$.dirs.RAW_HOME = 
+                        $$SHORTCODE$$.path.dirName($$SHORTCODE$$.dirs.RAW_DESKTOP);
+
+                    $$SHORTCODE$$.fs.getTemporaryFolder().then(
+
+                        function(appLocalTemp) {
+
+                            $$SHORTCODE$$.dirs.RAW_TEMP = appLocalTemp.nativePath;
+
+                            $$SHORTCODE$$.sharedInitScript();
+
+                            completionCallback();
+                        }
+                    );
+                }
+            );
+
+        }
+        catch (err) { 
+            $$SHORTCODE$$.criticalError("initScript throws " + err);
+        }
+    }
+    while (false);
+}
+
+$$SHORTCODE$$.criticalError = async function criticalError(error) {
 
     if ($$SHORTCODE$$.logError) {
         $$SHORTCODE$$.logError(error);
     }
-    else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
+    
+    if ($$SHORTCODE$$.S.LOG_CRITICAL_ERRORS) {
 
         try {
-            const desktop = uxp.storage.localFileSystem.getFolder(uxp.storage.domains.userDesktop);
-            const logFile = desktop + "/criticalErrors.log";
+            const desktop = 
+                await $$SHORTCODE$$.fs.getFolder(
+                    $$SHORTCODE$$.storage.domains.userDesktop);
+            const logFile = desktop.nativePath + "/criticalErrors.log";
             await logFile.write(error);            
         }
         catch (err) {
@@ -45,20 +107,58 @@ $$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAva
 
 })();
 
-exports.loadModules = function loadModules(nameSpace) {
+exports.loadModules = function loadModules(nameSpace, completionCallback) {
+
+    var failedTests = 0;
+    var missingImplementations = 0;
+
+    function verifyImplementationsAvailable(apiCollection) {
+        if (apiCollection) {
+            for (var entryName in apiCollection) {
+                var entry = apiCollection[entryName];
+                if ("function" == typeof entry && entry == $$SHORTCODE$$.IMPLEMENTATION_MISSING) {
+                    missingImplementations++;
+                    $$SHORTCODE$$.criticalError("Missing implementation " + entryName);
+                }
+            }
+        }
+    }
+
+    function runTests(testCollection) {
+        if (testCollection) {
+            for (var testEntryName in testCollection) {
+                var testEntry = testCollection[testEntryName];
+                if ("function" == typeof testEntry) {
+                    if (! testEntry()) {
+                        $$SHORTCODE$$.criticalError("Failed test " + testEntryName);
+                        failedTests++;
+                    }
+                }
+                else if ("object" == typeof testEntry) {
+                    runTests(testEntry);
+                }
+            }
+        }
+    }
 
     for (var pathIdx = 0; pathIdx < $$SHORTCODE$$.relativeFilePathsToLoad.length; pathIdx++) {
         var path = $$SHORTCODE$$.relativeFilePathsToLoad[pathIdx];
         require(path);
     }
 
-    for (var member in $$SHORTCODE$$) {
-        nameSpace[member] = $$SHORTCODE$$[member];        
-    }
+    $$SHORTCODE$$.initScript(function() {
 
-    if ($$SHORTCODE$$.RUN_TESTS) {
+        for (var member in $$SHORTCODE$$) {
+            nameSpace[member] = $$SHORTCODE$$[member];        
+        }
 
-    }
-    
-    return nameSpace;    
+        if ($$SHORTCODE$$.S.RUN_TESTS) {
+            verifyImplementationsAvailable($$SHORTCODE$$);
+            runTests($$SHORTCODE$$.tests);
+        }
+
+        completionCallback();
+
+    });
+
 }

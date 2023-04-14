@@ -1,12 +1,5 @@
 (function() {
 
-// Don't use 'var $$SHORTCODE$$'
-// Using var we might end up defining this in the wrong scope
-
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
 if (! $$SHORTCODE$$.tokenDict) {
     $$SHORTCODE$$.tokenDict = {};
 }
@@ -16,34 +9,12 @@ $$SHORTCODE$$.openFile = async function openFile(filePath) {
     if ($$SHORTCODE$$.logError) {
         $$SHORTCODE$$.logError(error);
     }
-    else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
+    else if ($$SHORTCODE$$.S.LOG_CRITICAL_ERRORS) {
 
         try {
-            const desktop = uxp.storage.localFileSystem.getFolder(uxp.storage.domains.userDesktop);
-            const logFile = desktop + "/criticalErrors.log";
-            await logFile.write(error);            
-        }
-        catch (err) {
-
-            try {
-                console.log(error);
-            }
-            catch (err) {   
-            }
-
-        }
-    }
-}
-
-$$SHORTCODE$$.errorBeforeLoggingAvailable = async function errorBeforeLoggingAvailable(error) {
-
-    if ($$SHORTCODE$$.logError) {
-        $$SHORTCODE$$.logError(error);
-    }
-    else if ($$SHORTCODE$$.LOG_CRITICAL_ERRORS) {
-
-        try {
-            const desktop = uxp.storage.localFileSystem.getFolder(uxp.storage.domains.userDesktop);
+            const desktop = 
+                $$SHORTCODE$$.UXP.storage.localFileSystem.getFolder(
+                    $$SHORTCODE$$.UXP.storage.domains.userDesktop);
             const logFile = desktop + "/criticalErrors.log";
             await logFile.write(error);            
         }

@@ -1,12 +1,5 @@
 ﻿(function() {
 
-// Don't use 'var $$SHORTCODE$$' 
-// Using var we might end up defining this in the wrong scope
-
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
 if ($$SHORTCODE$$.checkMac()) {
     $$SHORTCODE$$.path.SEPARATOR = "/";
     $$SHORTCODE$$.isMac = true;
@@ -18,11 +11,41 @@ else {
     $$SHORTCODE$$.isWindows = true;
 }
 
-if (! $$SHORTCODE$$.dirs) {
-    $$SHORTCODE$$.dirs = {};
-}
+$$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
 
-$$SHORTCODE$$.initScript = function initScript() {
+    do {
+        try {
+
+            $$SHORTCODE$$.C.APP_NAME = $$SHORTCODE$$.mapAppId($$SHORTCODE$$.C.APP_ID);
+
+            $$SHORTCODE$$.dirs.DIR_HOME = 
+                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_HOME);
+
+            $$SHORTCODE$$.dirs.DIR_TEMP = 
+                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_TEMP);
+
+            $$SHORTCODE$$.dirs.DIR_DOCUMENTS = 
+                $$SHORTCODE$$.dirs.DIR_HOME + 
+                "Documents" + 
+                $$SHORTCODE$$.path.SEPARATOR;
+
+            $$SHORTCODE$$.dirs.DIR_ADOBE_SCRIPTS = 
+                $$SHORTCODE$$.dirs.DIR_DOCUMENTS + 
+                "Adobe Scripts" + 
+                $$SHORTCODE$$.path.SEPARATOR;
+
+            $$SHORTCODE$$.dirs.DIR_APP_SCRIPTS = 
+                $$SHORTCODE$$.dirs.DIR_ADOBE_SCRIPTS + 
+                $$SHORTCODE$$.C.APP_NAME + 
+                $$SHORTCODE$$.path.SEPARATOR;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+
 }
 
 })();

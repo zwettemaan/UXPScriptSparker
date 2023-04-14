@@ -2,60 +2,7 @@
 // This code can be shared between CEP/JavaScript, ExtendScript and UXPScript
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
 (function(){
-
-$$SHORTCODE$$.shallowClone = function shallowClone(obj) {
-
-    var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-
-    do {
-        try {
-
-            if ("object" != typeof obj) {
-                retVal = obj;
-                break;
-            }
-
-            if (! obj) {
-                retVal = obj;
-                break;
-            }
-
-            var clone;
-            if (obj instanceof Array) {
-                clone = [];
-            }
-            else {
-                clone = {};        
-            }
-
-            for (var x in obj) 
-            {
-                clone[x] = obj[x];
-            }
-
-            retVal = clone;
-        }
-        catch (err) {
-            $$SHORTCODE$$.logError(arguments, "throws " + err);
-        }
-    }
-    while (false);
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-
-    $endif
-    return retVal;
-}
 
 $$SHORTCODE$$.deepClone = function deepClone(obj) {
 
@@ -119,6 +66,55 @@ $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r") + '"';
 }
 
+$$SHORTCODE$$.shallowClone = function shallowClone(obj) {
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        try {
+
+            if ("object" != typeof obj) {
+                retVal = obj;
+                break;
+            }
+
+            if (! obj) {
+                retVal = obj;
+                break;
+            }
+
+            var clone;
+            if (obj instanceof Array) {
+                clone = [];
+            }
+            else {
+                clone = {};        
+            }
+
+            for (var x in obj) 
+            {
+                clone[x] = obj[x];
+            }
+
+            retVal = clone;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
 // sQ: Wrap a string in single quotes
 $$SHORTCODE$$.sQ = function(s) {
     return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g,"\\n").replace(/\r/g,"\\r") + "'";
@@ -127,12 +123,6 @@ $$SHORTCODE$$.sQ = function(s) {
 $$SHORTCODE$$.logEntry = function(reportingFunctionArguments) {
     if ($$SHORTCODE$$.S.LOG_ENTRY_EXIT) {
         $$SHORTCODE$$.logTrace(reportingFunctionArguments, "Entry");
-    }
-}
-
-$$SHORTCODE$$.logExit = function(reportingFunctionArguments) {
-    if ($$SHORTCODE$$.S.LOG_ENTRY_EXIT) {
-        $$SHORTCODE$$.logTrace(reportingFunctionArguments, "Exit");
     }
 }
 
@@ -146,13 +136,9 @@ $$SHORTCODE$$.logError = function(reportingFunctionArguments, s) {
     }
 }
 
-$$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
-    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
-        if (! s) {
-            s = reportingFunctionArguments;
-            reportingFunctionArguments = undefined;
-        }
-        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "WARNING: " + s);
+$$SHORTCODE$$.logExit = function(reportingFunctionArguments) {
+    if ($$SHORTCODE$$.S.LOG_ENTRY_EXIT) {
+        $$SHORTCODE$$.logTrace(reportingFunctionArguments, "Exit");
     }
 }
 
@@ -173,6 +159,16 @@ $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
             reportingFunctionArguments = undefined;
         }
         $$SHORTCODE$$.logMessage(reportingFunctionArguments, "TRACE  : " + s);
+    }
+}
+
+$$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
+    if ($$SHORTCODE$$.S.LOG_LEVEL >= $$SHORTCODE$$.C.LOG_WARN) {
+        if (! s) {
+            s = reportingFunctionArguments;
+            reportingFunctionArguments = undefined;
+        }
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "WARNING: " + s);
     }
 }
 
