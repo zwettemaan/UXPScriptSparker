@@ -48,12 +48,16 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
         ECHO Removing generated files
         ECHO.
 
-        IF EXIST "!DESPACED_TARGET_NAME!.!TARGET_FILENAME_EXTENSION!" (
-            DEL "!DESPACED_TARGET_NAME!.!TARGET_FILENAME_EXTENSION!"
+        IF EXIST "!DESPACED_TARGET_NAME!.js" (
+            DEL "!DESPACED_TARGET_NAME!.js"
         )
 
-        IF EXIST "!DESPACED_TARGET_NAME!.htm" (
-            DEL "!DESPACED_TARGET_NAME!.htm"
+        IF EXIST "run_as_UXPScript.!TARGET_FILENAME_EXTENSION!" (
+            DEL "run_as_UXPScript.!TARGET_FILENAME_EXTENSION!"
+        )
+
+        IF EXIST "run_as_ES.jsx" (
+            DEL "run_as_ES.jsx"
         )
 
         IF EXIST "ReadMe for !DESPACED_TARGET_NAME!.md" (

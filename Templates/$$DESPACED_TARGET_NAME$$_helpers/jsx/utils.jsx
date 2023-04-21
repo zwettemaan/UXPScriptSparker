@@ -9,14 +9,13 @@
 
 (function() {
 
-$$SHORTCODE$$.alert = function alert(msg) {
-    
+$$SHORTCODE$$.alert = function _alert(msg) {  // Use `_alert`, instead of `alert` to avoid infinite recursion
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    alert(msg);
+    alert(msg); // Built-in should not match function name of this function - that's why we use `_alert`
     
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
@@ -24,9 +23,9 @@ $$SHORTCODE$$.alert = function alert(msg) {
     $endif
 }
 
-$$SHORTCODE$$.checkMac = function checkMac() {
-    
+$$SHORTCODE$$.checkMac = function checkMac() {    
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
@@ -34,8 +33,8 @@ $$SHORTCODE$$.checkMac = function checkMac() {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
-    $endif
 
+    $endif
     return retVal;
 };
 

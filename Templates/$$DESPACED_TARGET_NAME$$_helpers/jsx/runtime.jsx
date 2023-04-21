@@ -13,58 +13,32 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
 
     "../api/globals.js",
     "../shared/globals.js",
-    "./globals.idjs",
+    "./globals.jsx",
 
     "../api/tweakableSettings.js",
     "../shared/tweakableSettings.js",
 
     "../api/utils.js",
     "../shared/utils.js",
-    "./utils.idjs",
+    "./utils.jsx",
 
     "../api/pathUtils.js",
     "../shared/pathUtils.js",
-    "./pathUtils.idjs",
+    "./pathUtils.jsx",
 
     "../api/fileio.js",
     "../shared/fileio.js",
-    "./fileio.idjs",
+    "./fileio.jsx",
     
     "../shared/init.js",
     "../../$$DESPACED_TARGET_NAME$$.js"
 ];
 
-// require() and global.require() are different functions. I've come up with a mix-and-match
-// using both. Below, I fetch $$SHORTCODE$$.fs and $$SHORTCODE$$.g_fs which are different 'fs-like'
-// entities
-
 if (! $$SHORTCODE$$.tests) {
     $$SHORTCODE$$.tests = {};
 }
 
-if (! $$SHORTCODE$$.uxp) {
-    $$SHORTCODE$$.uxp = require("uxp");
-}
-
-if (! $$SHORTCODE$$.storage) {
-    $$SHORTCODE$$.storage = $$SHORTCODE$$.uxp.storage;
-}
-
-if (! $$SHORTCODE$$.fs) {
-    $$SHORTCODE$$.fs = $$SHORTCODE$$.storage.localFileSystem;
-}
-
-if (! $$SHORTCODE$$.g_fs) {
-    $$SHORTCODE$$.g_fs = global.require("fs");
-}
-
-var ES_SCRIPT_getHomeDir = 
-    "(function() {" +
-        "function dQ(s){\nreturn'\"'+s.replace(/\\\\/g,\"\\\\\\\\\").replace(/\"/g,'\\\\\"')+'\"';\n}" +
-        "return dQ(Folder('~').fsName)" +
-    "})()";
-
-$$SHORTCODE$$.initScript = async function initScript(completionCallback) {
+$$SHORTCODE$$.initScript = function initScript(completionCallback) {
 
     var retVal = false;
 
@@ -75,10 +49,9 @@ $$SHORTCODE$$.initScript = async function initScript(completionCallback) {
                 $$SHORTCODE$$.dirs = {};
             }
 
-            $$SHORTCODE$$.dirs.RAW_HOME = eval(app.doScript(ES_SCRIPT_getHomeDir, ScriptLanguage.JAVASCRIPT));
-
-            var appLocalTemp = await $$SHORTCODE$$.fs.getTemporaryFolder();
-            $$SHORTCODE$$.dirs.RAW_TEMP = appLocalTemp.nativePath;
+            $$SHORTCODE$$.dirs.RAW_HOME = Folder("~").fsName;
+            $$SHORTCODE$$.dirs.RAW_DESKTOP = Folder.desktop.fsName;
+            $$SHORTCODE$$.dirs.RAW_TEMP = Folder.temp.fsName;
 
             $$SHORTCODE$$.sharedInitScript();
 
@@ -97,19 +70,19 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
         $$SHORTCODE$$.logError(error);
     }
     
-    if ($$SHORTCODE$$.S.LOG_CRITICAL_ERRORS) {
+    if ($$SHORTCODE$$.S.LOG_CRITICAL_ERRORS && $$SHORTCODE$$.S.CRITICAL_LOG_FILE_ON_DESKTOP) {
 
         try {
-            const desktop = 
-                $$SHORTCODE$$.fs.getFolder(
-                    $$SHORTCODE$$.storage.domains.userDesktop);
-            const logFile = desktop.nativePath + "/criticalErrors.log";
-            logFile.write(error);            
+            var logFile = File(Folder.desktop.fsName + "/" + $$SHORTCODE$$.S.CRITICAL_LOG_FILE_ON_DESKTOP);
+            logFile.open("a");
+            logFile.encoding = "UTF8";
+            logFile.writeln(error);   
+            logFile.close();         
         }
         catch (err) {
 
             try {
-                console.log(error);
+                alert(error);
             }
             catch (err) {   
             }
@@ -120,7 +93,7 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
 
 })();
 
-exports.loadModules = async function loadModules(nameSpace, completionCallback) {
+$$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) {
 
     var failedTests = 0;
     var missingImplementations = 0;
@@ -154,12 +127,13 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         }
     }
 
+    var basePath = File($.fileName).parent.fsName + "/";
     for (var pathIdx = 0; pathIdx < $$SHORTCODE$$.relativeFilePathsToLoad.length; pathIdx++) {
-        var path = $$SHORTCODE$$.relativeFilePathsToLoad[pathIdx];
-        require(path);
+        var path = basePath + $$SHORTCODE$$.relativeFilePathsToLoad[pathIdx];
+        $.evalFile(path);
     }
 
-    await $$SHORTCODE$$.initScript(function() {
+    $$SHORTCODE$$.initScript(function() {
 
         for (var member in $$SHORTCODE$$) {
             nameSpace[member] = $$SHORTCODE$$[member];        
@@ -171,7 +145,6 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         }
 
         $$SHORTCODE$$.main();
-
     });
 
 }

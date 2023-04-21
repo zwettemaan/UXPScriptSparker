@@ -21,6 +21,17 @@ $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
             $$SHORTCODE$$.dirs.DIR_HOME = 
                 $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_HOME);
 
+            if ($$SHORTCODE$$.dirs.RAW_DESKTOP) {
+                $$SHORTCODE$$.dirs.DIR_DESKTOP = 
+                    $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_DESKTOP);
+            }
+            else {
+                $$SHORTCODE$$.dirs.DIR_DESKTOP = 
+                    $$SHORTCODE$$.dirs.DIR_HOME + 
+                    "Desktop" + 
+                    $$SHORTCODE$$.path.SEPARATOR;
+            }
+
             $$SHORTCODE$$.dirs.DIR_TEMP = 
                 $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_TEMP);
 

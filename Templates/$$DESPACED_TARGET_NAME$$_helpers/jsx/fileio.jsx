@@ -4,6 +4,8 @@ if (! $$SHORTCODE$$.fileio) {
     $$SHORTCODE$$.fileio = {};
 }
 
+// No logging in these functions - they are themselves used by the logging functions
+
 $$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, str, isAddNewLine) {
 
     try {

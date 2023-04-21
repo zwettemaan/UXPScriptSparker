@@ -6,12 +6,9 @@
             "request": "launch",
             "name": "$$TARGET_NAME$$",
 $if "$$TARGET_APP_FULL_SPECIFIER$$" != ""
-            "targetSpecifier": "$$TARGET_APP_FULL_SPECIFIER$$",
+            "hostAppSpecifier": "$$TARGET_APP_FULL_SPECIFIER$$",
 $endif            
-            "program": "${workspaceFolder}/$$DESPACED_TARGET_NAME$$.$$TARGET_FILENAME_EXTENSION$$",
-            "dontBreakOnErrors": false,
-            "extensionMode": "passive",
-            "stopOnEntry": false
+            "script": "${workspaceFolder}/run_as_ES.jsx"
         }
     ]
 }
