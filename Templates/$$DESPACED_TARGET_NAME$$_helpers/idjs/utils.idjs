@@ -1,6 +1,6 @@
 ﻿//
 // This code is exclusively UXPScript. It provides UXPScript-specific 
-// implementations utils API.
+// implementations of the utils API.
 //
 // utils.js depends on these functions being implemented
 // When adding new functionality here, make sure to also 
@@ -8,6 +8,33 @@
 //
 
 (function() {
+
+var ES_SCRIPT_appendLineToTextFile = 
+    "(function(filePath, line) {" +
+        "try {" +
+            "var textFile = File(filePath);" +
+            "textFile.open('a');" +
+            "textFile.encoding = 'UTF8';" +
+            "textFile.writeln(line);" +
+            "textFile.close();" +
+        "}" +
+        "catch (err) {" +
+        "}" +
+    "})";
+
+$$SHORTCODE$$.appendLineToTextFile = function(filePath, line) {
+
+    try {
+        var extendScript = 
+            ES_SCRIPT_appendLineToTextFile + "(" +
+                $$SHORTCODE$$.dQ(filePath) + "," +
+                $$SHORTCODE$$.dQ(line) +
+            ")";
+        app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+    }
+    catch (err) {        
+    }
+}
 
 $$SHORTCODE$$.alert = function alert(msg) {
     
@@ -108,9 +135,25 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, s) {
             
             var logLine = prefix + message;
                     
+            if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
+                $$SHORTCODE$$.appendLineToTextFile($$SHORTCODE$$.S.LOG_TO_FILEPATH, logLine);
+            }
+
             if ($$SHORTCODE$$.S.LOG_TO_UXPDEVTOOL_CONSOLE) {
                 console.log(logLine); 
             }
+
+            if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
+                try {
+                    var logFile = File($$SHORTCODE$$.S.LOG_TO_FILEPATH);
+                    logFile.open("a");
+                    logFile.writeln(estkLogLine);
+                    logFile.close();
+                }
+                catch (err) {                
+                }
+            }
+
         }
         catch (err) {
         }

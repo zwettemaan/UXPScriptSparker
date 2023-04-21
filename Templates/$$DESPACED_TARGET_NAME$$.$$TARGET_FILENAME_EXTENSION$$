@@ -12,12 +12,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-if (! $$SHORTCODE$$.UXP) {
-    $$SHORTCODE$$.UXP     = await require("uxp");
-    $$SHORTCODE$$.storage = $$SHORTCODE$$.UXP.storage;
-    $$SHORTCODE$$.fs      = $$SHORTCODE$$.storage.localFileSystem;
-}
-
-require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$, main);
+global.require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$, main);
 
 

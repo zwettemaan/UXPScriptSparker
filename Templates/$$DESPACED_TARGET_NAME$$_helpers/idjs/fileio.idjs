@@ -1,33 +1,5 @@
 (function() {
 
-if (! $$SHORTCODE$$.tokenDict) {
-    $$SHORTCODE$$.tokenDict = {};
-}
 
-$$SHORTCODE$$.openFile = async function openFile(filePath) {
-
-    if ($$SHORTCODE$$.logError) {
-        $$SHORTCODE$$.logError(error);
-    }
-    else if ($$SHORTCODE$$.S.LOG_CRITICAL_ERRORS) {
-
-        try {
-            const desktop = 
-                $$SHORTCODE$$.UXP.storage.localFileSystem.getFolder(
-                    $$SHORTCODE$$.UXP.storage.domains.userDesktop);
-            const logFile = desktop + "/criticalErrors.log";
-            await logFile.write(error);            
-        }
-        catch (err) {
-
-            try {
-                console.log(error);
-            }
-            catch (err) {   
-            }
-
-        }
-    }
-}
 
 })();

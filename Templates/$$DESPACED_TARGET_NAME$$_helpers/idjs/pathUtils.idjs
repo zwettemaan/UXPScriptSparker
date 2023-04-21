@@ -1,46 +1,59 @@
 ﻿//
-// This code is exclusively ExtendScript. It provides ExtendScript-specific 
+// This code is exclusively UXPScript. It provides UXPScript-specific 
 // implementations of the pathutils API.
 //
-// utils.js depends on these functions being implemented
+// pathutils.js depends on these functions being implemented
 // When adding new functionality here, make sure to also 
 // add corresponding tests to the utils_verifyDependencies()
 //
-
 (function() {
 
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
+var URL_FILE_PREFIX = "file:///";
+
 $$SHORTCODE$$.path.exists = function exists(filepath) {
+
+    var retVal = false;
+
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
-    $endif
 
-    var f = File(filepath);
-    var retVal = f.exists;
+    $endif
+    try {
+        var lstat = $$SHORTCODE$$.g_fs.lstatSync(URL_FILE_PREFIX + filePath);
+        retVal = true;
+    }
+    catch (err) {    
+    }
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 }
 
 $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
+
+    var retVal = false;
+
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
+
     $endif
-    
-    // This casts to a File instead of a Folder if the
-    // path references a file
-
-    var folder = Folder(folderPath);
-
-    var retVal = (folder instanceof Folder);
+    try {
+        var lstat = $$SHORTCODE$$.g_fs.lstatSync(URL_FILE_PREFIX + filePath);
+        retVal = lstat.isDirectory()
+    }
+    catch (err) {    
+    }
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif
     return retVal;
 }
@@ -50,8 +63,8 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     var success = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
-    $endif
 
+    $endif
     do {
         try {
             if (! folderPath) {
@@ -71,9 +84,13 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
                 break;
             }
 
-            var folder = Folder(folderPath);
-            folder.create();
-            success = folder.exists;
+            try {
+                $$SHORTCODE$$.g_fs.mkdir("file://" + folderPath);
+            }
+            catch (err) {                
+            }
+
+            success = $$SHORTCODE$$.path.isDir(folderPath);
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws" + err);       
@@ -83,6 +100,7 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);
+
     $endif  
     return success;
 }

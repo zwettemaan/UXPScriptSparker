@@ -1,12 +1,26 @@
 ﻿//
-// This file mirrors the API of js/utils.js
+// This code is exclusively ExtendScript. It provides ExtendScript-specific 
+// implementations of the utils API.
+//
+// utils.js depends on these functions being implemented
+// When adding new functionality here, make sure to also 
+// add corresponding tests to the utils_verifyDependencies()
 //
 
-if ("undefined" == typeof $$SHORTCODE$$) {
-    $$SHORTCODE$$ = {};
-}
-
 (function() {
+
+$$SHORTCODE$$.appendLineToTextFile = function(filePath, line) {
+
+    try {
+        var textFile = File(filePath);
+        textFile.open("a");
+        textFile.encoding = "UTF8";
+        textFile.writeln(line);
+        textFile.close();
+    }
+    catch (err) {        
+    }
+}
 
 $$SHORTCODE$$.checkMac = function checkMac() {
     
@@ -86,6 +100,10 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             }
             
             var estkLogLine = prefix + message;
+                    
+            if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
+                $$SHORTCODE$$.appendLineToTextFile($$SHORTCODE$$.S.LOG_TO_FILEPATH, estkLogLine);
+            }
                     
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
                 $.writeln(estkLogLine); 
