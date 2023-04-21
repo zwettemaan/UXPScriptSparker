@@ -1,6 +1,0 @@
-Make sure to right-click, then 'Open'
-
-  initialSetupConfigApp.command
-
-before anything else. If you don't 
-do that, nothing will work.

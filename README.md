@@ -4,12 +4,13 @@
 
 --
 
-Starter project for running and debugging UXPScript with Adobe InDesign and VSCode
+Starter project for running and debugging UXPScript with Adobe InDesign and the 
+Adobe UXP Debugger Tool
 
 © 2023, Rorohiko Ltd. - Kris Coppieters
 kris@rorohiko.com
 
-v1.0.0, Mar 24, 2023
+v1.0.0, Apr 21, 2023
 
 ## Preamble
 
@@ -38,9 +39,9 @@ to the absolute minimum.
 This package should allow you to get going with the following minimal 
 dependencies:
 
+- Mac OS X 13.0 or Windows 11.x or higher
 - Adobe InDesign 2023 or higher
-- Mac OS X 10.12 or Windows 10.x or higher
-- VSCode with the Adobe ExtendScript Debugger plug-in installed
+- Adobe UXP Debugger Tool
 
 Make sure to consult the [UXPScriptSparker Documentation](https://github.com/zwettemaan/UXPScriptSparker/wiki/UXPScriptSparker-Documentation)
 

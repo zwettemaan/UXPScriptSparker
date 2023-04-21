@@ -13,44 +13,16 @@ export UXPS_COMMANDS_DIR=`pwd`/
 
 . setTarget.command
 
-if [ "${TARGET_APP}" == "Illustrator" -o "${TARGET_APP}" == "Photoshop" -o "${TARGET_APP}" == "Premiere Pro" ]; then
 
-    # For Illustrator, Photoshop and Premiere Pro we don't use a link; instead we use a one-line stub script
-    
-    if [ -e "${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}.${TARGET_FILENAME_EXTENSION}" ]; then
+if [ -d "${TARGET_SCRIPT_ROOT_DIR}" ]; then
 
-        echo ""
-        echo "Removing ${TARGET_APP} stub script ${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}.${TARGET_FILENAME_EXTENSION}" 
-        echo ""
+    echo ""
+    echo "Removing directory ${TARGET_SCRIPT_ROOT_DIR}"
+    echo ""
 
-        rm -f "${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}.${TARGET_FILENAME_EXTENSION}"
-    fi
-
-elif [ "${TARGET_APP}" == "Dreamweaver" ]; then
-
-    if [ -e "${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}.${TARGET_FILENAME_EXTENSION}" ]; then
-
-        echo ""
-        echo "Removing links from ${TARGET_APP_SCRIPT_DIR}" 
-        echo ""
-
-        rm -f "${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}.${TARGET_FILENAME_EXTENSION}"
-        rm -f "${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}.htm"
-        rm -rf "${TARGET_APP_SCRIPT_DIR}${DESPACED_TARGET_NAME}_helpers"
-    fi
-
-else
-
-    if [ -d "${TARGET_SCRIPT_ROOT_DIR}" ]; then
-
-        echo ""
-        echo "Removing directory ${TARGET_SCRIPT_ROOT_DIR}"
-        echo ""
-
-        rm -rf "${TARGET_SCRIPT_ROOT_DIR}"
-    fi
-
+    rm -rf "${TARGET_SCRIPT_ROOT_DIR}"
 fi
+
 
 if [ "${BUILD_DIR}" != "" -a -d "${BUILD_DIR}" ]; then
 
@@ -59,20 +31,6 @@ if [ "${BUILD_DIR}" != "" -a -d "${BUILD_DIR}" ]; then
     echo ""
 
     rm -rf "${BUILD_DIR}"
-fi
-
-if [ -d "${EXTENSION_DIR}" ]; then
-
-    cd "${EXTENSION_DIR}"
-    if [ -d "${TEMP_SCRIPT_RUNNER_NAME}" ]; then
-        
-        echo ""
-        echo "Removing temporary script runner extension"
-        echo ""
-
-        rm -rf "${TEMP_SCRIPT_RUNNER_NAME}"
-    fi
-    
 fi
 
 if [ "${NESTED}" == "" ]; then
