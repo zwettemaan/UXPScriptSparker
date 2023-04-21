@@ -12,6 +12,6 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-global.require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$, main);
+await global.require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$, main);
 
 

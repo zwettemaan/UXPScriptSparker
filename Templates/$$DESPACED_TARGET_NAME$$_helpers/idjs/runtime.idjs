@@ -54,7 +54,7 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/init.js"
 ];
 
-$$SHORTCODE$$.initScript = function initScript(completionCallback) {
+$$SHORTCODE$$.initScript = async function initScript(completionCallback) {
 
     var retVal = false;
 
@@ -65,28 +65,20 @@ $$SHORTCODE$$.initScript = function initScript(completionCallback) {
                 $$SHORTCODE$$.dirs = {};
             }
 
-            $$SHORTCODE$$.fs.getFolder($$SHORTCODE$$.storage.domains.userDesktop).then(
-                function(desktopFolder) {
+            var desktopFolder = await $$SHORTCODE$$.fs.getFolder($$SHORTCODE$$.storage.domains.userDesktop);
 
-                    $$SHORTCODE$$.dirs.RAW_DESKTOP = desktopFolder.nativePath;
+            $$SHORTCODE$$.dirs.RAW_DESKTOP = desktopFolder.nativePath;
 
-                    $$SHORTCODE$$.dirs.RAW_HOME = 
-                        $$SHORTCODE$$.path.dirName($$SHORTCODE$$.dirs.RAW_DESKTOP);
+            $$SHORTCODE$$.dirs.RAW_HOME = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.RAW_DESKTOP);
 
-                    $$SHORTCODE$$.fs.getTemporaryFolder().then(
+            var appLocalTemp = await $$SHORTCODE$$.fs.getTemporaryFolder();
 
-                        function(appLocalTemp) {
+            $$SHORTCODE$$.dirs.RAW_TEMP = appLocalTemp.nativePath;
 
-                            $$SHORTCODE$$.dirs.RAW_TEMP = appLocalTemp.nativePath;
+            $$SHORTCODE$$.sharedInitScript();
 
-                            $$SHORTCODE$$.sharedInitScript();
-
-                            completionCallback();
-                        }
-                    );
-                }
-            );
-
+            completionCallback();
         }
         catch (err) { 
             $$SHORTCODE$$.criticalError("initScript throws " + err);
@@ -124,7 +116,7 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
 
 })();
 
-exports.loadModules = function loadModules(nameSpace, completionCallback) {
+exports.loadModules = async function loadModules(nameSpace, completionCallback) {
 
     var failedTests = 0;
     var missingImplementations = 0;
@@ -163,7 +155,7 @@ exports.loadModules = function loadModules(nameSpace, completionCallback) {
         require(path);
     }
 
-    $$SHORTCODE$$.initScript(function() {
+    await $$SHORTCODE$$.initScript(function() {
 
         for (var member in $$SHORTCODE$$) {
             nameSpace[member] = $$SHORTCODE$$[member];        
