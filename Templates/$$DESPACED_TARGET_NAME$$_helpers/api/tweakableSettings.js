@@ -29,7 +29,7 @@ $$SHORTCODE$$.tests.checkTweakableSettings = function checkTweakableSettings() {
             if (! $$SHORTCODE$$.S) {
                 $$SHORTCODE$$.logError(arguments, "$$SHORTCODE$$.S should exist");
                 break;
-            }s
+            }
 
             retVal = true;  
             for (var settingName in $$SHORTCODE$$.S) {

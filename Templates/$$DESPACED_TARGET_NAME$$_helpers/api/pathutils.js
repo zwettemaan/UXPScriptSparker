@@ -10,10 +10,14 @@ function declareAPI() {
     if (! $$SHORTCODE$$.path) {
         $$SHORTCODE$$.path = {};
     }
-    
-    $$SHORTCODE$$.path.exists = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.isDir  = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.mkdir  = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+
+    $$SHORTCODE$$.path.addTrailingSeparator = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.basename             = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.dirname              = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.exists               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.filenameExtension    = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.isDir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.mkdir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
 }
 
@@ -21,6 +25,33 @@ function declareAPI() {
 
 if (! $$SHORTCODE$$.tests.path) {
     $$SHORTCODE$$.tests.path = {};
+}
+
+$$SHORTCODE$$.tests.path.basename = function test_basename() {
+
+    var retVal = true;
+
+    do {
+        var expected;
+        var filePath;
+
+        expected = "kris";
+        filePath = "/Users/kris";
+        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+            retVal = false;
+        }
+
+        expected = "kris";
+        filePath = "/Users/kris/";
+        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+            retVal = false;
+        }
+
+
+    }
+    while (false);
+
+    return retVal;
 }
 
 $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPathFunctions() {

@@ -14,7 +14,7 @@ if (! $$SHORTCODE$$.path) {
 
 var URL_FILE_PREFIX = "file:///";
 
-$$SHORTCODE$$.path.exists = function exists(filepath) {
+$$SHORTCODE$$.path.exists = function exists(filePath) {
 
     var retVal = false;
 
@@ -45,7 +45,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 
     $endif
     try {
-        var lstat = $$SHORTCODE$$.g_fs.lstatSync(URL_FILE_PREFIX + filePath);
+        var lstat = $$SHORTCODE$$.g_fs.lstatSync(URL_FILE_PREFIX + folderPath);
         retVal = lstat.isDirectory()
     }
     catch (err) {    
@@ -85,7 +85,7 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
             }
 
             try {
-                $$SHORTCODE$$.g_fs.mkdir("file://" + folderPath);
+                $$SHORTCODE$$.g_fs.mkdir(URL_FILE_PREFIX + folderPath);
             }
             catch (err) {                
             }

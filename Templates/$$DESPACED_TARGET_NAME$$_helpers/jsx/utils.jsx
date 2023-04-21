@@ -9,17 +9,19 @@
 
 (function() {
 
-$$SHORTCODE$$.appendLineToTextFile = function(filePath, line) {
+$$SHORTCODE$$.alert = function alert(msg) {
+    
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
-    try {
-        var textFile = File(filePath);
-        textFile.open("a");
-        textFile.encoding = "UTF8";
-        textFile.writeln(line);
-        textFile.close();
-    }
-    catch (err) {        
-    }
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    alert(msg);
+    
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
 }
 
 $$SHORTCODE$$.checkMac = function checkMac() {
@@ -37,20 +39,22 @@ $$SHORTCODE$$.checkMac = function checkMac() {
     return retVal;
 };
 
-if ($$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG === undefined) {
-    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
-}
+$$SHORTCODE$$.checkWindows = function checkWindows() {    
 
-// Call this from JavaScript side via CSInterface
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
-$$SHORTCODE$$.fetchAccumulatedESTKToChromeConsoleLog = function() {
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
-    var retVal = $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG;
+    retVal = $.os.substr(0,3) == "Win";
 
-    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
 
+    $endif
     return retVal;
-};
+}
 
 $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
@@ -66,11 +70,6 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             $$SHORTCODE$$.inLogger = true;
             
             var prefix = "";
-
-            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE && $$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
-                // Make sure we can tell the difference between the message origins
-                prefix += "ES>>";
-            }
 
             if (! message) {
 
@@ -102,20 +101,14 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             var estkLogLine = prefix + message;
                     
             if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
-                $$SHORTCODE$$.appendLineToTextFile($$SHORTCODE$$.S.LOG_TO_FILEPATH, estkLogLine);
+                $$SHORTCODE$$.fileio.appendUTF8TextFile(
+                    $$SHORTCODE$$.S.LOG_TO_FILEPATH, 
+                    estkLogLine, 
+                    $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE);
             }
                     
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
                 $.writeln(estkLogLine); 
-            }
-
-            if ($$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE) {
-
-                if ("string" != typeof $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG) {
-                    $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG = "";
-                }
-
-                $$SHORTCODE$$.ACCUMULATED_ESTK_TO_CHROME_CONSOLE_LOG += estkLogLine + "\n";
             }
 
         }

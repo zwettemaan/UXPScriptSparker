@@ -1,5 +1,90 @@
 (function() {
 
+if (! $$SHORTCODE$$.fileio) {
+    $$SHORTCODE$$.fileio = {};
+}
 
+var ES_SCRIPT_readUTF8TextFile = 
+    "(function(filePath) {" +
+        "var result = '';" +
+        "function dQ(s){\nreturn'\"'+s.replace(/\\\\/g,\"\\\\\\\\\").replace(/\"/g,'\\\\\"').replace(/\\n/g,\"\\\\n\").replace(/\\r/g,\"\\\\r\")+'\"';\n}" +
+        "try {" +
+            "var textFile = File(filePath);" +
+            "textFile.open('r');" +
+            "textFile.encoding = 'UTF8';" +
+            "result = textFile.read();" +
+            "textFile.close();" +
+        "}" +
+        "catch (err) {" +
+        "}" +
+        "return dQ(result)";
+    "})";
+
+var ES_SCRIPT_outputToUTF8TextFile = 
+    "(function(filePath, line, mode_a_or_w, isAddNewLine) {" +
+        "try {" +
+            "var textFile = File(filePath);" +
+            "textFile.open(mode);" +
+            "textFile.encoding = 'UTF8';" +
+            "if (isAddNewLine){" +
+                "textFile.writeln(line);" +
+            "}" +
+            "else{" +
+                "textFile.write(line);" +
+            "}" +
+            "textFile.close();" +
+        "}" +
+        "catch (err) {" +
+        "}" +
+    "})";
+
+$$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, text, isAddNewLine) {
+
+    try {
+        var extendScript = 
+            ES_SCRIPT_outputToUTF8TextFile + "(" +
+                $$SHORTCODE$$.dQ(filePath) + "," +
+                $$SHORTCODE$$.dQ(text) + "," +
+                $$SHORTCODE$$.dQ("a") + "," +
+                (isAddNewLine ? "true" : "false") +
+            ")";
+        app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+    }
+    catch (err) {       
+    }
+}
+
+$$SHORTCODE$$.fileio.readUTF8TextFile = function readUTF8TextFile(filePath) {
+
+    var retVal;
+
+    try {
+        var extendScript = 
+            ES_SCRIPT_readUTF8TextFile + "(" +
+                $$SHORTCODE$$.dQ(filePath) + 
+            ")";
+        retVal = eval(app.doScript(extendScript, ScriptLanguage.JAVASCRIPT));
+    }
+    catch (err) {        
+    }
+
+    return retVal;
+}
+
+$$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, text, isAddNewLine) {
+
+    try {
+        var extendScript = 
+            ES_SCRIPT_outputToUTF8TextFile + "(" +
+                $$SHORTCODE$$.dQ(filePath) + "," +
+                $$SHORTCODE$$.dQ(text) + "," +
+                $$SHORTCODE$$.dQ("w") + "," +
+                (isAddNewLine ? "true" : "false") +
+            ")";
+        app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+    }
+    catch (err) {        
+    }
+}
 
 })();

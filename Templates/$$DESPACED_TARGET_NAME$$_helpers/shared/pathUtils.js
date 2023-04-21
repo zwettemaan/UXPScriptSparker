@@ -8,32 +8,39 @@ if (! $$SHORTCODE$$.tests.path) {
     $$SHORTCODE$$.tests.path = {};
 }
 
-$$SHORTCODE$$.tests.path.basename = function test_basename() {
+$$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {
 
-    var retVal = true;
+    var retVal = filePath;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     do {
-        var expected;
-        var filePath;
 
-        expected = "kris";
-        filePath = "/Users/kris";
-        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
-            retVal = false;
+        if (! filePath) {
+            break;            
         }
 
-        expected = "kris";
-        filePath = "/Users/kris/";
-        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
-            retVal = false;
+        var lastChar = filePath.substr(-1);        
+        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
+            break;
         }
 
+        if (! separator) {
+            separator = $$SHORTCODE$$.path.SEPARATOR;
+        }
 
+        retVal += separator;
     }
     while (false);
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
     return retVal;
-}
+};
 
 $$SHORTCODE$$.path.basename = function basename(filepath, separator) {
     
@@ -111,90 +118,5 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath) {
     $endif
     return retVal;
 }
-
-$$SHORTCODE$$.path.exists = function exists(filepath) {
-
-    var retVal;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-
-    var f = File(filepath);
-    retVal = f.exists;
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-
-    $endif
-    return retVal;
-}
-
-$$SHORTCODE$$.path.isDir = function isDir(folderPath) {
-
-    var retVal;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-    
-    // This casts to a File instead of a Folder if the
-    // path references a file
-
-    var folder = Folder(folderPath);
-
-    retVal = (folder instanceof Folder);
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-
-    $endif
-    return retVal;
-}
-
-$$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
-
-    var success = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-
-    do {
-        try {
-            if (! folderPath) {
-                $$SHORTCODE$$.logError(arguments, "no folderPath");
-                break;
-            }
-
-            if ($$SHORTCODE$$.path.exists(folderPath)) {
-                success = true;
-                break;
-            }
-
-            var parentFolderPath = $$SHORTCODE$$.path.dirname(folderPath, separator);
-            success = $$SHORTCODE$$.path.mkdir(parentFolderPath, separator);
-            if (! success) {
-                $$SHORTCODE$$.logError(arguments, "cannot create parent folder");
-                break;
-            }
-
-            var folder = Folder(folderPath);
-            folder.create();
-            success = folder.exists;
-        }
-        catch (err) {
-            $$SHORTCODE$$.logError(arguments, "throws" + err);       
-        }
-    }
-    while (false);
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-    
-    $endif  
-    return success;
-}
-
 
 })();
