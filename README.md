@@ -14,6 +14,16 @@ v1.0.0, Apr 21, 2023
 
 ## Preamble
 
+UXPScriptSparker is a tool for learning and using UXPScript in Adobe InDesign. 
+
+It allows for the creation of reusable code that can run in both ExtendScript
+and UXPScript. 
+
+The tool includes two scaffolding sets, one for ExtendScript and one for 
+UXPScript, as well as shared APIs that work in both environments. 
+The script contains one or more .js files that can be executed in either 
+environment.
+
 The goal of this project is to reduce the treshold to 'get started' writing
 and debugging UXPScript scripts.
 
