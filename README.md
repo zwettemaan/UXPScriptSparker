@@ -52,6 +52,7 @@ dependencies:
 - Mac OS X 13.0 or Windows 11.x or higher
 - Adobe InDesign 2023 or higher
 - Adobe UXP Debugger Tool
+- VSCode with ExtendScript debugger
 
 Make sure to consult the [UXPScriptSparker Documentation](https://github.com/zwettemaan/UXPScriptSparker/wiki)
 
