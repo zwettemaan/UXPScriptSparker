@@ -53,6 +53,6 @@ dependencies:
 - Adobe InDesign 2023 or higher
 - Adobe UXP Debugger Tool
 
-Make sure to consult the [UXPScriptSparker Documentation](https://github.com/zwettemaan/UXPScriptSparker/wiki/UXPScriptSparker-Documentation)
+Make sure to consult the [UXPScriptSparker Documentation](https://github.com/zwettemaan/UXPScriptSparker/wiki)
 
 This project uses the Sparker application. More info here: https://github.com/zwettemaan/Sparker
