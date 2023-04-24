@@ -59,10 +59,9 @@
         if (col >= framesPerRow) {
 
             col = 0;
-            xPos = curPageBounds[1];
-        
-            yPos += frameHeight;
             row++;
+            xPos = curPageBounds[1];        
+            yPos += frameHeight;
 
             if (row >= framesPerColumn) {
 
@@ -72,11 +71,10 @@
                 frameWidth = (curPageBounds[3] - curPageBounds[1])/framesPerRow;
                 frameHeight = (curPageBounds[2] - curPageBounds[0])/framesPerColumn;
 
+                row = 0;
                 xPos = curPageBounds[1];
                 yPos = curPageBounds[0];
 
-                row = 0;
-                yPos = 0;
             }
         }
     }
