@@ -12,6 +12,12 @@ kris@rorohiko.com
 
 v1.0.0, Apr 21, 2023
 
+## Speed comparisons
+
+For some rough and ready speed comparisons between UXPScript and ExtendScript, visit
+
+[https://github.com/zwettemaan/UXPScriptSparker](https://coppieters.nz/?p=624)
+
 ## Preamble
 
 UXPScriptSparker is a tool for learning and using UXPScript in Adobe InDesign. 
