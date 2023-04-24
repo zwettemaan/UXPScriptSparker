@@ -56,8 +56,8 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
             DEL "run_as_UXPScript.!TARGET_FILENAME_EXTENSION!"
         )
 
-        IF EXIST "run_as_ES.jsx" (
-            DEL "run_as_ES.jsx"
+        IF EXIST "run_as_ExtendScript.jsx" (
+            DEL "run_as_ExtendScript.jsx"
         )
 
         IF EXIST "ReadMe for !DESPACED_TARGET_NAME!.md" (

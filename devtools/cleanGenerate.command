@@ -52,7 +52,7 @@ else
         
         rm -f "$DESPACED_TARGET_NAME.js"
         rm -f "run_as_UXPScript.$TARGET_FILENAME_EXTENSION"
-        rm -f "run_as_ES.jsx"
+        rm -f "run_as_ExtendScript.jsx"
         rm -f "ReadMe for $DESPACED_TARGET_NAME.md"
         rm -rf ${DESPACED_TARGET_NAME}_helpers
         rm -rf BuildSettings

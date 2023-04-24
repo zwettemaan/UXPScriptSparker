@@ -8,7 +8,7 @@
 $if "$$TARGET_APP_FULL_SPECIFIER$$" != ""
             "hostAppSpecifier": "$$TARGET_APP_FULL_SPECIFIER$$",
 $endif            
-            "script": "${workspaceFolder}/run_as_ES.jsx"
+            "script": "${workspaceFolder}/run_as_ExtendScript.jsx"
         }
     ]
 }

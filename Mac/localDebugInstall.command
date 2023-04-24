@@ -31,7 +31,7 @@ echo "Creating temporary symbolic links to the script and its 'helpers' director
 echo ""
 
 ln -s "${PROJECT_ROOT_DIR}run_as_UXPScript.${TARGET_FILENAME_EXTENSION}" "${TARGET_SCRIPT_ROOT_DIR}run_as_UXPScript.${TARGET_FILENAME_EXTENSION}"
-ln -s "${PROJECT_ROOT_DIR}run_as_ES.jsx" "${TARGET_SCRIPT_ROOT_DIR}run_as_ES.jsx"
+ln -s "${PROJECT_ROOT_DIR}run_as_ExtendScript.jsx" "${TARGET_SCRIPT_ROOT_DIR}run_as_ExtendScript.jsx"
 ln -s "${PROJECT_ROOT_DIR}${DESPACED_TARGET_NAME}.js" "${TARGET_SCRIPT_ROOT_DIR}${DESPACED_TARGET_NAME}.js"
 ln -s "${PROJECT_ROOT_DIR}${DESPACED_TARGET_NAME}_helpers" "${TARGET_SCRIPT_ROOT_DIR}${DESPACED_TARGET_NAME}_helpers"
 
