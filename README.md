@@ -14,9 +14,9 @@ v1.0.0, Apr 21, 2023
 
 ## Speed comparisons
 
-For some rough and ready speed comparisons between UXPScript and ExtendScript, visit
+For some rough and ready speed comparisons between UXPScript and ExtendScript, visit my blog:
 
-[https://github.com/zwettemaan/UXPScriptSparker](https://coppieters.nz/?p=624)
+[https://coppieters.nz/?p=624](https://coppieters.nz/?p=624)
 
 ## Preamble
 
