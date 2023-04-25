@@ -1,4 +1,4 @@
-Make sure to right-click, then 'Open' the icon for
+In the Finder, make sure to right-click, then 'Open' the icon for
 
   initialSetupConfigApp.command
 

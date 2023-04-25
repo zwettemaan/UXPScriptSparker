@@ -1,0 +1,106 @@
+﻿//
+// This code is exclusively UXPScript. It provides UXPScript-specific 
+// implementations of the utils API.
+//
+(function() {
+
+$$SHORTCODE$$.clearImmediate = function(taskId) {
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+
+    clearImmediate(taskId);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+}
+
+$$SHORTCODE$$.clearInterval = function(taskId) {
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+
+    clearInterval(taskId);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+}
+
+$$SHORTCODE$$.clearTimeout = function(taskId) {
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+
+    clearTimeout(taskId);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+}
+
+$$SHORTCODE$$.setImmediate = function setImmediate(taskFtn) {
+
+    var retVal;
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+
+    retVal = setImmediate(taskFtn);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.setInterval = function setInterval(taskFtn, timeoutMilliseconds) {
+
+    var retVal;
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+
+    retVal = setInterval(taskFtn, timeoutMilliseconds);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.setTimeout = function setTimeout(taskFtn, timeoutMilliseconds) {
+
+    var retVal;
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+
+    retVal = setTimeout(taskFtn, timeoutMilliseconds);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+})();

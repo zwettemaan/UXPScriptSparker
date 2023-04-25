@@ -33,6 +33,11 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../api/idDOM.js",
     "./idDOM.jsx",
 
+    "../api/compat.js",
+    "./compat.jsx",
+
+    "./promiscuous-browser.jsx",
+
     "../shared/init.js",
     "../../$$DESPACED_TARGET_NAME$$.js"
 ];

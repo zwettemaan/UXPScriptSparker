@@ -17,12 +17,16 @@ function declareAPI() {
     $$SHORTCODE$$.logNote      = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.logTrace     = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.logWarning   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.randomGUID   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.shallowClone = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.sQ           = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.toHex        = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
 }
 
 //--------- Tests
+
+var GUID_REGEX = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
 
 $$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
 
@@ -280,6 +284,193 @@ $$SHORTCODE$$.tests.deepClone = function deepClone() {
     return retVal;
 }
 
+$$SHORTCODE$$.tests.randomGUID = function randomGUID() {
+
+    var retVal = false;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        
+        try {
+
+            var guid1 = $$SHORTCODE$$.randomGUID();
+            var guid2 = $$SHORTCODE$$.randomGUID();
+            if (guid1 == guid2) {
+                $$SHORTCODE$$.logError(arguments, "guids should be different")
+                break;                
+            }
+
+            if (! guid1.match(GUID_REGEX)) {
+                $$SHORTCODE$$.logError(arguments, "guid1 wrong format")
+                break;                
+            }
+
+            if (! guid2.match(GUID_REGEX)) {
+                $$SHORTCODE$$.logError(arguments, "guid2 wrong format")
+                break;                
+            }
+
+            retVal = true;      
+            $$SHORTCODE$$.logNote(arguments, "test passed");
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+            retVal = false;
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.tests.toHex = function toHex() {
+
+    var retVal = false;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        
+        try {
+
+            var tests = [
+                {
+                    value: 0,
+                    digits: 0,
+                    expected: ""
+                },
+                {
+                    value: 0,
+                    digits: 1,
+                    expected: "0"
+                },
+                {
+                    value: 0,
+                    digits: 2,
+                    expected: "00"
+                },
+                {
+                    value: 0,
+                    digits: 3,
+                    expected: "000"
+                },
+                {
+                    value: 0,
+                    digits: 4,
+                    expected: "0000"
+                },
+                {
+                    value: 0,
+                    digits: 16,
+                    expected: "0000000000000000"
+                },
+                {
+                    value: 12345678,
+                    digits: 0,
+                    expected: ""
+                },
+                {
+                    value: 12345678,
+                    digits: 1,
+                    expected: "E"
+                },
+                {
+                    value: 12345678,
+                    digits: 2,
+                    expected: "4E"
+                },
+                {
+                    value: 12345678,
+                    digits: 3,
+                    expected: "14E"
+                },
+                {
+                    value: 12345678,
+                    digits: 4,
+                    expected: "614E"
+                },
+                {
+                    value: 12345678,
+                    digits: 16,
+                    expected: "0000000000BC614E"
+                },
+                {
+                    value: -12345678,
+                    digits: 16,
+                    expected: undefined
+                },
+                {
+                    value: 0.1,
+                    digits: 4,
+                    expected: undefined
+                },
+                {
+                    value: NaN,
+                    digits: 4,
+                    expected: undefined
+                },
+                {
+                    value: "123",
+                    digits: 4,
+                    expected: undefined
+                },
+                {
+                    value: undefined,
+                    digits: 4,
+                    expected: undefined
+                },
+                {
+                    value: null,
+                    digits: 4,
+                    expected: undefined
+                },
+                {
+                    value: {a:1},
+                    digits: 4,
+                    expected: undefined
+                }
+            ];
+
+            retVal = true;      
+            for (var idx = 0; idx < tests.length; idx++) {
+                var test = tests[idx];
+                try {
+                    if ($SHORTCODE$$.toHex(test.value, test.digits) !== test.expected) {
+                        $$SHORTCODE$$.logError(arguments, "test #" + idx + " fails");
+                        retVal = false;
+                        break;
+                    }
+                }
+                catch (err) {
+                    $$SHORTCODE$$.logError(arguments, "tests throw " + err);
+                    retVal = false;
+                }
+            }
+
+            $$SHORTCODE$$.logNote(arguments, "test passed");
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+            retVal = false;
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
 //------------
 
 declareAPI();

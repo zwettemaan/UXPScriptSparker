@@ -85,78 +85,6 @@ $$SHORTCODE$$.dQ = function(s) {
 }
 
 /**
-* Make a copy of an object so it is equivalent, but does not share any references. 
-* Do not apply this on any nested objects
-* 
-* @function $$SHORTCODE$$.shallowClone
-* 
-* @param {any} obj - What we want to clone
-* @return a shallow clone of the object
-*/
-
-$$SHORTCODE$$.shallowClone = function shallowClone(obj) {
-
-    var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-
-    $$SHORTCODE$$.logEntry(arguments);
-    $endif
-
-    do {
-        try {
-
-            if ("object" != typeof obj) {
-                retVal = obj;
-                break;
-            }
-
-            if (! obj) {
-                retVal = obj;
-                break;
-            }
-
-            var clone;
-            if (obj instanceof Array) {
-                clone = [];
-            }
-            else {
-                clone = {};        
-            }
-
-            for (var x in obj) 
-            {
-                clone[x] = obj[x];
-            }
-
-            retVal = clone;
-        }
-        catch (err) {
-            $$SHORTCODE$$.logError(arguments, "throws " + err);
-        }
-    }
-    while (false);
-
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
-    $$SHORTCODE$$.logExit(arguments);
-
-    $endif
-    return retVal;
-}
-
-/**
-* Wrap a string in single quotes, so that eval($$SHORTCODE$$.sQ(x)) == x 
-* 
-* @function $$SHORTCODE$$.sQ
-* 
-* @param {string} s - string to be quoted
-* @return a copy of s wrapped in quotes
-*/
-
-$$SHORTCODE$$.sQ = function(s) {
-    return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g,"\\n").replace(/\r/g,"\\r") + "'";
-}
-
-/**
 * Call this function when entering any function. A typical usage is 
 *   function myFunction()
 *   {
@@ -290,6 +218,181 @@ $$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
         }
         $$SHORTCODE$$.logMessage(reportingFunctionArguments, "WARNING: " + s);
     }
+}
+
+/**
+* Generate some GUID. This is not really a 'proper' GUID generator, 
+* but for our needs it'll do.
+*
+* @function $$SHORTCODE$$.randomGUID
+* 
+* @return a random GUID in XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX format
+* XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+*           111 1111 1222 222222333333
+* 01234567 9012 4567 9012 456789012345
+*          
+*/
+
+$$SHORTCODE$$.randomGUID = function randomGUID() 
+{
+    var retVal = "";
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    for (var wordIdx = 0; wordIdx < 8; wordIdx++)
+    {
+        var r = Math.round(Math.random() * 65536);
+        var r = $$SHORTCODE$$.toHex(r,4);
+        retVal = retVal + r;
+        if (wordIdx >= 1 && wordIdx <= 4)
+        {
+            retVal = retVal + "-";
+        }
+    }
+    
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+/**
+* Make a copy of an object so it is equivalent, but does not share any references. 
+* Do not apply this on any nested objects
+* 
+* @function $$SHORTCODE$$.shallowClone
+* 
+* @param {any} obj - What we want to clone
+* @return a shallow clone of the object
+*/
+
+$$SHORTCODE$$.shallowClone = function shallowClone(obj) {
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        try {
+
+            if ("object" != typeof obj) {
+                retVal = obj;
+                break;
+            }
+
+            if (! obj) {
+                retVal = obj;
+                break;
+            }
+
+            var clone;
+            if (obj instanceof Array) {
+                clone = [];
+            }
+            else {
+                clone = {};        
+            }
+
+            for (var x in obj) 
+            {
+                clone[x] = obj[x];
+            }
+
+            retVal = clone;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+/**
+* Wrap a string in single quotes, so that eval($$SHORTCODE$$.sQ(x)) == x 
+* 
+* @function $$SHORTCODE$$.sQ
+* 
+* @param {string} s - string to be quoted
+* @return a copy of s wrapped in quotes
+*/
+
+$$SHORTCODE$$.sQ = function(s) {
+    return "'" + s.replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g,"\\n").replace(/\r/g,"\\r") + "'";
+}
+
+/**
+* Convert a positive integer to a fixed-length hexadecimal number
+* 
+* @function $$SHORTCODE$$.toHex
+* 
+* @param {number} value - value to be converted
+* @param {number} numDigits - how many digits
+* @return a hexadecimal string or undefined
+*/
+
+$$SHORTCODE$$.toHex = function toHex(value, numDigits) 
+{
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        try {
+
+            if ("number" != typeof(value)) {
+                $$SHORTCODE$$.logError(arguments, "value is not a number");
+                break;
+            }
+
+            if (isNaN(value)) {
+                $$SHORTCODE$$.logError(arguments, "value is NaN");
+                break;
+            }
+
+            if (value < 0) {
+                $$SHORTCODE$$.logError(arguments, "negative value");
+                break;
+            }
+
+            if (Math.floor(value) != value) {
+                $$SHORTCODE$$.logError(arguments, "value has decimals");
+                break;
+            }
+
+            var hexString = value.toString(16);
+            if (hexString.length > numDigits) {
+                hexString = hexString.substring(hexString.length - numDigits);
+            }
+            else if (hexString.length < numDigits) {
+                hexString = Array(numDigits - length + 1).join("0") + hexString;
+            }
+
+            retVal = hexString.toUpperCase();
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
 }
 
 })();
