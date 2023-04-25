@@ -33,7 +33,7 @@ var CLASS_CHARACTERISTICS_LOOKUP = {
     "DOMClass": {
         attributes: [
             "isValid"
-        ]
+        ],
         parent: "Class"
     },
     "DOMClassWithId": {
