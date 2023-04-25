@@ -105,7 +105,7 @@ $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) 
         if (apiCollection) {
             for (var entryName in apiCollection) {
                 var entry = apiCollection[entryName];
-                if ("function" == typeof entry && entry == $$SHORTCODE$$.IMPLEMENTATION_MISSING) {
+                if ("function" == typeof entry && entry == $$SHORTCODE$$.IMPLEMENTATION_MISSING && entryName != "IMPLEMENTATION_MISSING") {
                     missingImplementations++;
                     $$SHORTCODE$$.criticalError("Missing implementation " + entryName);
                 }
