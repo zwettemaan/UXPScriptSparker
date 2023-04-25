@@ -1,0 +1,200 @@
+﻿(function() {
+
+// Don't use `var $$SHORTCODE$$`
+// By using `var` we will end up defining this in the wrong scope
+
+if ("undefined" == typeof $$SHORTCODE$$) {
+    $$SHORTCODE$$ = {};
+}
+
+// The CLASS_CHARACTERISTICS_LOOKUP table contains 'characteristic elements' 
+// of various InDesign DOM classes. By checking if these elements are present
+// we can classify an object as being instanceof. This is not foolproof - 
+// this method will fail on 'duck typed' objects.
+
+var CLASS_CHARACTERISTICS_LOOKUP = {
+    "Book": {
+        attributes: [
+            "automaticDocumentConversion"
+        ],
+        parent: "DOMClass"
+    },
+    "BookContent" : {
+        attributes: [
+            "documentPageRange"
+        ],
+        parent: "DOMClassWithId"
+    },
+    "Class": {
+        methods: [
+            "__proto__"
+        ]
+    },
+    "DOMClass": {
+        attributes: [
+            "isValid"
+        ]
+        parent: "Class"
+    },
+    "DOMClassWithId": {
+        attributes: [
+            "id"
+        ],
+        parent: "DOMClass"
+    },
+    "Document": {
+        attributes: [
+            "adjustLayoutPreference"
+        ],
+        parent: "DOMClassWithId"
+    },
+    "Graphic": {
+        attributes: [
+            "imageTypeName"
+        ],
+        parent: "DOMClassWithId"
+    },
+    "EPS": {
+        attributeValues: [
+            { 
+                attribute: "imageTypeName",
+                value: "EPS" 
+            }
+        ],
+        parent: "Graphic"
+    },
+    "PDF": {
+        attributeValues: [
+            { 
+                attribute: "imageTypeName",
+                value: "Adobe PDF" 
+            }
+        ],
+        parent: "Graphic"
+    },
+    "WMF": {
+        attributeValues: [
+            { 
+                attribute: "imageTypeName",
+                value: "WMF" 
+            }
+        ],
+        parent: "Graphic"
+    },
+    "PICT": {
+        attributeValues: [
+            { 
+                attribute: "imageTypeName",
+                value: "PICT" 
+            }
+        ],
+        parent: "Graphic"
+    },
+    "ImportedPage": {
+        attributeValues: [
+            { 
+                attribute: "imageTypeName",
+                value: "InDesign" 
+            }
+        ],
+        parent: "Graphic"
+    },
+    "SVG": {
+        attributeValues: [
+            { 
+                attribute: "imageTypeName",
+                value: "SVG" 
+            }
+        ],
+        parent: "Graphic"
+    }
+};
+
+$$SHORTCODE$$.instanceof = function _instanceof(object, domClassName) {
+  
+    var retVal = false;
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif
+    do {
+
+        try {
+
+            if (! object) {
+                break;
+            }
+
+            var classEntry = CLASS_CHARACTERISTICS_LOOKUP[domClassName]
+            if (! classEntry) {
+                $$SHORTCODE$$.logError(arguments, "not a supported class name. Check idDOM.idjs and add more info if needed");
+                break;
+            } 
+
+            if (classEntry.attributeValues) {
+                retVal = true;
+                for (var attrValueIdx = 0; attrValueIdx < classEntry.attributeValues.length; attrValueIdx++) {
+                    var attrEntry = classEntry.attributeValues[attrValueIdx];
+                    if (! object.__lookupGetter__(attrEntry.attribute)) {
+                        retVal = false;
+                        break;                    
+                    }
+                    if (object[attrEntry.attribute] != attrEntry.value) {
+                        retVal = false;
+                        break;                    
+                    }
+                }
+                if (! retVal) {
+                    break;
+                }
+            }
+
+            if (classEntry.attributes) {
+                retVal = true;
+                for (var attrIdx = 0; attrIdx < classEntry.attributes.length; attrIdx++) {
+                    var attrName = classEntry.attributes[attrIdx];
+                    if (! object.__lookupGetter__(attrName)) {
+                        retVal = false;
+                        break;                    
+                    }
+                }
+                if (! retVal) {
+                    break;
+                }
+            }
+
+            if (classEntry.methods) {
+                retVal = true;
+                for (var methodIdx = 0; methodIdx < classEntry.methods.length; methodIdx++) {
+                    var methodName = classEntry.methods[methodIdx];
+                    if (! (methodName in object)) {
+                        retVal = false;
+                        break;                    
+                    }
+                }
+                if (! retVal) {
+                    break;
+                }
+            }
+
+            if (classEntry.parent) {
+                retVal = $$SHORTCODE$$.instanceof(object, classEntry.parent);
+            }
+
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+})();

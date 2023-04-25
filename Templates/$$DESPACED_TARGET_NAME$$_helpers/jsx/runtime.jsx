@@ -30,6 +30,9 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/fileio.js",
     "./fileio.jsx",
     
+    "../api/idDOM.js",
+    "./idDOM.jsx",
+
     "../shared/init.js",
     "../../$$DESPACED_TARGET_NAME$$.js"
 ];

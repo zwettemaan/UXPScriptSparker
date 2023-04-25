@@ -9,8 +9,7 @@
 
 (function() {
 
-$$SHORTCODE$$.alert = function alert(msg) {
-    
+$$SHORTCODE$$.alert = function alert(msg) {    
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
     $$SHORTCODE$$.logEntry(arguments);
@@ -64,7 +63,7 @@ $$SHORTCODE$$.checkWindows = function checkWindows() {
     return retVal;
 }
 
-$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, s) {
+$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
     var savedInLogger = $$SHORTCODE$$.inLogger;
 

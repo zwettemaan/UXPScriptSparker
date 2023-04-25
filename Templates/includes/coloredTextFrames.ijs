@@ -1,4 +1,8 @@
 ﻿function main() {
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
 
     app.scriptPreferences.enableRedraw = false;
 
@@ -84,4 +88,9 @@
     var elapsedMilliseconds = end - start;
     
     $$SHORTCODE$$.alert("time elapsed (ms) = " + elapsedMilliseconds);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
 }

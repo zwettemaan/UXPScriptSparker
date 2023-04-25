@@ -21,12 +21,12 @@ var ES_SCRIPT_readUTF8TextFile =
     "})";
 
 var ES_SCRIPT_outputToUTF8TextFile = 
-    "(function(filePath, line, mode_a_or_w, isAddNewLine) {" +
+    "(function(filePath, line, mode_a_or_w, mustAddNewline) {" +
         "try {" +
             "var textFile = File(filePath);" +
             "textFile.open(mode);" +
             "textFile.encoding = 'UTF8';" +
-            "if (isAddNewLine){" +
+            "if (mustAddNewline){" +
                 "textFile.writeln(line);" +
             "}" +
             "else{" +
@@ -40,7 +40,7 @@ var ES_SCRIPT_outputToUTF8TextFile =
 
 // No logging in these functions - they are themselves used by the logging functions
 
-$$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, text, isAddNewLine) {
+$$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, text, handleNewLine) {
 
     try {
         var extendScript = 
@@ -48,7 +48,7 @@ $$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, 
                 $$SHORTCODE$$.dQ(filePath) + "," +
                 $$SHORTCODE$$.dQ(text) + "," +
                 $$SHORTCODE$$.dQ("a") + "," +
-                (isAddNewLine ? "true" : "false") +
+                (handleNewLine == $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE ? "true" : "false") +
             ")";
         app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
     }
@@ -73,7 +73,7 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = function readUTF8TextFile(filePath) {
     return retVal;
 }
 
-$$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, text, isAddNewLine) {
+$$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, text, handleNewLine) {
 
     try {
         var extendScript = 
@@ -81,7 +81,7 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, te
                 $$SHORTCODE$$.dQ(filePath) + "," +
                 $$SHORTCODE$$.dQ(text) + "," +
                 $$SHORTCODE$$.dQ("w") + "," +
-                (isAddNewLine ? "true" : "false") +
+                (handleNewLine == $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE ? "true" : "false") +
             ")";
         app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
     }

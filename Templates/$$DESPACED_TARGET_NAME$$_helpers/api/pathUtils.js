@@ -81,32 +81,32 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
                 }
 
                 // Directory with spaces in the name
-                if (! $$SHORTCODE$$.path.exists("/Application Support")) {
-                    $$SHORTCODE$$.logError(arguments, "/Application Support should exist");
+                if (! $$SHORTCODE$$.path.exists("/Program Files")) {
+                    $$SHORTCODE$$.logError(arguments, "'/Program Files' should exist");
                     break;
                 }
 
                 // Directory with spaces in the name and trailing slash
-                if (! $$SHORTCODE$$.path.exists("/Application Support/")) {
-                    $$SHORTCODE$$.logError(arguments, "/Application Support/ should exist");
+                if (! $$SHORTCODE$$.path.exists("/Program Files/")) {
+                    $$SHORTCODE$$.logError(arguments, "'/Program Files/' should exist");
                     break;
                 }
 
                 // A file
-                if (! $$SHORTCODE$$.path.exists("/etc/hosts")) {
-                    $$SHORTCODE$$.logError(arguments, "/etc/hosts should exist");
+                if (! $$SHORTCODE$$.path.exists("/Windows/System32/Drivers/etc/hosts")) {
+                    $$SHORTCODE$$.logError(arguments, "/Windows/System32/Drivers/etc/hosts should exist");
                     break;
                 }
 
-                // A file with a trailing slash should not exist
-                if ($$SHORTCODE$$.path.exists("/etc/hosts/")) {
-                    $$SHORTCODE$$.logError(arguments, "/etc/hosts/ should not exist");
+                // A file with a trailing slash should exist
+                if (! $$SHORTCODE$$.path.exists("/Windows/System32/Drivers/etc/hosts/")) {
+                    $$SHORTCODE$$.logError(arguments, "/Windows/System32/Drivers/etc/hosts/ should exist");
                     break;
                 }
 
                 // A non-existent file
-                if ($$SHORTCODE$$.path.exists("/etc/file_does_not_exist_no_way.txt")) {
-                    $$SHORTCODE$$.logError(arguments, "/etc/file_does_not_exist_no_way.txt should not exist");
+                if ($$SHORTCODE$$.path.exists("/Users/file_does_not_exist_no_way.txt")) {
+                    $$SHORTCODE$$.logError(arguments, "/Users/file_does_not_exist_no_way.txt should not exist");
                     break;
                 }
             }
@@ -126,14 +126,14 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
                 }
 
                 // Directory with spaces in the name
-                if (! $$SHORTCODE$$.path.exists("/Application Support")) {
-                    $$SHORTCODE$$.logError(arguments, "/Application Support should exist");
+                if (! $$SHORTCODE$$.path.exists("/Library/Application Support")) {
+                    $$SHORTCODE$$.logError(arguments, "/Library/Application Support should exist");
                     break;
                 }
 
                 // Directory with spaces in the name and trailing slash
-                if (! $$SHORTCODE$$.path.exists("/Application Support/")) {
-                    $$SHORTCODE$$.logError(arguments, "/Application Support/ should exist");
+                if (! $$SHORTCODE$$.path.exists("/Library//Application Support/")) {
+                    $$SHORTCODE$$.logError(arguments, "/Library/Application Support/ should exist");
                     break;
                 }
 
@@ -143,9 +143,9 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
                     break;
                 }
 
-                // A file with a trailing slash should not exist
-                if ($$SHORTCODE$$.path.exists("/etc/hosts/")) {
-                    $$SHORTCODE$$.logError(arguments, "/etc/hosts/ should not exist");
+                // A file with a trailing slash should exist
+                if (! $$SHORTCODE$$.path.exists("/etc/hosts/")) {
+                    $$SHORTCODE$$.logError(arguments, "/etc/hosts/ should exist");
                     break;
                 }
 

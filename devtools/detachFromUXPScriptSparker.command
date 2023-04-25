@@ -46,7 +46,7 @@ else
         rm -rf Templates
         rm -f Mac/initialSetupConfigApp.command
         rm -rf Mac/SparkerConfig.app
-        rm -rf "Mac/ Do not forget to de-quarantine!.txt"
+        rm -rf "Mac/ Do not forget to de-quarantine! Read!.txt"
         rm -f Windows/SparkerConfig.exe
         rm -rf Windows/SparkerConfig\ Libs
         export UXPS_DELETE_MYSELF=1

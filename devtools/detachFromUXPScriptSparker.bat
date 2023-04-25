@@ -51,7 +51,7 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
         RD /s /q Templates >NUL 2>&1
         DEL Mac\initialSetupConfigApp.command
         RD /s /q Mac\SparkerConfig.app >NUL 2>&1
-        RD /s /q "Mac\ Do not forget to de-quarantine!.txt" >NUL 2>&1
+        RD /s /q "Mac\ Do not forget to de-quarantine! Read!.txt" >NUL 2>&1
         DEL Windows\SparkerConfig.exe
         RD /s /q Windows\SparkerConfig\ Libs >NUL 2>&1
         SET UXPS_DELETE_MYSELF="YES"
