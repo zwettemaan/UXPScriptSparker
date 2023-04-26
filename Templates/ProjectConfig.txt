@@ -12,7 +12,7 @@ IS_BUILDSETTING_PROJECT_VERSION=1
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
-SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames"
+SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames,Promises"
 
 ENABLE_LOG_ENTRY_EXIT="OFF"
 SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"

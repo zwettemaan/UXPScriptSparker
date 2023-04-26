@@ -5,6 +5,7 @@
 (function() {
 
 var timedFunctionList = undefined;
+var nextIdleAfter = undefined;
 var cancelledTaskIds = {};
 var taskIdCounter = 0;
 
@@ -14,7 +15,6 @@ $$SHORTCODE$$.clearImmediate = function(taskId) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     clearTimedFunction(taskId);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -29,7 +29,6 @@ $$SHORTCODE$$.clearInterval = function(taskId) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     clearTimedFunction(taskId);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -44,7 +43,6 @@ $$SHORTCODE$$.clearTimeout = function(taskId) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     clearTimedFunction(taskId);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -59,7 +57,6 @@ function clearTimedFunction(taskId) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     try {
         cancelledTaskIds[taskId] = true;
     }
@@ -81,7 +78,6 @@ $$SHORTCODE$$.setImmediate = function setImmediate(taskFtn) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     retVal = timedFunction(taskFtn, 0, false);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -99,7 +95,6 @@ $$SHORTCODE$$.setInterval = function setInterval(taskFtn, timeoutMilliseconds) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     retVal = timedFunction(taskFtn, timeoutMilliseconds, true);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -117,7 +112,6 @@ $$SHORTCODE$$.setTimeout = function setTimeout(taskFtn, timeoutMilliseconds) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     retVal = timedFunction(taskFtn, timeoutMilliseconds, false);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -135,7 +129,6 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-
     do {
         try {
 
@@ -145,7 +138,8 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
                 timeOutMilliseconds = 0;
             }
 
-            var callAfter = (new Date()).getTime() + timeOutMilliseconds;
+            var now = (new Date()).getTime();
+            var callAfter = now + timeOutMilliseconds;
 
             var taskEntry = {
                 taskFtn: taskFtn, 
@@ -158,18 +152,17 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
             {          
                 timedFunctionList = [];
 
-                var timedFunctionIdleTask = app.idleTasks.add();
+                timedFunctionIdleTask = app.idleTasks.add();
                 timedFunctionIdleTask.addEventListener(
                     IdleTask.ON_IDLE,
                     function() {
 
                         var activeTaskList = timedFunctionList;
-                        timedFunctionList = undefined;
+                        timedFunctionList = [];
+                        nextIdleAfter = undefined;
 
                         var activeCancelledTasks = cancelledTaskIds;
                         cancelledTaskIds = {};
-
-                        var soonestCallAfter = undefined;
 
                         for (var taskIdx = 0; taskIdx < activeTaskList.length; taskIdx++) {
 
@@ -181,7 +174,7 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
                             if (task.taskId in cancelledTaskIds) {
                                 taskFinished = true;
                             }
-                            else if (now < task.callAfter) {
+                            else if (task.callAfter < now) {
 
                                 task.taskFtn();
 
@@ -196,43 +189,58 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
                             }
 
                             if (! taskFinished) {
-
-                                if (! timedFunctionList) {
-                                    timedFunctionList = [];
-                                }
-
                                 timedFunctionList.push(task);
-
-                                if (soonestCallAfter == undefined || task.callAfter < soonestCallAfter) {
-                                    soonestCallAfter = task.callAfter;
-                                }
                             }
                         }
 
-                        if (! timedFunctionList) {
+                        if (timedFunctionList.length == 0) {
+                            timedFunctionList = undefined;
                             timedFunctionIdleTask.sleep = 0;
+                            timedFunctionIdleTask = undefined;
                         }
-                        else {
-                            var sleepTime = soonestCallAfter - (new Date()).getTime();
+                        else if (nextIdleAfter === undefined || nextIdleAfter > soonestCallAfter) {
+
+                            var soonestCallAfter = undefined;
+                            for (var taskIdx = 0; taskIdx < timedFunctionList.length; taskIdx++) {
+                                if (soonestCallAfter === undefined || soonestCallAfter > task.callAfter) {
+                                    soonestCallAfter = task.callAfter;
+                                }
+                            }
+
+                            var now = (new Date()).getTime();
+                            var sleepTime = soonestCallAfter - now;
                             if (sleepTime < 1) {
                                 sleepTime = 1;
                             }
                             timedFunctionIdleTask.sleep  = sleepTime;
+                            nextIdleAfter = now + sleepTime;
                         }
                     }
                 );
 
-                timedFunctionIdleTask.sleep = timeOutMilliseconds; // That's the lowest we can go
             }
 
             timedFunctionList.push(taskEntry);
             retVal = taskEntry.taskId;
+
+            if (nextIdleAfter !== undefined && (nextIdleAfter < callAfter)) {
+                break;
+            }
+
+            var sleepTime = timeOutMilliseconds;
+            if (sleepTime < 1) {
+                sleepTime = 1; // That's the lowest we can go
+            }
+
+            timedFunctionIdleTask.sleep = sleepTime; 
+            nextIdleAfter = now + sleepTime;
 
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);
         }
     }
+    while (false);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logExit(arguments);

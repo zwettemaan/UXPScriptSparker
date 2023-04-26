@@ -17,6 +17,8 @@ function declareAPI() {
     $$SHORTCODE$$.logNote      = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.logTrace     = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.logWarning   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.popLogLevel  = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.pushLogLevel = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.randomGUID   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.shallowClone = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.sQ           = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
@@ -440,11 +442,15 @@ $$SHORTCODE$$.tests.toHex = function toHex() {
                 }
             ];
 
+
             retVal = true;      
             for (var idx = 0; idx < tests.length; idx++) {
                 var test = tests[idx];
                 try {
-                    if ($SHORTCODE$$.toHex(test.value, test.digits) !== test.expected) {
+                    $$SHORTCODE$$.pushLogLevel($$SHORTCODE$$.C.LOG_NONE);
+                    var calculated = $$SHORTCODE$$.toHex(test.value, test.digits);
+                    $$SHORTCODE$$.popLogLevel();
+                    if (calculated !== test.expected) {
                         $$SHORTCODE$$.logError(arguments, "test #" + idx + " fails");
                         retVal = false;
                         break;
@@ -455,6 +461,7 @@ $$SHORTCODE$$.tests.toHex = function toHex() {
                     retVal = false;
                 }
             }
+
 
             $$SHORTCODE$$.logNote(arguments, "test passed");
         }

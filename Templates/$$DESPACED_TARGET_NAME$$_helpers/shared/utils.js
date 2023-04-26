@@ -14,6 +14,8 @@
 * @return a deep clone of the object
 */
 
+var logLevelStack = [];
+
 $$SHORTCODE$$.deepClone = function deepClone(obj) {
 
     var retVal = undefined;
@@ -221,6 +223,52 @@ $$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
 }
 
 /**
+* Change the log level and restore what it was set to before the preceding call to pushLogLevel()
+*
+* @function $$SHORTCODE$$.popLogLevel
+* 
+* @return the previous log level before the popLogLevel()
+*          
+*/
+
+$$SHORTCODE$$.popLogLevel = function popLogLevel() {
+
+    var retVal;
+
+    retVal = $$SHORTCODE$$.S.LOG_LEVEL;
+    if (logLevelStack.length > 0) {
+        $$SHORTCODE$$.S.LOG_LEVEL = logLevelStack.pop();
+    }
+    else {
+        $$SHORTCODE$$.S.LOG_LEVEL = $$SHORTCODE$$.C.LOG_NONE;
+    }
+    
+    return retVal;
+}
+
+/**
+* Change the log level and save the previous log level on a
+* stack.
+*
+* @function $$SHORTCODE$$.pushLogLevel
+* 
+* @param {integer} newLogLevel  - new log level
+* @return the previous log level
+*          
+*/
+
+$$SHORTCODE$$.pushLogLevel = function pushLogLevel(newLogLevel) {
+
+    var retVal;
+
+    retVal = $$SHORTCODE$$.S.LOG_LEVEL;
+    logLevelStack.push($$SHORTCODE$$.S.LOG_LEVEL);
+    $$SHORTCODE$$.S.LOG_LEVEL = newLogLevel;
+
+    return retVal;
+}
+
+/**
 * Generate some GUID. This is not really a 'proper' GUID generator, 
 * but for our needs it'll do.
 *
@@ -377,7 +425,7 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits)
                 hexString = hexString.substring(hexString.length - numDigits);
             }
             else if (hexString.length < numDigits) {
-                hexString = Array(numDigits - length + 1).join("0") + hexString;
+                hexString = Array(numDigits - hexString.length + 1).join("0") + hexString;
             }
 
             retVal = hexString.toUpperCase();

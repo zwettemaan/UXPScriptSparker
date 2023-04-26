@@ -1,5 +1,5 @@
 /**@license MIT-promiscuous-©Ruben Verborgh*/
-(function () {
+(function (func, obj) {
 
   // Type checking utility function
   function is(type, item) { return (typeof item)[0] == type; }
@@ -97,7 +97,7 @@
   }
 
   // Export the main module
-  $.globals.Promise = Promise;
+  $.global.Promise = Promise;
 
   // Creates a resolved promise
   Promise.resolve = ResolvedPromise;

@@ -12,6 +12,8 @@ $elif "$$STARTERCODE$$" == "ColoredTextFrames"
 $include "coloredTextFrames.ijs"
 $elif "$$STARTERCODE$$" == "MakeNewDoc"
 $include "makeNewDoc.ijs"
+$elif "$$STARTERCODE$$" == "Promises"
+$include "promises.ijs"
 $else
 $include "emptyMain.ijs"
 $endif
