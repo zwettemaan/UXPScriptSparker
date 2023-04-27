@@ -1,4 +1,6 @@
 ﻿function main() {
+
+    var retVal;    
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
 
     $$SHORTCODE$$.logEntry(arguments);
@@ -14,7 +16,7 @@
         }
     );
       
-    myFirstPromise.then(
+    retVal = myFirstPromise.then(
         function(successMessage) {
             $$SHORTCODE$$.alert('Yay! ' + successMessage);
         }
@@ -24,4 +26,5 @@
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
+    return retVal;
 }

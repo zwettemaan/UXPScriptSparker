@@ -34,7 +34,7 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "./idDOM.idjs",
 
     "../api/compat.js",
-    "./compat.jsx",
+    "./compat.idjs",
 
     "../shared/init.js",
     "../../$$DESPACED_TARGET_NAME$$.js"
@@ -70,7 +70,7 @@ var ES_SCRIPT_getHomeDir =
         "return dQ(Folder('~').fsName)" +
     "})()";
 
-$$SHORTCODE$$.initScript = async function initScript(completionCallback) {
+$$SHORTCODE$$.initDirsScript = async function initDirsScript() {
 
     var retVal = false;
 
@@ -86,9 +86,6 @@ $$SHORTCODE$$.initScript = async function initScript(completionCallback) {
             var appLocalTemp = await $$SHORTCODE$$.fs.getTemporaryFolder();
             $$SHORTCODE$$.dirs.RAW_TEMP = appLocalTemp.nativePath;
 
-            $$SHORTCODE$$.sharedInitScript();
-
-            completionCallback();
         }
         catch (err) { 
             $$SHORTCODE$$.criticalError("initScript throws " + err);
@@ -165,19 +162,20 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         require(path);
     }
 
-    await $$SHORTCODE$$.initScript(function() {
+    await $$SHORTCODE$$.initDirsScript();
 
-        for (var member in $$SHORTCODE$$) {
-            nameSpace[member] = $$SHORTCODE$$[member];        
-        }
+    $$SHORTCODE$$.sharedInitScript();
 
-        if ($$SHORTCODE$$.S.RUN_TESTS) {
-            verifyImplementationsAvailable($$SHORTCODE$$);
-            runTests($$SHORTCODE$$.tests);
-        }
+    for (var member in $$SHORTCODE$$) {
+        nameSpace[member] = $$SHORTCODE$$[member];        
+    }
 
-        $$SHORTCODE$$.main();
+    if ($$SHORTCODE$$.S.RUN_TESTS) {
+        verifyImplementationsAvailable($$SHORTCODE$$);
+        runTests($$SHORTCODE$$.tests);
+    }
 
-    });
+    await $$SHORTCODE$$.main();
+
 
 }

@@ -46,7 +46,7 @@ if (! $$SHORTCODE$$.tests) {
     $$SHORTCODE$$.tests = {};
 }
 
-$$SHORTCODE$$.initScript = function initScript(completionCallback) {
+$$SHORTCODE$$.initDirsScript = function initDirsScript() {
 
     var retVal = false;
 
@@ -61,9 +61,6 @@ $$SHORTCODE$$.initScript = function initScript(completionCallback) {
             $$SHORTCODE$$.dirs.RAW_DESKTOP = Folder.desktop.fsName;
             $$SHORTCODE$$.dirs.RAW_TEMP = Folder.temp.fsName;
 
-            $$SHORTCODE$$.sharedInitScript();
-
-            completionCallback();
         }
         catch (err) { 
             $$SHORTCODE$$.criticalError("initScript throws " + err);
@@ -141,18 +138,18 @@ $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) 
         $.evalFile(path);
     }
 
-    $$SHORTCODE$$.initScript(function() {
+    $$SHORTCODE$$.initScript();
+    $$SHORTCODE$$.sharedInitScript();
 
-        for (var member in $$SHORTCODE$$) {
-            nameSpace[member] = $$SHORTCODE$$[member];        
-        }
+    for (var member in $$SHORTCODE$$) {
+        nameSpace[member] = $$SHORTCODE$$[member];        
+    }
 
-        if ($$SHORTCODE$$.S.RUN_TESTS) {
-            verifyImplementationsAvailable($$SHORTCODE$$);
-            runTests($$SHORTCODE$$.tests);
-        }
+    if ($$SHORTCODE$$.S.RUN_TESTS) {
+        verifyImplementationsAvailable($$SHORTCODE$$);
+        runTests($$SHORTCODE$$.tests);
+    }
 
-        $$SHORTCODE$$.main();
-    });
+    $$SHORTCODE$$.main();
 
 }

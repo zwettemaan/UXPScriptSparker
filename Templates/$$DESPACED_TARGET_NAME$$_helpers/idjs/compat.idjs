@@ -4,7 +4,7 @@
 //
 (function() {
 
-$$SHORTCODE$$.clearImmediate = function(taskId) {
+$$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -19,7 +19,7 @@ $$SHORTCODE$$.clearImmediate = function(taskId) {
     $endif
 }
 
-$$SHORTCODE$$.clearInterval = function(taskId) {
+$$SHORTCODE$$.clearInterval = function _clearInterval(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -34,7 +34,7 @@ $$SHORTCODE$$.clearInterval = function(taskId) {
     $endif
 }
 
-$$SHORTCODE$$.clearTimeout = function(taskId) {
+$$SHORTCODE$$.clearTimeout = function _clearTimeout(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -49,7 +49,7 @@ $$SHORTCODE$$.clearTimeout = function(taskId) {
     $endif
 }
 
-$$SHORTCODE$$.setImmediate = function setImmediate(taskFtn) {
+$$SHORTCODE$$.setImmediate = function _setImmediate(taskFtn) {
 
     var retVal;
 
@@ -67,7 +67,7 @@ $$SHORTCODE$$.setImmediate = function setImmediate(taskFtn) {
     return retVal;
 }
 
-$$SHORTCODE$$.setInterval = function setInterval(taskFtn, timeoutMilliseconds) {
+$$SHORTCODE$$.setInterval = function _setInterval(taskFtn, timeoutMilliseconds) {
 
     var retVal;
 
@@ -85,7 +85,7 @@ $$SHORTCODE$$.setInterval = function setInterval(taskFtn, timeoutMilliseconds) {
     return retVal;
 }
 
-$$SHORTCODE$$.setTimeout = function setTimeout(taskFtn, timeoutMilliseconds) {
+$$SHORTCODE$$.setTimeout = function _setTimeout(taskFtn, timeoutMilliseconds) {
 
     var retVal;
 
