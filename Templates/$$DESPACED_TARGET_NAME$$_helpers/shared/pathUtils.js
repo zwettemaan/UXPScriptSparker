@@ -8,6 +8,9 @@ if (! $$SHORTCODE$$.tests.path) {
     $$SHORTCODE$$.tests.path = {};
 }
 
+$$SHORTCODE$$.path.REGEXP_KEEP_SLASH = /[^\/]*/g;
+$$SHORTCODE$$.path.REGEXP_KEEP_BACKSLASH = /[^\\]*/g;
+
 $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {
 
     var retVal = filePath;
@@ -22,13 +25,17 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
             break;            
         }
 
-        var lastChar = filePath.substr(-1);        
-        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
-            break;
-        }
-
         if (! separator) {
             separator = $$SHORTCODE$$.path.SEPARATOR;
+        }
+
+        if (separator == $$SHORTCODE$$.path.GUESS_SEPARATOR) {
+            separator = $$SHORTCODE$$.path.guessSeparator(filePath);
+        }
+
+        var lastChar = filePath.substr(-1);        
+        if (lastChar == separator) {
+            break;
         }
 
         retVal += separator;
@@ -42,7 +49,7 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
     return retVal;
 };
 
-$$SHORTCODE$$.path.basename = function basename(filepath, separator) {
+$$SHORTCODE$$.path.basename = function basename(filePath, separator) {
     
     var endSegment;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -54,8 +61,12 @@ $$SHORTCODE$$.path.basename = function basename(filepath, separator) {
         separator = $$SHORTCODE$$.path.SEPARATOR;
     }
 
-    // toString() handles cases where filepath is an ExtendScript File/Folder object
-    var splitPath = filepath.toString().split(separator);
+    if (separator == $$SHORTCODE$$.path.GUESS_SEPARATOR) {
+        separator = $$SHORTCODE$$.path.guessSeparator(filePath);
+    }
+
+    // toString() handles cases where filePath is an ExtendScript File/Folder object
+    var splitPath = filePath.toString().split(separator);
     do {
         endSegment = splitPath.pop();   
     }
@@ -68,7 +79,7 @@ $$SHORTCODE$$.path.basename = function basename(filepath, separator) {
     return endSegment;
 }
 
-$$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
+$$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
     
     var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -80,8 +91,12 @@ $$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
         separator = $$SHORTCODE$$.path.SEPARATOR;
     }
 
-    // toString() handles cases where filepath is an ExtendScript File/Folder object
-    var splitPath = filepath.toString().split(separator);
+    if (separator == $$SHORTCODE$$.path.GUESS_SEPARATOR) {
+        separator = $$SHORTCODE$$.path.guessSeparator(filePath);
+    }
+
+    // toString() handles cases where filePath is an ExtendScript File/Folder object
+    var splitPath = filePath.toString().split(separator);
     do {
         var endSegment = splitPath.pop();   
     }
@@ -96,7 +111,7 @@ $$SHORTCODE$$.path.dirname = function dirname(filepath, separator) {
     return retVal;
 }
 
-$$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath) {
+$$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath) {
     
     var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
@@ -104,7 +119,7 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath) {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    var splitName = $$SHORTCODE$$.path.basename(filepath).split(".");
+    var splitName = $$SHORTCODE$$.path.basename(filePath).split(".");
     var extension = "";
     if (splitName.length > 1) {
         extension = splitName.pop();
@@ -118,5 +133,54 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filepath) {
     $endif
     return retVal;
 }
+
+$$SHORTCODE$$.path.guessSeparator = function addTrailingSeparator(filePath, likelySeparator) {
+
+    var retVal = $$SHORTCODE$$.path.SEPARATOR;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+
+        if (! filePath) {
+            break;            
+        }
+
+        if (! likelySeparator) {
+            likelySeparator = $$SHORTCODE$$.path.SEPARATOR;
+        }
+
+        var lastChar = filePath.substr(-1);        
+        if (lastChar == $$SHORTCODE$$.path.SEPARATOR || lastChar == $$SHORTCODE$$.path.OTHER_PLATFORM_SEPARATOR) {
+            retVal = lastChar;
+            break;
+        }
+
+        var slashCount = filePath.replace($$SHORTCODE$$.path.REGEXP_KEEP_SLASH);
+        var backSlashCount = filePath.replace($$SHORTCODE$$.path.REGEXP_KEEP_BACKSLASH);
+        if (backSlashCount < slashCount) {
+            retVal = "/";
+        }
+        else if (backSlashCount > slashCount) {
+            retVal = "\\";
+        }
+        else if (likelySeparator != $$SHORTCODE$$.path.GUESS_SEPARATOR) {
+            retVal = likelySeparator;
+        }
+        else {
+            retVal = $$SHORTCODE$$.path.SEPARATOR;
+        }
+
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+};
 
 })();

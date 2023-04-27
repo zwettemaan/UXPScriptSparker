@@ -10,6 +10,7 @@ else {
     $$SHORTCODE$$.isMac = false;
     $$SHORTCODE$$.isWindows = true;
 }
+$$SHORTCODE$$.path.GUESS_SEPARATOR = "?";
 
 $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
 

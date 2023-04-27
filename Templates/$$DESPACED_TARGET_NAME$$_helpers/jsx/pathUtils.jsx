@@ -13,13 +13,13 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-$$SHORTCODE$$.path.exists = function exists(filepath) {
+$$SHORTCODE$$.path.exists = function exists(filePath) {
     
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-    var f = File(filepath);
+    var f = File(filePath);
     var retVal = f.exists;
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"

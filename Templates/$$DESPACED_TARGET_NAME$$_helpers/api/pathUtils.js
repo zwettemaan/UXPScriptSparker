@@ -16,6 +16,7 @@ function declareAPI() {
     $$SHORTCODE$$.path.dirname              = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.exists               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.filenameExtension    = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.path.guessSeparator       = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.isDir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.mkdir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
@@ -35,18 +36,41 @@ $$SHORTCODE$$.tests.path.basename = function test_basename() {
         var expected;
         var filePath;
 
+        if ($$SHORTCODE$$.isMac) {
+            expected = "kris";
+            filePath = "/Users/kris";
+        }
+        else {
+            expected = "kris";
+            filePath = "C:\\Users\\kris";
+        }
+        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+            retVal = false;
+        }
+
+        if ($$SHORTCODE$$.isMac) {
+            expected = "kris";
+            filePath = "/Users/kris/";
+        }
+        else {
+            expected = "kris";
+            filePath = "C:\\Users\\kris\\";
+        }
+        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+            retVal = false;
+        }
+
         expected = "kris";
         filePath = "/Users/kris";
-        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+        if (expected != $$SHORTCODE$$.path.basename(filePath, $$SHORTCODE$$.path.GUESS_SEPARATOR)) {
             retVal = false;
         }
 
         expected = "kris";
         filePath = "/Users/kris/";
-        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
+        if (expected != $$SHORTCODE$$.path.basename(filePath, $$SHORTCODE$$.path.GUESS_SEPARATOR)) {
             retVal = false;
         }
-
 
     }
     while (false);
