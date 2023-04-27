@@ -158,8 +158,8 @@ $$SHORTCODE$$.path.guessSeparator = function addTrailingSeparator(filePath, like
             break;
         }
 
-        var slashCount = filePath.replace($$SHORTCODE$$.path.REGEXP_KEEP_SLASH);
-        var backSlashCount = filePath.replace($$SHORTCODE$$.path.REGEXP_KEEP_BACKSLASH);
+        var slashCount = filePath.replace($$SHORTCODE$$.path.REGEXP_KEEP_SLASH, "").length;
+        var backSlashCount = filePath.replace($$SHORTCODE$$.path.REGEXP_KEEP_BACKSLASH, "").length;
         if (backSlashCount < slashCount) {
             retVal = "/";
         }
