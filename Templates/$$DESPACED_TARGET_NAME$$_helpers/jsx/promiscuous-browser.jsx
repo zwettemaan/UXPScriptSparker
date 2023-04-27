@@ -77,23 +77,26 @@
 
   // Finalizes the promise by resolving/rejecting it with the transformed value
   function finalize(promise, resolve, reject, value, transform) {
-    $$SHORTCODE$$.setImmediate(function () {
-      try {
-        // Transform the value through and check whether it's a promise
-        value = transform(value);
-        transform = value && (is(obj, value) | is(func, value)) && value.then;
-        // Return the result if it's not a promise
-        if (!is(func, transform))
-          resolve(value);
-        // If it's a promise, make sure it's not circular
-        else if (value == promise)
-          reject(TypeError());
-        // Take over the promise's state
-        else
+    // KC 20230427 - trying to short-circuit the resolve in ExtendScript
+    // because ES is synchronous, rather than async.
+    try {
+      // Transform the value through and check whether it's a promise
+      value = transform(value);
+      transform = value && (is(obj, value) | is(func, value)) && value.then;
+      // Return the result if it's not a promise
+      if (!is(func, transform))
+        resolve(value);
+      // If it's a promise, make sure it's not circular
+      else if (value == promise)
+        reject(TypeError());
+      // Take over the promise's state
+      else {
+        $$SHORTCODE$$.setImmediate(function () {
           transform.call(value, resolve, reject);
+        });
       }
-      catch (error) { reject(error); }
-    });
+    }
+    catch (error) { reject(error); }
   }
 
   // Export the main module

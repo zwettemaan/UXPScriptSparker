@@ -9,7 +9,7 @@ var nextIdleAfter = undefined;
 var cancelledTaskIds = {};
 var taskIdCounter = 0;
 
-$$SHORTCODE$$.clearImmediate = function(taskId) {
+$$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -23,7 +23,7 @@ $$SHORTCODE$$.clearImmediate = function(taskId) {
     $endif
 }
 
-$$SHORTCODE$$.clearInterval = function(taskId) {
+$$SHORTCODE$$.clearInterval = function _clearInterval(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -37,7 +37,7 @@ $$SHORTCODE$$.clearInterval = function(taskId) {
     $endif
 }
 
-$$SHORTCODE$$.clearTimeout = function(taskId) {
+$$SHORTCODE$$.clearTimeout = function _clearTimeout(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
     $$SHORTCODE$$.logEntry(arguments);
@@ -70,7 +70,7 @@ function clearTimedFunction(taskId) {
     $endif
 }
 
-$$SHORTCODE$$.setImmediate = function setImmediate(taskFtn) {
+$$SHORTCODE$$.setImmediate = function _setImmediate(taskFtn) {
 
     var retVal;
 
@@ -87,7 +87,7 @@ $$SHORTCODE$$.setImmediate = function setImmediate(taskFtn) {
     return retVal;
 }
 
-$$SHORTCODE$$.setInterval = function setInterval(taskFtn, timeoutMilliseconds) {
+$$SHORTCODE$$.setInterval = function _setInterval(taskFtn, timeoutMilliseconds) {
 
     var retVal;
 
@@ -104,7 +104,7 @@ $$SHORTCODE$$.setInterval = function setInterval(taskFtn, timeoutMilliseconds) {
     return retVal;
 }
 
-$$SHORTCODE$$.setTimeout = function setTimeout(taskFtn, timeoutMilliseconds) {
+$$SHORTCODE$$.setTimeout = function _setTimeout(taskFtn, timeoutMilliseconds) {
 
     var retVal;
 
@@ -157,7 +157,7 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
                     IdleTask.ON_IDLE,
                     function() {
 
-                        var activeTaskList = timedFunctionList;
+                        var activeTaskList = timedFunctionList ? timedFunctionList : [];
                         timedFunctionList = [];
                         nextIdleAfter = undefined;
 
@@ -171,7 +171,7 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
                             var task = activeTaskList[taskIdx];
                             var taskFinished = false;
 
-                            if (task.taskId in cancelledTaskIds) {
+                            if (task.taskId in activeCancelledTasks) {
                                 taskFinished = true;
                             }
                             else if (task.callAfter < now) {
@@ -195,7 +195,9 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
 
                         if (timedFunctionList.length == 0) {
                             timedFunctionList = undefined;
-                            timedFunctionIdleTask.sleep = 0;
+                            if (timedFunctionIdleTask) {
+                                timedFunctionIdleTask.sleep = 0;
+                            }
                             timedFunctionIdleTask = undefined;
                         }
                         else if (nextIdleAfter === undefined || nextIdleAfter > soonestCallAfter) {

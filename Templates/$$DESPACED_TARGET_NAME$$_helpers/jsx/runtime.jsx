@@ -138,7 +138,7 @@ $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) 
         $.evalFile(path);
     }
 
-    $$SHORTCODE$$.initScript();
+    $$SHORTCODE$$.initDirsScript();
     $$SHORTCODE$$.sharedInitScript();
 
     for (var member in $$SHORTCODE$$) {
