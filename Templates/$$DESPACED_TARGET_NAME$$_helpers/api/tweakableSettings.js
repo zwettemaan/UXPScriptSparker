@@ -17,7 +17,7 @@ function declareAPI() {
 $$SHORTCODE$$.tests.checkTweakableSettings = function checkTweakableSettings() {
 
     var retVal = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -52,7 +52,7 @@ $$SHORTCODE$$.tests.checkTweakableSettings = function checkTweakableSettings() {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

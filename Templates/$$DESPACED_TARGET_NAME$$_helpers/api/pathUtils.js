@@ -81,7 +81,7 @@ $$SHORTCODE$$.tests.path.basename = function test_basename() {
 $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPathFunctions() {
 
     var retVal = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -93,44 +93,44 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
             if ($$SHORTCODE$$.isWindows) {
 
                 // Directory
-                if (! $$SHORTCODE$$.path.exists("/Users")) {
-                    $$SHORTCODE$$.logError(arguments, "/Users should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users should exist");
                     break;
                 }
 
                 // Directory with trailing separator
-                if (! $$SHORTCODE$$.path.exists("/Users/")) {
-                    $$SHORTCODE$$.logError(arguments, "/Users/ should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/ should exist");
                     break;
                 }
 
                 // Directory with spaces in the name
-                if (! $$SHORTCODE$$.path.exists("/Program Files")) {
-                    $$SHORTCODE$$.logError(arguments, "'/Program Files' should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files")) {
+                    $$SHORTCODE$$.logError(arguments, "'" + $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files' should exist");
                     break;
                 }
 
                 // Directory with spaces in the name and trailing slash
-                if (! $$SHORTCODE$$.path.exists("/Program Files/")) {
-                    $$SHORTCODE$$.logError(arguments, "'/Program Files/' should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files/")) {
+                    $$SHORTCODE$$.logError(arguments, "'" + $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files/' should exist");
                     break;
                 }
 
                 // A file
-                if (! $$SHORTCODE$$.path.exists("/Windows/System32/Drivers/etc/hosts")) {
-                    $$SHORTCODE$$.logError(arguments, "/Windows/System32/Drivers/etc/hosts should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts should exist");
                     break;
                 }
 
                 // A file with a trailing slash should exist
-                if (! $$SHORTCODE$$.path.exists("/Windows/System32/Drivers/etc/hosts/")) {
-                    $$SHORTCODE$$.logError(arguments, "/Windows/System32/Drivers/etc/hosts/ should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts/")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts/ should exist");
                     break;
                 }
 
                 // A non-existent file
-                if ($$SHORTCODE$$.path.exists("/Users/file_does_not_exist_no_way.txt")) {
-                    $$SHORTCODE$$.logError(arguments, "/Users/file_does_not_exist_no_way.txt should not exist");
+                if ($$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/file_does_not_exist_no_way.txt")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/file_does_not_exist_no_way.txt should not exist");
                     break;
                 }
             }
@@ -190,7 +190,7 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

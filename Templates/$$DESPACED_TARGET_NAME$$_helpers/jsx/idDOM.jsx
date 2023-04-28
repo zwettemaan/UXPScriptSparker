@@ -11,7 +11,7 @@ $$SHORTCODE$$.instanceof = function _instanceof(object, domClassName) {
   
     var retVal;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
@@ -24,7 +24,7 @@ $$SHORTCODE$$.instanceof = function _instanceof(object, domClassName) {
         $$SHORTCODE$$.logError(arguments, "throws " + err);
     }
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

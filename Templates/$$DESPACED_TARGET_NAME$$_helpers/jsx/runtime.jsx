@@ -57,9 +57,20 @@ $$SHORTCODE$$.initDirsScript = function initDirsScript() {
                 $$SHORTCODE$$.dirs = {};
             }
 
-            $$SHORTCODE$$.dirs.RAW_HOME = Folder("~").fsName;
-            $$SHORTCODE$$.dirs.RAW_DESKTOP = Folder.desktop.fsName;
-            $$SHORTCODE$$.dirs.RAW_TEMP = Folder.temp.fsName;
+            $$SHORTCODE$$.dirs.HOME = $$SHORTCODE$$.path.addTrailingSeparator(Folder("~").fsName);
+            $$SHORTCODE$$.dirs.DESKTOP = $$SHORTCODE$$.path.addTrailingSeparator(Folder.desktop.fsName);
+            $$SHORTCODE$$.dirs.TEMP = $$SHORTCODE$$.path.addTrailingSeparator(Folder.temp.fsName);
+
+
+            if ($$SHORTCODE$$.isMac) {
+                $$SHORTCODE$$.dirs.DRIVE_PREFIX = "";
+            }
+            else {
+                var splitHomePath = $$SHORTCODE$$.dirs.HOME.split($$SHORTCODE$$.path.SEPARATOR);
+                if (splitHomePath.length > 0) {
+                    $$SHORTCODE$$.dirs.DRIVE_PREFIX = splitHomePath[0] + $$SHORTCODE$$.path.SEPARATOR;
+                }
+            }
 
         }
         catch (err) { 

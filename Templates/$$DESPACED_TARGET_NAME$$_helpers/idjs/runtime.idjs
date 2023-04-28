@@ -81,10 +81,72 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                 $$SHORTCODE$$.dirs = {};
             }
 
-            $$SHORTCODE$$.dirs.RAW_HOME = eval(app.doScript(ES_SCRIPT_getHomeDir, ScriptLanguage.JAVASCRIPT));
-
             var appLocalTemp = await $$SHORTCODE$$.fs.getTemporaryFolder();
-            $$SHORTCODE$$.dirs.RAW_TEMP = appLocalTemp.nativePath;
+            $$SHORTCODE$$.dirs.TEMP = 
+                $$SHORTCODE$$.path.addTrailingSeparator(appLocalTemp.nativePath);
+
+            // At the moment, the temp path seems to give us relevant data 
+            // regarding the user's context. This can break at any new UXPScript
+            // version!
+
+            try {
+
+                var splitTempPath = $$SHORTCODE$$.dirs.TEMP.split($$SHORTCODE$$.path.SEPARATOR);
+
+                if ($$SHORTCODE$$.isWindows) {
+
+                    if (splitTempPath.length > 0) {
+                        $$SHORTCODE$$.dirs.DRIVE_PREFIX = splitTempPath[0] + $$SHORTCODE$$.path.SEPARATOR;
+                    }
+
+                    if (splitTempPath.length > 1) {
+                        $$SHORTCODE$$.dirs.USERS = 
+                            $$SHORTCODE$$.dirs.DRIVE_PREFIX + 
+                            splitTempPath[1] + $$SHORTCODE$$.path.SEPARATOR;
+                    }
+
+                    if (splitTempPath.length > 2) {
+                        $$SHORTCODE$$.dirs.HOME = 
+                            $$SHORTCODE$$.dirs.USERS + 
+                            splitTempPath[2] + $$SHORTCODE$$.path.SEPARATOR;
+                    }
+
+                }
+                else {
+                
+                    $$SHORTCODE$$.dirs.DRIVE_PREFIX = "";
+
+                    if (splitTempPath.length > 0) {
+                        $$SHORTCODE$$.dirs.USERS = 
+                            $$SHORTCODE$$.dirs.DRIVE_PREFIX + 
+                            splitTempPath[0] + $$SHORTCODE$$.path.SEPARATOR;
+                    }
+
+                    if (splitTempPath.length > 1) {
+                        $$SHORTCODE$$.dirs.HOME = 
+                            $$SHORTCODE$$.dirs.USERS + 
+                            splitTempPath[1] + $$SHORTCODE$$.path.SEPARATOR;
+                    }
+
+                    if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.HOME + "Library")) {
+                        $$SHORTCODE$$.criticalError("Could not find ~/Library");
+                        $$SHORTCODE$$.dirs.HOME = undefined;
+                    }
+
+                }
+            }
+            catch (err) {            
+            }
+
+            // Fall back to using ExtendScript if we did not manage to get the data
+            if (! $$SHORTCODE$$.dirs.HOME) {
+                $$SHORTCODE$$.dirs.HOME = 
+                    $$SHORTCODE$$.path.addTrailingSeparator(
+                        eval(
+                            app.doScript(
+                                ES_SCRIPT_getHomeDir, 
+                                ScriptLanguage.JAVASCRIPT)));
+            }
 
         }
         catch (err) { 

@@ -14,9 +14,24 @@ STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
 SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames,Promises"
 
-ENABLE_LOG_ENTRY_EXIT="OFF"
-SELECT_ENABLE_LOG_ENTRY_EXIT="ON,OFF"
+ENABLE_LOG_ENTRY_EXIT="ON_DISABLED"
 HELP_ENABLE_LOG_ENTRY_EXIT="Add verbose tracing code for entry/exit into methods to the generated code"
+SELECT_ENABLE_LOG_ENTRY_EXIT="OFF,ON_DISABLED,ON_ENABLED"
+
+RUN_TESTS="1"
+HELP_RUN_TESTS="Whether to run tests on startup. See tweakableSettings file to turn this on or off later on."
+SELECT_RUN_TESTS="1,0"
+IS_ADVANCED_RUN_TESTS=1
+
+STARTUP_LOG_LEVEL="NOTE"
+HELP_STARTUP_LOG_LEVEL="What log level to set when starting up"
+SELECT_STARTUP_LOG_LEVEL="NONE,ERROR,WARN,NOTE,TRACE"
+IS_ADVANCED_STARTUP_LOG_LEVEL=1
+
+LOG_TO_FILE_ON_DESKTOP="1"
+HELP_LOG_TO_FILE_ON_DESKTOP="Whether to log to a desktop file."
+SELECT_LOG_TO_FILE_ON_DESKTOP="0,1"
+IS_ADVANCED_LOG_TO_FILE_ON_DESKTOP=1
 
 TARGET_APP="InDesign"
 HELP_TARGET_APP="The target Adobe application. See setTarget command file for 'Any' defaults."

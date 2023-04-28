@@ -14,7 +14,7 @@ $$SHORTCODE$$.path.REGEXP_KEEP_BACKSLASH = /[^\\]*/g;
 $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {
 
     var retVal = filePath;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -42,7 +42,7 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -52,7 +52,7 @@ $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath
 $$SHORTCODE$$.path.basename = function basename(filePath, separator) {
     
     var endSegment;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -72,7 +72,7 @@ $$SHORTCODE$$.path.basename = function basename(filePath, separator) {
     }
     while (splitPath.length > 0 && endSegment == "");
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -82,7 +82,7 @@ $$SHORTCODE$$.path.basename = function basename(filePath, separator) {
 $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
     
     var retVal;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -104,7 +104,7 @@ $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
 
     retVal = splitPath.join(separator);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -114,7 +114,7 @@ $$SHORTCODE$$.path.dirname = function dirname(filePath, separator) {
 $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath) {
     
     var retVal;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -127,7 +127,7 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath) {
 
     retVal = extension.toLowerCase();
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -137,7 +137,7 @@ $$SHORTCODE$$.path.filenameExtension = function filenameExtension(filePath) {
 $$SHORTCODE$$.path.guessSeparator = function addTrailingSeparator(filePath, likelySeparator) {
 
     var retVal = $$SHORTCODE$$.path.SEPARATOR;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -176,7 +176,7 @@ $$SHORTCODE$$.path.guessSeparator = function addTrailingSeparator(filePath, like
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

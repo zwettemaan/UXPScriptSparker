@@ -10,28 +10,28 @@
 (function() {
 
 $$SHORTCODE$$.alert = function _alert(msg) {  // Use `_alert`, instead of `alert` to avoid infinite recursion
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     alert(msg); // Built-in should not match function name of this function - that's why we use `_alert`
     
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
 }
 
 $$SHORTCODE$$.checkMac = function checkMac() {    
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     var retVal = $.os.substr(0,3) == "Mac";
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -41,14 +41,14 @@ $$SHORTCODE$$.checkMac = function checkMac() {
 $$SHORTCODE$$.checkWindows = function checkWindows() {    
 
     var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     retVal = $.os.substr(0,3) == "Win";
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

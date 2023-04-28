@@ -19,7 +19,7 @@ var logLevelStack = [];
 $$SHORTCODE$$.deepClone = function deepClone(obj) {
 
     var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -66,7 +66,7 @@ $$SHORTCODE$$.deepClone = function deepClone(obj) {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -284,7 +284,7 @@ $$SHORTCODE$$.pushLogLevel = function pushLogLevel(newLogLevel) {
 $$SHORTCODE$$.randomGUID = function randomGUID() 
 {
     var retVal = "";
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -300,7 +300,7 @@ $$SHORTCODE$$.randomGUID = function randomGUID()
         }
     }
     
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -320,7 +320,7 @@ $$SHORTCODE$$.randomGUID = function randomGUID()
 $$SHORTCODE$$.shallowClone = function shallowClone(obj) {
 
     var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -359,7 +359,7 @@ $$SHORTCODE$$.shallowClone = function shallowClone(obj) {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -392,7 +392,7 @@ $$SHORTCODE$$.sQ = function(s) {
 $$SHORTCODE$$.toHex = function toHex(value, numDigits) 
 {
     var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -436,7 +436,7 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits)
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

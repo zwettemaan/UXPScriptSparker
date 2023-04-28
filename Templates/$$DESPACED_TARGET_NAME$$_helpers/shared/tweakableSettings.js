@@ -4,10 +4,19 @@
 
 (function() {
 
-$$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_NONE;
+$$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_$$STARTUP_LOG_LEVEL$$;
 
+$if $$LOG_TO_FILE_ON_DESKTOP$$ == "0"
 $$SHORTCODE$$.S.LOG_TO_FILEPATH               = undefined; // file path or undefined
+$else
+$$SHORTCODE$$.S.LOG_TO_FILEPATH               = "~/Desktop/$$SHORTCODE$$_ScriptRun.log"; // undefined; // file path or undefined
+$endif
+
+$if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON_ENABLED"
 $$SHORTCODE$$.S.LOG_ENTRY_EXIT                = false;
+$else
+$$SHORTCODE$$.S.LOG_ENTRY_EXIT                = true;
+$endif
 
 $$SHORTCODE$$.S.CRITICAL_LOG_FILE_ON_DESKTOP  = "criticalErrors.log";
 $$SHORTCODE$$.S.LOG_TO_CHROME_CONSOLE         = false; // Only useful in CEP/ExtendScript
@@ -16,7 +25,11 @@ $$SHORTCODE$$.S.LOG_TO_UXPDEVTOOL_CONSOLE     = false; // Only useful in UXPScri
 
 $$SHORTCODE$$.S.LOG_CRITICAL_ERRORS           = false;
 
+$if "$$RUN_TESTS$$" == "1"
+$$SHORTCODE$$.S.RUN_TESTS                     = true;
+$else
 $$SHORTCODE$$.S.RUN_TESTS                     = false;
+$endif
 
 /* Add any global settings, defaults... here */
 

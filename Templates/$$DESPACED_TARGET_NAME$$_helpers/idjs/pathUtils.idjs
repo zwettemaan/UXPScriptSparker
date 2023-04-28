@@ -18,7 +18,7 @@ $$SHORTCODE$$.path.exists = function exists(filePath) {
 
     var retVal = false;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
@@ -29,7 +29,7 @@ $$SHORTCODE$$.path.exists = function exists(filePath) {
     catch (err) {    
     }
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -40,7 +40,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 
     var retVal = false;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
@@ -51,7 +51,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
     catch (err) {    
     }
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -61,7 +61,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
 
     var success = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
@@ -98,7 +98,7 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif  

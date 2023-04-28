@@ -10,7 +10,7 @@
 (function() {
 
 $$SHORTCODE$$.alert = function alert(msg) {    
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -23,7 +23,7 @@ $$SHORTCODE$$.alert = function alert(msg) {
     theDialog.show();
     theDialog.destroy();
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -32,14 +32,14 @@ $$SHORTCODE$$.alert = function alert(msg) {
 $$SHORTCODE$$.checkMac = function checkMac() {    
 
     var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     retVal = window.navigator.platform == "darwin";
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -49,14 +49,14 @@ $$SHORTCODE$$.checkMac = function checkMac() {
 $$SHORTCODE$$.checkWindows = function checkWindows() {    
 
     var retVal = undefined;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
     retVal = window.navigator.platform.toLowerCase().indexOf("win") != -1;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

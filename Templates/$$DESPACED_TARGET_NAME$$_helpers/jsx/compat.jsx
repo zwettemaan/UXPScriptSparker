@@ -11,13 +11,13 @@ var taskIdCounter = 0;
 
 $$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
     clearTimedFunction(taskId);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -25,13 +25,13 @@ $$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
 $$SHORTCODE$$.clearInterval = function _clearInterval(taskId) {
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
     clearTimedFunction(taskId);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -39,13 +39,13 @@ $$SHORTCODE$$.clearInterval = function _clearInterval(taskId) {
 
 $$SHORTCODE$$.clearTimeout = function _clearTimeout(taskId) {
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
     clearTimedFunction(taskId);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -53,7 +53,7 @@ $$SHORTCODE$$.clearTimeout = function _clearTimeout(taskId) {
 
 function clearTimedFunction(taskId) {
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
@@ -64,7 +64,7 @@ function clearTimedFunction(taskId) {
         $$SHORTCODE$$.logError(arguments, "throws " + err);
     }
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -74,13 +74,13 @@ $$SHORTCODE$$.setImmediate = function _setImmediate(taskFtn) {
 
     var retVal;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
     retVal = timedFunction(taskFtn, 0, false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -91,13 +91,13 @@ $$SHORTCODE$$.setInterval = function _setInterval(taskFtn, timeoutMilliseconds) 
 
     var retVal;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
     retVal = timedFunction(taskFtn, timeoutMilliseconds, true);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -108,13 +108,13 @@ $$SHORTCODE$$.setTimeout = function _setTimeout(taskFtn, timeoutMilliseconds) {
 
     var retVal;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
     retVal = timedFunction(taskFtn, timeoutMilliseconds, false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -125,7 +125,7 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
 
     var retVal;
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
@@ -244,7 +244,7 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif

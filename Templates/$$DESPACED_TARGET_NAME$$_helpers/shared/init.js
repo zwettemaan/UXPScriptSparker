@@ -19,37 +19,44 @@ $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
 
             $$SHORTCODE$$.C.APP_NAME = $$SHORTCODE$$.mapAppId($$SHORTCODE$$.C.APP_ID);
 
-            $$SHORTCODE$$.dirs.DIR_HOME = 
-                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_HOME);
-
-            if ($$SHORTCODE$$.dirs.RAW_DESKTOP) {
-                $$SHORTCODE$$.dirs.DIR_DESKTOP = 
-                    $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_DESKTOP);
+            if (! $$SHORTCODE$$.dirs.HOME) {
+                $$SHORTCODE$$.criticalError("sharedInitScript needs dirs.HOME");
+                break;
             }
-            else {
-                $$SHORTCODE$$.dirs.DIR_DESKTOP = 
-                    $$SHORTCODE$$.dirs.DIR_HOME + 
+
+            if (! $$SHORTCODE$$.dirs.TEMP) {
+                $$SHORTCODE$$.criticalError("sharedInitScript needs dirs.TEMP");
+                break;
+            }
+
+            if (! $$SHORTCODE$$.dirs.DESKTOP) {
+                $$SHORTCODE$$.dirs.DESKTOP = 
+                    $$SHORTCODE$$.dirs.HOME + 
                     "Desktop" + 
                     $$SHORTCODE$$.path.SEPARATOR;
             }
 
-            $$SHORTCODE$$.dirs.DIR_TEMP = 
-                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.dirs.RAW_TEMP);
 
-            $$SHORTCODE$$.dirs.DIR_DOCUMENTS = 
-                $$SHORTCODE$$.dirs.DIR_HOME + 
-                "Documents" + 
-                $$SHORTCODE$$.path.SEPARATOR;
+            if (! $$SHORTCODE$$.dirs.DOCUMENTS) {
+                $$SHORTCODE$$.dirs.DOCUMENTS = 
+                    $$SHORTCODE$$.dirs.HOME + 
+                    "Documents" + 
+                    $$SHORTCODE$$.path.SEPARATOR;
+            }
 
-            $$SHORTCODE$$.dirs.DIR_ADOBE_SCRIPTS = 
-                $$SHORTCODE$$.dirs.DIR_DOCUMENTS + 
-                "Adobe Scripts" + 
-                $$SHORTCODE$$.path.SEPARATOR;
+            if (! $$SHORTCODE$$.dirs.ADOBE_SCRIPTS) {
+                $$SHORTCODE$$.dirs.ADOBE_SCRIPTS = 
+                    $$SHORTCODE$$.dirs.DOCUMENTS + 
+                    "Adobe Scripts" + 
+                    $$SHORTCODE$$.path.SEPARATOR;
+            }
 
-            $$SHORTCODE$$.dirs.DIR_APP_SCRIPTS = 
-                $$SHORTCODE$$.dirs.DIR_ADOBE_SCRIPTS + 
-                $$SHORTCODE$$.C.APP_NAME + 
-                $$SHORTCODE$$.path.SEPARATOR;
+            if (! $$SHORTCODE$$.dirs.APP_SCRIPTS) {
+                $$SHORTCODE$$.dirs.APP_SCRIPTS = 
+                    $$SHORTCODE$$.dirs.ADOBE_SCRIPTS + 
+                    $$SHORTCODE$$.C.APP_NAME + 
+                    $$SHORTCODE$$.path.SEPARATOR;
+            }
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);

@@ -33,7 +33,7 @@ var GUID_REGEX = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[
 $$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
 
     var retVal = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -72,7 +72,7 @@ $$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -82,7 +82,7 @@ $$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
 $$SHORTCODE$$.tests.deepClone = function deepClone() {
 
     var retVal = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -279,7 +279,7 @@ $$SHORTCODE$$.tests.deepClone = function deepClone() {
     } 
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -289,7 +289,7 @@ $$SHORTCODE$$.tests.deepClone = function deepClone() {
 $$SHORTCODE$$.tests.randomGUID = function randomGUID() {
 
     var retVal = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -325,7 +325,7 @@ $$SHORTCODE$$.tests.randomGUID = function randomGUID() {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
@@ -335,7 +335,7 @@ $$SHORTCODE$$.tests.randomGUID = function randomGUID() {
 $$SHORTCODE$$.tests.toHex = function toHex() {
 
     var retVal = false;
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
@@ -472,7 +472,7 @@ $$SHORTCODE$$.tests.toHex = function toHex() {
     }
     while (false);
 
-    $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON"
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
