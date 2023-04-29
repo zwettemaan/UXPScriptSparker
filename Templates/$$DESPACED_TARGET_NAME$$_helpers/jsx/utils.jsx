@@ -99,17 +99,17 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, levelPrefix, mes
             
             var now = new Date();
             var timePrefix = 
-                XChg.leftPad(now.getUTCDate(), "0", 2) + 
+                $$SHORTCODE$$.leftPad(now.getUTCDate(), "0", 2) + 
                 "-" + 
-                XChg.leftPad(now.getUTCMonth() + 1, "0", 2) + 
+                $$SHORTCODE$$.leftPad(now.getUTCMonth() + 1, "0", 2) + 
                 "-" + 
-                XChg.leftPad(now.getUTCFullYear(), "0", 4) + 
+                $$SHORTCODE$$.leftPad(now.getUTCFullYear(), "0", 4) + 
                 " " + 
-                XChg.leftPad(now.getUTCHours(), "0", 2) + 
+                $$SHORTCODE$$.leftPad(now.getUTCHours(), "0", 2) + 
                 ":" + 
-                XChg.leftPad(now.getUTCMinutes(), "0", 2) + 
+                $$SHORTCODE$$.leftPad(now.getUTCMinutes(), "0", 2) + 
                 ":" + 
-                XChg.leftPad(now.getUTCSeconds(), "0", 2) + 
+                $$SHORTCODE$$.leftPad(now.getUTCSeconds(), "0", 2) + 
                 "+00 ";
 
             var platformPrefix = "E ";
