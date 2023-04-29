@@ -86,6 +86,43 @@ $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.toString().replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r") + '"';
 }
 
+
+$$SHORTCODE$$.leftPad = function leftPad(s, padChar, len) {
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        try {
+
+            retVal = s + "";
+
+            if (retVal.length > len) {
+                retVal = retVal.substring(retVal.length - len);
+                break;
+            }
+
+            var padLength = len - retVal.length;
+
+            var padding = new Array(padLength + 1).join(padChar)
+            retVal = padding + retVal;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
 /**
 * Call this function when entering any function. A typical usage is 
 *   function myFunction()
@@ -127,7 +164,7 @@ $$SHORTCODE$$.logError = function(reportingFunctionArguments, s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
         }
-        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "ERROR  : " + s);
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "ERROR", s);
     }
 }
 
@@ -172,7 +209,7 @@ $$SHORTCODE$$.logNote = function(reportingFunctionArguments, s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
         }
-        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "NOTE   : " + s);
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "NOTE", s);
     }
 }
 
@@ -195,7 +232,7 @@ $$SHORTCODE$$.logTrace = function(reportingFunctionArguments, s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
         }
-        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "TRACE  : " + s);
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "TRACE", s);
     }
 }
 
@@ -218,7 +255,7 @@ $$SHORTCODE$$.logWarning = function(reportingFunctionArguments, s) {
             s = reportingFunctionArguments;
             reportingFunctionArguments = undefined;
         }
-        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "WARNING: " + s);
+        $$SHORTCODE$$.logMessage(reportingFunctionArguments, "WARN", s);
     }
 }
 
@@ -300,6 +337,42 @@ $$SHORTCODE$$.randomGUID = function randomGUID()
         }
     }
     
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.rightPad = function rightPad(s, padChar, len) {
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    do {
+        try {
+
+            retVal = s + "";
+
+            if (retVal.length > len) {
+                retVal = retVal.substring(0,len);
+                break;
+            }
+
+            var padLength = len - retVal.length;
+
+            var padding = new Array(padLength + 1).join(padChar)
+            retVal += padding;
+        }
+        catch (err) {
+            $$SHORTCODE$$.logError(arguments, "throws " + err);
+        }
+    }
+    while (false);
+
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 

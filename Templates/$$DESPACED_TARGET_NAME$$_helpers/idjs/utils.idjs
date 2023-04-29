@@ -63,7 +63,7 @@ $$SHORTCODE$$.checkWindows = function checkWindows() {
     return retVal;
 }
 
-$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
+$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, levelPrefix, message) {
 
     var savedInLogger = $$SHORTCODE$$.inLogger;
 
@@ -76,7 +76,7 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             
             $$SHORTCODE$$.inLogger = true;
             
-            var prefix = "";
+            var functionPrefix = "";
 
             if (! message) {
 
@@ -88,7 +88,7 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
                 if ("string" == typeof reportingFunctionArguments) {
 
-                    prefix += reportingFunctionArguments + ": ";
+                    functionPrefix += reportingFunctionArguments + ": ";
                     
                 }
                 else {
@@ -100,12 +100,29 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
                     catch (err) {
                         reportingFunctionName = "[anonymous function]";
                     }
-                    prefix += reportingFunctionName + ": ";
+                    functionPrefix += reportingFunctionName + ": ";
 
                 }
             }
             
-            var logLine = prefix + message;
+            var now = new Date();
+            var timePrefix = 
+                $$SHORTCODE$$.leftPad(now.getUTCDate(), "0", 2) + 
+                "-" + 
+                $$SHORTCODE$$.leftPad(now.getUTCMonth() + 1, "0", 2) + 
+                "-" + 
+                $$SHORTCODE$$.leftPad(now.getUTCFullYear(), "0", 4) + 
+                " " + 
+                $$SHORTCODE$$.leftPad(now.getUTCHours(), "0", 2) + 
+                ":" + 
+                $$SHORTCODE$$.leftPad(now.getUTCMinutes(), "0", 2) + 
+                ":" + 
+                $$SHORTCODE$$.leftPad(now.getUTCSeconds(), "0", 2) + 
+                "+00 ";
+
+            var platformPrefix = "U ";
+            
+            var logLine = platformPrefix + timePrefix + "- " + levelPrefix + ": " + functionPrefix + message;
                     
             if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
                 $$SHORTCODE$$.fileio.appendUTF8TextFile(

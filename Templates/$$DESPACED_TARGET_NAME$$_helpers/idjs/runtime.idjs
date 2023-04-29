@@ -128,11 +128,6 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                             splitTempPath[1] + $$SHORTCODE$$.path.SEPARATOR;
                     }
 
-                    if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.HOME + "Library")) {
-                        $$SHORTCODE$$.criticalError("Could not find ~/Library");
-                        $$SHORTCODE$$.dirs.HOME = undefined;
-                    }
-
                 }
             }
             catch (err) {            

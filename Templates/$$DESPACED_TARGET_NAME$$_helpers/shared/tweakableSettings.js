@@ -4,7 +4,11 @@
 
 (function() {
 
+$if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON_ENABLED"
+$$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_TRACE;
+$else
 $$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_$$STARTUP_LOG_LEVEL$$;
+$endif
 
 $if $$LOG_TO_FILE_ON_DESKTOP$$ == "0"
 $$SHORTCODE$$.S.LOG_TO_FILEPATH               = undefined; // file path or undefined
@@ -13,9 +17,9 @@ $$SHORTCODE$$.S.LOG_TO_FILEPATH               = "~/Desktop/$$SHORTCODE$$_ScriptR
 $endif
 
 $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON_ENABLED"
-$$SHORTCODE$$.S.LOG_ENTRY_EXIT                = false;
-$else
 $$SHORTCODE$$.S.LOG_ENTRY_EXIT                = true;
+$else
+$$SHORTCODE$$.S.LOG_ENTRY_EXIT                = false;
 $endif
 
 $$SHORTCODE$$.S.CRITICAL_LOG_FILE_ON_DESKTOP  = "criticalErrors.log";

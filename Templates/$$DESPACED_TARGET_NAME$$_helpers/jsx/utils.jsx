@@ -55,7 +55,7 @@ $$SHORTCODE$$.checkWindows = function checkWindows() {
     return retVal;
 }
 
-$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
+$$SHORTCODE$$.logMessage = function(reportingFunctionArguments, levelPrefix, message) {
 
     var savedInLogger = $$SHORTCODE$$.inLogger;
 
@@ -68,7 +68,7 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
             
             $$SHORTCODE$$.inLogger = true;
             
-            var prefix = "";
+            var functionPrefix = "";
 
             if (! message) {
 
@@ -80,7 +80,7 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
 
                 if ("string" == typeof reportingFunctionArguments) {
 
-                    prefix += reportingFunctionArguments + ": ";
+                    functionPrefix += reportingFunctionArguments + ": ";
                     
                 }
                 else {
@@ -92,22 +92,39 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, message) {
                     catch (err) {
                         reportingFunctionName = "[anonymous function]";
                     }
-                    prefix += reportingFunctionName + ": ";
+                    functionPrefix += reportingFunctionName + ": ";
 
                 }
             }
             
-            var estkLogLine = prefix + message;
-                    
+            var now = new Date();
+            var timePrefix = 
+                XChg.leftPad(now.getUTCDate(), "0", 2) + 
+                "-" + 
+                XChg.leftPad(now.getUTCMonth() + 1, "0", 2) + 
+                "-" + 
+                XChg.leftPad(now.getUTCFullYear(), "0", 4) + 
+                " " + 
+                XChg.leftPad(now.getUTCHours(), "0", 2) + 
+                ":" + 
+                XChg.leftPad(now.getUTCMinutes(), "0", 2) + 
+                ":" + 
+                XChg.leftPad(now.getUTCSeconds(), "0", 2) + 
+                "+00 ";
+
+            var platformPrefix = "E ";
+
+            var logLine = platformPrefix + timePrefix + "- " + levelPrefix + ": " + functionPrefix + message;
+
             if ($$SHORTCODE$$.S.LOG_TO_FILEPATH) {
                 $$SHORTCODE$$.fileio.appendUTF8TextFile(
                     $$SHORTCODE$$.S.LOG_TO_FILEPATH, 
-                    estkLogLine, 
+                    logLine, 
                     $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE);
             }
                     
             if ($$SHORTCODE$$.S.LOG_TO_ESTK_CONSOLE) {
-                $.writeln(estkLogLine); 
+                $.writeln(logLine); 
             }
 
         }

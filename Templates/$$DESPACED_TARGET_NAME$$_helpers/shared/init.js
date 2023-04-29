@@ -29,6 +29,21 @@ $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
                 break;
             }
 
+            // Do a quick check if the home directory is plausible
+
+            if ($$SHORTCODE$$.isMac) {
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.HOME + "Library")) {
+                    $$SHORTCODE$$.criticalError("Could not find ~/Library");
+                    break;
+                }
+            }
+            else {
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.HOME + "Application Data")) {
+                    $$SHORTCODE$$.criticalError("Could not find ~/Application Data");
+                    break;
+                }
+            }
+
             if (! $$SHORTCODE$$.dirs.DESKTOP) {
                 $$SHORTCODE$$.dirs.DESKTOP = 
                     $$SHORTCODE$$.dirs.HOME + 
