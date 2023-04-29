@@ -85,7 +85,7 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
             $$SHORTCODE$$.dirs.TEMP = 
                 $$SHORTCODE$$.path.addTrailingSeparator(appLocalTemp.nativePath);
 
-            // At the moment, the temp path seems to give us relevant data 
+            // At the moment, on Windows, the temp path seems to give us relevant data 
             // regarding the user's context. This can break at any new UXPScript
             // version!
 
@@ -114,19 +114,8 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                 }
                 else {
                 
+                    // On Mac, the temp path is located in /var... - of no use to us 
                     $$SHORTCODE$$.dirs.DRIVE_PREFIX = "";
-
-                    if (splitTempPath.length > 0) {
-                        $$SHORTCODE$$.dirs.USERS = 
-                            $$SHORTCODE$$.dirs.DRIVE_PREFIX + 
-                            splitTempPath[0] + $$SHORTCODE$$.path.SEPARATOR;
-                    }
-
-                    if (splitTempPath.length > 1) {
-                        $$SHORTCODE$$.dirs.HOME = 
-                            $$SHORTCODE$$.dirs.USERS + 
-                            splitTempPath[1] + $$SHORTCODE$$.path.SEPARATOR;
-                    }
 
                 }
             }
