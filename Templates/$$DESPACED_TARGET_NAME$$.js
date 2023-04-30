@@ -14,6 +14,8 @@ $elif "$$STARTERCODE$$" == "MakeNewDoc"
 $include "makeNewDoc.ijs"
 $elif "$$STARTERCODE$$" == "Promises"
 $include "promises.ijs"
+$elif "$$STARTERCODE$$" == "Mandelbrot"
+$include "mandelbrot.ijs"
 $else
 $include "emptyMain.ijs"
 $endif

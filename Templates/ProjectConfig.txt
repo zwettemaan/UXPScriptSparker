@@ -12,23 +12,24 @@ IS_BUILDSETTING_PROJECT_VERSION=1
 
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
-SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames,Promises"
+SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames,Promises,Mandelbrot"
 
 ENABLE_LOG_ENTRY_EXIT="ON_DISABLED"
 HELP_ENABLE_LOG_ENTRY_EXIT="Add verbose tracing code for entry/exit into methods to the generated code"
 SELECT_ENABLE_LOG_ENTRY_EXIT="OFF,ON_DISABLED,ON_ENABLED"
+IS_ADVANCED_LOG_ENTRY_EXIT=1
 
-RUN_TESTS="1"
+RUN_TESTS="0"
 HELP_RUN_TESTS="Whether to run tests on startup. See tweakableSettings file to turn this on or off later on."
 SELECT_RUN_TESTS="1,0"
 IS_ADVANCED_RUN_TESTS=1
 
-STARTUP_LOG_LEVEL="NOTE"
+STARTUP_LOG_LEVEL="NONE"
 HELP_STARTUP_LOG_LEVEL="What log level to set when starting up"
 SELECT_STARTUP_LOG_LEVEL="NONE,ERROR,WARN,NOTE,TRACE"
 IS_ADVANCED_STARTUP_LOG_LEVEL=1
 
-LOG_TO_FILE_ON_DESKTOP="1"
+LOG_TO_FILE_ON_DESKTOP="0"
 HELP_LOG_TO_FILE_ON_DESKTOP="Whether to log to a desktop file."
 SELECT_LOG_TO_FILE_ON_DESKTOP="0,1"
 IS_ADVANCED_LOG_TO_FILE_ON_DESKTOP=1
@@ -37,6 +38,7 @@ TARGET_APP="InDesign"
 HELP_TARGET_APP="The target Adobe application. See setTarget command file for 'Any' defaults."
 # List is not complete yet - in progress 
 SELECT_TARGET_APP="Any,InCopy,InDesign"
+IS_ADVANCED_TARGET_APP=1
 
 TARGET_CC_VERSION="Any"
 HELP_TARGET_CC_VERSION="The target Creative Cloud version. Inspect the Template/includes/appMap.json file to see the 'Any' defaults that will be used."
@@ -53,9 +55,11 @@ HELP_TARGET_NAME="Human readable script name (e.g. for use in documentation)."
 
 SHORTCODE="UXES"
 HELP_SHORTCODE="Some variable name for global object used to store UXPScript/ExtendScript globals. Helps avoiding variable name clashes."
+IS_ADVANCED_SHORTCODE=1
 
 TARGET_DIRNAME=UXPScriptSparker
 HELP_TARGET_DIRNAME="This is a subfolder name used to store the script in the user scripts folder, and to store preferences in ~/Library/Preferences or %APPDATA%"
 
 PREFS_FILENAME=UXPScriptSparkerPreferences.json
 HELP_PREFS_FILENAME="This is a file name name to store preferences in the preferences subfolder"
+IS_ADVANCED_PREFS_FILENAME=1
