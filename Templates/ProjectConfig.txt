@@ -17,7 +17,7 @@ SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames,Promises,Mandel
 ENABLE_LOG_ENTRY_EXIT="ON_DISABLED"
 HELP_ENABLE_LOG_ENTRY_EXIT="Add verbose tracing code for entry/exit into methods to the generated code"
 SELECT_ENABLE_LOG_ENTRY_EXIT="OFF,ON_DISABLED,ON_ENABLED"
-IS_ADVANCED_LOG_ENTRY_EXIT=1
+IS_ADVANCED_ENABLE_LOG_ENTRY_EXIT=1
 
 RUN_TESTS="0"
 HELP_RUN_TESTS="Whether to run tests on startup. See tweakableSettings file to turn this on or off later on."

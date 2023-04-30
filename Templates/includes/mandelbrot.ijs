@@ -1,4 +1,9 @@
 ﻿//
+// Do not run this code directly. 
+// Instead, this code can be launched either in ExtendScript or in UXPScript,
+// by running either the run_as_ExtendScript.jsx or the run_as_UXPScript.idjs 
+// scripts from the Scripts Panel
+//
 // Mandelbrot set visualization in Adobe InDesign (tested with CS5 and above)
 //
 // (c) 2015 Kris Coppieters, kris@rorohiko.com
@@ -9,10 +14,9 @@
 // Start Adobe InDesign, run the script. Go get coffee.
 //
 
-// Do not run this code directly. 
-// Instead, this code can be launched either in ExtendScript or in UXPScript,
-// by running either the run_as_ExtendScript.jsx or the run_as_UXPScript.idjs 
-// scripts from the Scripts Panel
+function main() {
+    calculateMandelbrot();
+}
 
 //
 // How many steps before we bail out and decide the complex point is not going to reach
@@ -21,47 +25,47 @@
 const kMaxSteps = 35;
 
 //
+// How large a pixel grid (kNumPixels x kNumPixels). The larger, the slower.
+//
+var kNumPixels = 50;
+
+//
 // For applying swatches we apply a logarithmic scale; pre-calculate this value because
 // we'll need it a lot
 //
 const kLogOfMaxSteps = Math.log(kMaxSteps);
 
-//
-// How large a pixel grid (kNumPixels x kNumPixels)
-//
-var kNumPixels = 50;
 
-$$SHORTCODE$$.main =
-function main() {
+var swatches = {};
+
+var document = app.documents.add();
+
+//
+// Give the user something to watch while it's happening.
+//
+app.scriptPreferences.enableRedraw = true;
+
+document.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
+document.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
+
+var firstPage = document.pages.item(0);
+
+var firstPageWidth = firstPage.bounds[3] - firstPage.bounds[1];
+var firstPageHeight = firstPage.bounds[2] - firstPage.bounds[0];
+
+var gridWidth;
+if (firstPageHeight > firstPageWidth) {
+    gridWidth = firstPageWidth;
+}
+else {
+    gridWidth = firstPageHeight;
+}
+
+var pixelRectWidth = gridWidth / kNumPixels;
+
+function calculateMandelbrot() {
 
     $$SHORTCODE$$.logEntry(arguments);
-
-    var swatches = {};
-
-    var document = app.documents.add();
-
-    //
-    // Give the user something to watch while it's happening.
-    //
-    app.scriptPreferences.enableRedraw = true;
-
-    document.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
-    document.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
-
-    var firstPage = document.pages.item(0);
-
-    var firstPageWidth = firstPage.bounds[3] - firstPage.bounds[1];
-    var firstPageHeight = firstPage.bounds[2] - firstPage.bounds[0];
-
-    var gridWidth;
-    if (firstPageHeight > firstPageWidth) {
-        gridWidth = firstPageWidth;
-    }
-    else {
-        gridWidth = firstPageHeight;
-    }
-
-    var pixelRectWidth = gridWidth / kNumPixels;
 
     //
     // Do a bit of benchmarking: record the start and end times, and subtract them
