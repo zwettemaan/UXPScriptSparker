@@ -27,7 +27,7 @@ const kMaxSteps = 35;
 //
 // How large a pixel grid (kNumPixels x kNumPixels). The larger, the slower.
 //
-var kNumPixels = 50;
+var kNumPixels = 40;
 
 //
 // For applying swatches we apply a logarithmic scale; pre-calculate this value because
