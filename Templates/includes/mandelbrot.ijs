@@ -14,10 +14,6 @@
 // Start Adobe InDesign, run the script. Go get coffee.
 //
 
-function main() {
-    calculateMandelbrot();
-}
-
 //
 // How many steps before we bail out and decide the complex point is not going to reach
 // distance 2 from the origin. The higher, the more accurate, but also the slower
@@ -27,14 +23,17 @@ const kMaxSteps = 35;
 //
 // How large a pixel grid (kNumPixels x kNumPixels). The larger, the slower.
 //
-var kNumPixels = 40;
+var kNumPixels = 19;
+
+function main() {
+    calculateMandelbrot();
+}
 
 //
 // For applying swatches we apply a logarithmic scale; pre-calculate this value because
 // we'll need it a lot
 //
 const kLogOfMaxSteps = Math.log(kMaxSteps);
-
 
 var swatches = {};
 
@@ -202,7 +201,7 @@ function numSteps(lambda, kMaxSteps) {
         n++;
         z = jump(z,lambda);
         var distSqr = z.distSqr();
-     }
+    }
     while (distSqr < 4 && n < kMaxSteps);
 
     return n;

@@ -5,7 +5,11 @@
 // by running either the run_as_ExtendScript.jsx or the run_as_UXPScript.idjs 
 // scripts from the Scripts Panel
 
-$$SHORTCODE$$.main =
+$$SHORTCODE$$.main = main;
+
+// The sample codes included below all need to have a 
+// function main(){...} somewhere in the code
+
 $if "$$STARTERCODE$$" == "HelloWorld"
 $include "helloWorld.ijs"
 $elif "$$STARTERCODE$$" == "ColoredTextFrames"
