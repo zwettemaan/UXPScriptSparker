@@ -18,6 +18,10 @@ For some rough and ready speed comparisons between UXPScript and ExtendScript, v
 
 [https://coppieters.nz/?p=624](https://coppieters.nz/?p=624)
 
+A ready-to-install sample script, generated with UXPScriptSparker:
+
+https://github.com/zwettemaan/UXPScriptSparker/wiki/InDesignBrot
+
 ## Preamble
 
 UXPScriptSparker is a tool for learning and using UXPScript in Adobe InDesign. 
