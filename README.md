@@ -22,6 +22,8 @@ A ready-to-install sample script, generated with UXPScriptSparker:
 
 https://github.com/zwettemaan/UXPScriptSparker/wiki/InDesignBrot
 
+![Screenshot 2023-05-04 at 8 41 22 AM](https://user-images.githubusercontent.com/3396477/236045482-9589a18d-49c6-4c6c-bed3-78ba071bed08.png)
+
 ## Preamble
 
 UXPScriptSparker is a tool for learning and using UXPScript in Adobe InDesign. 
