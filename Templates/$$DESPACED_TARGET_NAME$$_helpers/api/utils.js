@@ -301,17 +301,17 @@ $$SHORTCODE$$.tests.randomGUID = function randomGUID() {
             var guid1 = $$SHORTCODE$$.randomGUID();
             var guid2 = $$SHORTCODE$$.randomGUID();
             if (guid1 == guid2) {
-                $$SHORTCODE$$.logError(arguments, "guids should be different")
+                $$SHORTCODE$$.logError(arguments, "guids should be different");
                 break;                
             }
 
             if (! guid1.match(GUID_REGEX)) {
-                $$SHORTCODE$$.logError(arguments, "guid1 wrong format")
+                $$SHORTCODE$$.logError(arguments, "guid1 wrong format");
                 break;                
             }
 
             if (! guid2.match(GUID_REGEX)) {
-                $$SHORTCODE$$.logError(arguments, "guid2 wrong format")
+                $$SHORTCODE$$.logError(arguments, "guid2 wrong format");
                 break;                
             }
 
@@ -478,6 +478,7 @@ $$SHORTCODE$$.tests.toHex = function toHex() {
     $endif
     return retVal;
 }
+
 //------------
 
 declareAPI();
