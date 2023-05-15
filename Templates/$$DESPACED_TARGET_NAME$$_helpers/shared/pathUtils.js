@@ -1,7 +1,20 @@
 ﻿(function() {
 
 if (! $$SHORTCODE$$.path) {
-	$$SHORTCODE$$.path = {};
+    $$SHORTCODE$$.path = {};
+}
+
+if ($$SHORTCODE$$.checkMac()) {
+    $$SHORTCODE$$.path.SEPARATOR = "/";
+    $$SHORTCODE$$.path.OTHER_SEPARATOR = "\\";
+    $$SHORTCODE$$.isMac = true;
+    $$SHORTCODE$$.isWindows = false;
+}
+else {
+    $$SHORTCODE$$.path.SEPARATOR = "\\";
+    $$SHORTCODE$$.path.OTHER_SEPARATOR = "/";
+    $$SHORTCODE$$.isMac = false;
+    $$SHORTCODE$$.isWindows = true;
 }
 
 if (! $$SHORTCODE$$.tests.path) {
@@ -10,6 +23,7 @@ if (! $$SHORTCODE$$.tests.path) {
 
 $$SHORTCODE$$.path.REGEXP_KEEP_SLASH = /[^\/]*/g;
 $$SHORTCODE$$.path.REGEXP_KEEP_BACKSLASH = /[^\\]*/g;
+$$SHORTCODE$$.path.GUESS_SEPARATOR = "?";
 
 $$SHORTCODE$$.path.addTrailingSeparator = function addTrailingSeparator(filePath, separator) {
 

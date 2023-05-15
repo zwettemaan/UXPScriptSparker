@@ -7,10 +7,6 @@
 
 function declareAPI() {
 
-    if (! $$SHORTCODE$$.fileio) {
-        $$SHORTCODE$$.fileio = {};
-    }
-    
     $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE      = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
     $$SHORTCODE$$.fileio.FILEIO_DONT_APPEND_NEWLINE = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
 
@@ -18,6 +14,10 @@ function declareAPI() {
     $$SHORTCODE$$.fileio.readUTF8TextFile           = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.fileio.writeUTF8TextFile          = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
+}
+
+if (! $$SHORTCODE$$.fileio) {
+    $$SHORTCODE$$.fileio = {};
 }
 
 //----------- Tests

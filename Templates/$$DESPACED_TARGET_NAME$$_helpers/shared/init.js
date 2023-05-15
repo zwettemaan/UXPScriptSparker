@@ -1,17 +1,5 @@
 ﻿(function() {
 
-if ($$SHORTCODE$$.checkMac()) {
-    $$SHORTCODE$$.path.SEPARATOR = "/";
-    $$SHORTCODE$$.isMac = true;
-    $$SHORTCODE$$.isWindows = false;
-}
-else {
-    $$SHORTCODE$$.path.SEPARATOR = "\\";
-    $$SHORTCODE$$.isMac = false;
-    $$SHORTCODE$$.isWindows = true;
-}
-$$SHORTCODE$$.path.GUESS_SEPARATOR = "?";
-
 $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
 
     do {

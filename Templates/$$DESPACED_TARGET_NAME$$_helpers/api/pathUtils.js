@@ -7,9 +7,6 @@
 
 function declareAPI() {
 
-    if (! $$SHORTCODE$$.path) {
-        $$SHORTCODE$$.path = {};
-    }
 
     $$SHORTCODE$$.path.addTrailingSeparator = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.basename             = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
@@ -20,6 +17,10 @@ function declareAPI() {
     $$SHORTCODE$$.path.isDir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.mkdir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
+}
+
+if (! $$SHORTCODE$$.path) {
+    $$SHORTCODE$$.path = {};
 }
 
 //----------- Tests

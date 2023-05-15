@@ -42,6 +42,14 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../../$$DESPACED_TARGET_NAME$$.js"
 ];
 
+if (! $$SHORTCODE$$.S) {
+    $$SHORTCODE$$.S = {};
+}
+
+if (! $$SHORTCODE$$.C) {
+    $$SHORTCODE$$.C = {};
+}
+
 if (! $$SHORTCODE$$.tests) {
     $$SHORTCODE$$.tests = {};
 }

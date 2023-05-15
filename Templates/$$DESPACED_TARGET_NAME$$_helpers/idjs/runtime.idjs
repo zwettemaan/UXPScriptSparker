@@ -44,6 +44,14 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
 // using both. Below, I fetch $$SHORTCODE$$.fs and $$SHORTCODE$$.g_fs which are different 'fs-like'
 // entities
 
+if (! $$SHORTCODE$$.S) {
+    $$SHORTCODE$$.S = {};
+}
+
+if (! $$SHORTCODE$$.C) {
+    $$SHORTCODE$$.C = {};
+}
+
 if (! $$SHORTCODE$$.tests) {
     $$SHORTCODE$$.tests = {};
 }
@@ -222,6 +230,4 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
     }
 
     await $$SHORTCODE$$.main();
-
-
 }

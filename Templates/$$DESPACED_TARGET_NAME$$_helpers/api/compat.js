@@ -18,7 +18,6 @@ function declareAPI() {
 
 //----------- Tests
 
-
 //-------------------
 
 declareAPI();
