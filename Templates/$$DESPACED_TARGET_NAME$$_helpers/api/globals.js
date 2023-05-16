@@ -16,7 +16,7 @@ function declareAPI() {
 
 //------------------- Tests
 
-$$SHORTCODE$$.tests.checkGlobals = function checkGlobals() {
+$$SHORTCODE$$.tests.checkGlobals = function tests_checkGlobals() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -40,12 +40,6 @@ $$SHORTCODE$$.tests.checkGlobals = function checkGlobals() {
                     retVal = false;                    
                 }
             }
-
-            if (! retVal) {
-                break;
-            }
-
-            $$SHORTCODE$$.logNote(arguments, "test passed");
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);

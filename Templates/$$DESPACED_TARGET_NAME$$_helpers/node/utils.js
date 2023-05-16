@@ -23,6 +23,23 @@ $$SHORTCODE$$.alert = function alert(msg) {
     $endif
 }
 
+$$SHORTCODE$$.checkLinux = function checkLinux() {    
+
+    var retVal = undefined;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+
+    retVal = $$SHORTCODE$$.os.platform() === 'linux';
+
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
 $$SHORTCODE$$.checkMac = function checkMac() {    
 
     var retVal = undefined;
@@ -31,7 +48,7 @@ $$SHORTCODE$$.checkMac = function checkMac() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    retVal = os.platform() === 'darwin';
+    retVal = $$SHORTCODE$$.os.platform() === 'darwin';
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
@@ -48,7 +65,7 @@ $$SHORTCODE$$.checkWindows = function checkWindows() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    retVal = os.platform() === 'win32';
+    retVal = $$SHORTCODE$$.os.platform() === 'win32';
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
@@ -65,7 +82,7 @@ $$SHORTCODE$$.checkLinux = function checkLinux() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    retVal = os.platform() === 'linux';
+    retVal = $$SHORTCODE$$.os.platform() === 'linux';
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);

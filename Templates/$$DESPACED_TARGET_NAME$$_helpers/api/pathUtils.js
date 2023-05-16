@@ -16,7 +16,7 @@ function declareAPI() {
     $$SHORTCODE$$.path.guessSeparator       = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.isDir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.path.mkdir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-
+    $$SHORTCODE$$.path.reduce               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 }
 
 if (! $$SHORTCODE$$.path) {
@@ -29,57 +29,257 @@ if (! $$SHORTCODE$$.tests.path) {
     $$SHORTCODE$$.tests.path = {};
 }
 
-$$SHORTCODE$$.tests.path.basename = function test_basename() {
+$$SHORTCODE$$.tests.path.basename = function tests_basename() {
 
     var retVal = true;
 
     do {
-        var expected;
-        var filePath;
 
-        if ($$SHORTCODE$$.isMac) {
-            expected = "kris";
-            filePath = "/Users/kris";
-        }
-        else {
-            expected = "kris";
-            filePath = "C:\\Users\\kris";
-        }
-        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
-            retVal = false;
-        }
+        var tests = [
+            {
+                filePath: "/Users/kris/Desktop",
+                separator: undefined,
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop",
+                separator: undefined,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop",
+                separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop",
+                separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop",
+                separator: "/",
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop",
+                separator: "/",
+                basename: "C:\\Users\\kris\\Desktop",
+                dirname: ""
+            },         
+            {
+                filePath: "/Users/kris/Desktop",
+                separator: "\\",
+                basename: "/Users/kris/Desktop",
+                dirname: ""
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop",
+                separator: "\\",
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop/",
+                separator: undefined,
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop\\",
+                separator: undefined,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop/",
+                separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop\\",
+                separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop/",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop\\",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris/Desktop/",
+                separator: "/",
+                basename: "Desktop",
+                dirname: "/Users/kris/"
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop\\",
+                separator: "/",
+                basename: "C:\\Users\\kris\\Desktop\\",
+                dirname: ""
+            },         
+            {
+                filePath: "/Users/kris/Desktop/",
+                separator: "\\",
+                basename: "/Users/kris/Desktop/",
+                dirname: ""
+            },
+            {
+                filePath: "C:\\Users\\kris\\Desktop\\",
+                separator: "\\",
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users\\kris/Desktop",
+                separator: undefined,
+                basename: "Desktop",
+                macDirname: "/Users/kris/",
+                winDirname: "\\Users\\kris\\"
+            },
+            {
+                filePath: "C:\\Users/kris\\Desktop",
+                separator: undefined,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users\\kris/Desktop",
+                separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
+                basename: "Desktop",
+                macDirname: "/Users/kris/",
+                winDirname: "\\Users\\kris\\"
+            },
+            {
+                filePath: "C:\\Users/kris\\Desktop",
+                separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
+                basename: "Desktop",
+                dirname: "C:\\Users\\kris\\"
+            },
+            {
+                filePath: "/Users/kris\\Desktop",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                basename: "kris\\Desktop",
+                dirname: "/Users/"
+            },
+            {
+                filePath: "C:\\Users\\kris/Desktop",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                basename: "kris/Desktop",
+                dirname: "C:\\Users\\"
+            },
+            {
+                filePath: "/Users/kris\\Desktop",
+                separator: "/",
+                basename: "kris\\Desktop",
+                dirname: "/Users/"
+            },
+            {
+                filePath: "C:\\Users/kris\\Desktop",
+                separator: "/",
+                basename: "kris\\Desktop",
+                dirname: "C:\\Users/"
+            },         
+            {
+                filePath: "/Users\\kris/Desktop",
+                separator: "\\",
+                basename: "kris/Desktop",
+                dirname: "/Users\\"
+            },
+            {
+                filePath: "C:\\Users\\kris/Desktop/t.txt",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                macBasename: "t.txt",
+                winBasename: "kris/Desktop/t.txt",
+                macDirname: "C:\\Users\\kris/Desktop/",
+                winDirname: "C:\\Users\\"
+            },
+            {
+                filePath: "/Users/kris\\Desktop\\t.txt",
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
+                macBasename: "kris\\Desktop\\t.txt",
+                winBasename: "t.txt",
+                macDirname: "/Users/",
+                winDirname: "/Users/kris\\Desktop\\"
+            }
+        ]
 
-        if ($$SHORTCODE$$.isMac) {
-            expected = "kris";
-            filePath = "/Users/kris/";
+        for (var testIdx = 0; testIdx < tests.length; testIdx++) {
+            var test = tests[testIdx];
+            var basename = $$SHORTCODE$$.path.basename(test.filePath, test.separator);
+            var dirname = $$SHORTCODE$$.path.dirname(test.filePath, test.separator);
+            var expectedBasename;
+            var expectedDirname;
+            if ($$SHORTCODE$$.isMac) {
+                if ("macBasename" in test) {
+                    expectedBasename = test.macBasename;
+                }
+                else {
+                    expectedBasename = test.basename;
+                }
+                if ("macDirname" in test) {
+                    expectedDirname = test.macDirname;
+                }
+                else {
+                    expectedDirname = test.dirname;
+                }
+            } 
+            else if ($$SHORTCODE$$.isWindows) {
+                if ("winBasename" in test) {
+                    expectedBasename = test.winBasename;
+                }
+                else {
+                    expectedBasename = test.basename;
+                }
+                if ("winDirname" in test) {
+                    expectedDirname = test.winDirname;
+                }
+                else {
+                    expectedDirname = test.dirname;
+                }
+            }
+            if (expectedBasename != basename) {
+                retVal = false;
+                $$SHORTCODE$$.logError(arguments, "basename(" + test.filePath + "," + test.separator + ") returned '" + basename + "' but expected '" + expectedBasename + "'");
+            }
+            if (expectedDirname != dirname) {
+                retVal = false;
+                $$SHORTCODE$$.logError(arguments, "dirname(" + test.filePath + "," + test.separator + ") returned '" + dirname + "' but expected '" + expectedDirname + "'");
+            }
         }
-        else {
-            expected = "kris";
-            filePath = "C:\\Users\\kris\\";
-        }
-        if (expected != $$SHORTCODE$$.path.basename(filePath)) {
-            retVal = false;
-        }
-
-        expected = "kris";
-        filePath = "/Users/kris";
-        if (expected != $$SHORTCODE$$.path.basename(filePath, $$SHORTCODE$$.path.GUESS_SEPARATOR)) {
-            retVal = false;
-        }
-
-        expected = "kris";
-        filePath = "/Users/kris/";
-        if (expected != $$SHORTCODE$$.path.basename(filePath, $$SHORTCODE$$.path.GUESS_SEPARATOR)) {
-            retVal = false;
-        }
-
     }
     while (false);
 
     return retVal;
 }
 
-$$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPathFunctions() {
+$$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function tests_checkLowLevelPathFunctions() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -182,7 +382,6 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
             }
 
             retVal = true;      
-            $$SHORTCODE$$.logNote(arguments, "test passed");
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);
@@ -195,6 +394,209 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function checkLowLevelPath
     $$SHORTCODE$$.logExit(arguments);
 
     $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.tests.path.pathReduce = function tests_pathReduce() {
+
+    var retVal = true;
+
+    do {
+
+        var tests = [
+            {
+                filePath: "./relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+            },
+            {
+                filePath: "./relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "./relative/path/../somewhere",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "relative/path/../somewhere",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere",
+                reduce: "C:\\Users\\somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere\\",
+                reduce: "C:\\Users\\somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:/Users/Path/../somewhere",
+                reduce: "C:/Users/Path/../somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:/Users/Path/../somewhere/",
+                reduce: "C:/Users/Path/../somewhere/",
+                separator: "\\"
+            },
+            {
+                filePath: "./relative/path/../somewhere/",
+                reduce: ".\\./relative/path/../somewhere/",
+                separator: "\\"
+            },
+            {
+                filePath: "./relative/path/../somewhere",
+                reduce: ".\\./relative/path/../somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "relative/path/../somewhere/",
+                reduce: ".\\relative/path/../somewhere/",
+                separator: "\\"
+            },
+            {
+                filePath: "relative/path/../somewhere",
+                reduce: ".\\relative/path/../somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere",
+                reduce: "./C:\\Users\\Path\\..\\somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere\\",
+                reduce: "./C:\\Users\\Path\\..\\somewhere\\",
+                separator: "/"
+            },
+            {
+                filePath: "C:/Users/Path/../somewhere",
+                reduce: "C:/Users/Path/../somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:/Users/Path/../somewhere/",
+                reduce: "./C:/Users/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "./relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "./relative/path/../somewhere",
+                reduce: "./relative/somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "relative/path/../somewhere",
+                reduce: "./relative/somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere",
+                reduce: "C:\\Users\\somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere\\",
+                reduce: "C:\\Users\\somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "C:/Users/Path/../somewhere",
+                reduce: "./C:/Users/somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "C:/Users/Path/../somewhere/",
+                reduce: "./C:/Users/somewhere",
+                separator: UXES.path.GUESS_SEPARATOR
+            },
+            {
+                filePath: "./relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+            },
+            {
+                filePath: "./relative/path/../somewhere",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "relative/path/../somewhere/",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "relative/path/../somewhere",
+                reduce: "./relative/somewhere",
+                separator: "/"
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere",
+                reduce: "C:\\Users\\somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:\\Users\\Path\\..\\somewhere\\",
+                reduce: "C:\\Users\\somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:/Users/Path/..\\somewhere",
+                reduce: "C:/Users/Path/..\\somewhere",
+                separator: "\\"
+            },
+            {
+                filePath: "C:/Users/Path/..\\somewhere/",
+                reduce: "C:/Users/Path/..\\somewhere/",
+                separator: "\\"
+            }
+        ];
+
+        for (var testIdx = 0; testIdx < tests.length; testIdx++) {
+            var test = tests[testIdx];
+            var reduce = $$SHORTCODE$$.path.reduce(test.filePath, test.separator);
+            var expectedReduce;
+            if ($$SHORTCODE$$.isMac) {
+                if ("macReduce" in test) {
+                    expectedReduce = test.macReduce;
+                }
+                else {
+                    expectedReduce = test.reduce;
+                }
+            } 
+            else if ($$SHORTCODE$$.isWindows) {
+                if ("winBasename" in test) {
+                    expectedReduce = test.winBasename;
+                }
+                else {
+                    expectedReduce = test.basename;
+                }
+            }
+            if (expectedReduce != reduce) {
+                retVal = false;
+                $$SHORTCODE$$.logError(arguments, "reduce(" + test.filePath + "," + test.separator + ") returned '" + reduce + "' but expected '" + expectedReduce + "'");
+            }
+        }
+    }
+    while (false);
+
     return retVal;
 }
 

@@ -60,6 +60,22 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
             DEL "run_as_ExtendScript.jsx"
         )
 
+        IF EXIST "run.!TARGET_FILENAME_EXTENSION!" (
+            DEL "run.!TARGET_FILENAME_EXTENSION!"
+        )
+
+        IF EXIST "run.jsx" (
+            DEL "run.jsx"
+        )
+
+        IF EXIST "package*.json" (
+            DEL "package*.json"
+        )
+
+        IF EXIST "server.js" (
+            DEL "server.js"
+        )
+
         IF EXIST "ReadMe for !DESPACED_TARGET_NAME!.md" (
             DEL "ReadMe for !DESPACED_TARGET_NAME!.md"
         )
@@ -74,6 +90,10 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
 
         IF EXIST ".vscode" (
                 RD /s /q .vscode >NUL 2>&1
+        )
+
+        IF EXIST "node_modules" (
+                RD /s /q node_modules >NUL 2>&1
         )
 
         IF EXIST "VSCode" (

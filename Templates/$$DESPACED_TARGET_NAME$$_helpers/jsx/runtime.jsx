@@ -139,7 +139,10 @@ $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) 
             for (var testEntryName in testCollection) {
                 var testEntry = testCollection[testEntryName];
                 if ("function" == typeof testEntry) {
-                    if (! testEntry()) {
+                    if (testEntry()) {
+                        $$SHORTCODE$$.logNote("Passed test " + testEntryName);
+                    }
+                    else {
                         $$SHORTCODE$$.criticalError("Failed test " + testEntryName);
                         failedTests++;
                     }

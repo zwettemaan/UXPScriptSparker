@@ -1,4 +1,17 @@
-﻿function main() {
+﻿$if "$$TARGETCONTEXT$$" != "InDesign UXPScript+ExtendScript" and "$$TARGETCONTEXT$$" != "InDesign UXPScript" and "$$TARGETCONTEXT$$" != "InDesign ExtendScript"
+function main() {
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif 
+    // Empty main() function. The coloredTextFrames template is not applicable in target context $$TARGETCONTEXT$$   
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logExit(arguments);
+    $endif
+}
+$else
+function main() {
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);

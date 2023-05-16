@@ -9,6 +9,7 @@ function declareAPI() {
     $$SHORTCODE$$.alert        = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.checkMac     = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.checkWindows = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+    $$SHORTCODE$$.checkLinux   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.deepClone    = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.dQ           = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
     $$SHORTCODE$$.logError     = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
@@ -30,7 +31,7 @@ function declareAPI() {
 
 var GUID_REGEX = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
 
-$$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
+$$SHORTCODE$$.tests.checkMacWindowsLinux = function tests_checkMacWindowsLinux() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -42,28 +43,45 @@ $$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
         
         try {
 
-            if ($$SHORTCODE$$.isMac && $$SHORTCODE$$.isWindows) {
-                $$SHORTCODE$$.logError(arguments, "both isMac and isWindows are true");
+            var platformCount = 0;
+
+            if ($$SHORTCODE$$.checkMac()) {
+                platformCount++;
+            }
+
+            if ($$SHORTCODE$$.checkWindows()) {
+                platformCount++;
+            }
+
+            if ($$SHORTCODE$$.checkLinux()) {
+                platformCount++;
+            }
+
+            if (platformCount != 1) {
+                $$SHORTCODE$$.logError(arguments, "check... methods result in indeterminate platform");
                 break;
             }
 
-            if (! $$SHORTCODE$$.isMac && ! $$SHORTCODE$$.isWindows) {
-                $$SHORTCODE$$.logError(arguments, "both isMac and isWindows are false");
-                break;
+            platformCount = 0;
+
+            if ($$SHORTCODE$$.isMac) {
+                platformCount++;
             }
 
-            if ($$SHORTCODE$$.checkMac() && $$SHORTCODE$$.checkWindows()) {
-                $$SHORTCODE$$.logError(arguments, "both checkMac and checkWindows return true");
-                break;
+            if ($$SHORTCODE$$.isWindows) {
+                platformCount++;
             }
 
-            if (! $$SHORTCODE$$.checkMac() && ! $$SHORTCODE$$.checkWindows()) {
-                $$SHORTCODE$$.logError(arguments, "neither checkMac nor checkWindows return true");
+            if ($$SHORTCODE$$.isLinux) {
+                platformCount++;
+            }
+
+            if (platformCount != 1) {
+                $$SHORTCODE$$.logError(arguments, "status attributes cause indeterminate platform");
                 break;
-            }  
+            }
 
             retVal = true;      
-            $$SHORTCODE$$.logNote(arguments, "test passed");
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);
@@ -79,7 +97,7 @@ $$SHORTCODE$$.tests.checkMacWindows = function checkMacWindows() {
     return retVal;
 }
 
-$$SHORTCODE$$.tests.deepClone = function deepClone() {
+$$SHORTCODE$$.tests.deepClone = function tests_deepClone() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -269,7 +287,6 @@ $$SHORTCODE$$.tests.deepClone = function deepClone() {
             }
 
             retVal = true;      
-            $$SHORTCODE$$.logNote(arguments, "test passed");
 
         }
         catch (err) {
@@ -286,7 +303,7 @@ $$SHORTCODE$$.tests.deepClone = function deepClone() {
     return retVal;
 }
 
-$$SHORTCODE$$.tests.randomGUID = function randomGUID() {
+$$SHORTCODE$$.tests.randomGUID = function tests_randomGUID() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -316,7 +333,6 @@ $$SHORTCODE$$.tests.randomGUID = function randomGUID() {
             }
 
             retVal = true;      
-            $$SHORTCODE$$.logNote(arguments, "test passed");
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);
@@ -332,7 +348,7 @@ $$SHORTCODE$$.tests.randomGUID = function randomGUID() {
     return retVal;
 }
 
-$$SHORTCODE$$.tests.toHex = function toHex() {
+$$SHORTCODE$$.tests.toHex = function tests_toHex() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -461,9 +477,6 @@ $$SHORTCODE$$.tests.toHex = function toHex() {
                     retVal = false;
                 }
             }
-
-
-            $$SHORTCODE$$.logNote(arguments, "test passed");
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);

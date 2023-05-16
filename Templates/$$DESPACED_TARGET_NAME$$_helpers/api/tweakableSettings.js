@@ -15,7 +15,7 @@ function declareAPI() {
 
 //--------------- Tests
 
-$$SHORTCODE$$.tests.checkTweakableSettings = function checkTweakableSettings() {
+$$SHORTCODE$$.tests.checkTweakableSettings = function test_checkTweakableSettings() {
 
     var retVal = false;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -44,7 +44,6 @@ $$SHORTCODE$$.tests.checkTweakableSettings = function checkTweakableSettings() {
                 break;
             }
             
-            $$SHORTCODE$$.logNote(arguments, "test passed");
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);

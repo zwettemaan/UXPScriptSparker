@@ -10,6 +10,10 @@ PROJECT_VERSION="1.0.0"
 HELP_PROJECT_VERSION="Initial version number for the script"
 IS_BUILDSETTING_PROJECT_VERSION=1
 
+TARGETCONTEXT="InDesign UXPScript+ExtendScript"
+HELP_TARGETCONTEXT="Choose the runtime context(s) for this script"
+SELECT_TARGETCONTEXT="InDesign UXPScript+ExtendScript,InDesign UXPScript,InDesign ExtendScript,Node,Browser"
+
 STARTERCODE="HelloWorld"
 HELP_STARTERCODE="Choose whether some sample code should be added"
 SELECT_STARTERCODE="None,HelloWorld,MakeNewDoc,ColoredTextFrames,Promises,Mandelbrot"

@@ -12,8 +12,6 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-var URL_FILE_PREFIX = "file:///";
-
 $$SHORTCODE$$.path.exists = function exists(filePath) {
 
     var retVal = false;
@@ -22,12 +20,25 @@ $$SHORTCODE$$.path.exists = function exists(filePath) {
     $$SHORTCODE$$.logEntry(arguments);
 
     $endif
-    try {
-        var lstat = $$SHORTCODE$$.fs.lstatSync(URL_FILE_PREFIX + filePath);
-        retVal = true;
+    do {
+        try {
+            
+            if (! filePath) {
+                break;
+            }
+
+            var lastChar = filePath.charAt(filePath.length - 1);
+            if (lastChar == '/' || lastChar == '\\') {
+                filePath = filePath.substr(0, filePath.length - 1);
+            }
+
+            var lstat = $$SHORTCODE$$.fs.lstatSync(filePath);
+            retVal = true;
+        }
+        catch (err) {    
+        }
     }
-    catch (err) {    
-    }
+    while (false);
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
@@ -45,7 +56,7 @@ $$SHORTCODE$$.path.isDir = function isDir(folderPath) {
 
     $endif
     try {
-        var lstat = $$SHORTCODE$$.fs.lstatSync(URL_FILE_PREFIX + folderPath);
+        var lstat = $$SHORTCODE$$.fs.lstatSync(folderPath);
         retVal = lstat.isDirectory()
     }
     catch (err) {    
@@ -85,7 +96,7 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
             }
 
             try {
-                $$SHORTCODE$$.fs.mkdirSync(URL_FILE_PREFIX + folderPath);
+                $$SHORTCODE$$.fs.mkdirSync(folderPath);
             }
             catch (err) {                
             }

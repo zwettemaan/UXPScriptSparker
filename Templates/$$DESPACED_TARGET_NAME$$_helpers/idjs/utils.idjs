@@ -46,6 +46,20 @@ $$SHORTCODE$$.checkMac = function checkMac() {
     return retVal;
 }
 
+$$SHORTCODE$$.checkLinux = function checkLinux() {    
+
+    var retVal = false;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
 $$SHORTCODE$$.checkWindows = function checkWindows() {    
 
     var retVal = undefined;
@@ -56,6 +70,20 @@ $$SHORTCODE$$.checkWindows = function checkWindows() {
 
     retVal = window.navigator.platform.toLowerCase().indexOf("win") != -1;
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.checkLinux = function checkLinux() {    
+
+    var retVal = false;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 

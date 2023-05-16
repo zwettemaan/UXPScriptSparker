@@ -12,7 +12,7 @@ function declareAPI() {
 
 //----------- Tests
 
-$$SHORTCODE$$.tests.instanceof = function test_instanceof() {
+$$SHORTCODE$$.tests.instanceof = function tests_instanceof() {
 
     var retVal = true;
 

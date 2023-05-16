@@ -1,4 +1,17 @@
-﻿//
+﻿$if "$$TARGETCONTEXT$$" != "InDesign UXPScript+ExtendScript" and "$$TARGETCONTEXT$$" != "InDesign UXPScript" and "$$TARGETCONTEXT$$" != "InDesign ExtendScript"
+function main() {
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logEntry(arguments);
+
+    $endif 
+    // Empty main() function. The Mandelbrot template is not applicable in target context $$TARGETCONTEXT$$   
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logExit(arguments);
+    $endif
+}
+$else
+//
 // Do not run this code directly. 
 // Instead, this code can be launched either in ExtendScript or in UXPScript,
 // by running either the run_as_ExtendScript.jsx or the run_as_UXPScript.idjs 
@@ -298,3 +311,4 @@ function createSquareOfNxN( n, x, y, pixelRectWidth) {
 
     return rects_by_XxY;
 }
+$endif

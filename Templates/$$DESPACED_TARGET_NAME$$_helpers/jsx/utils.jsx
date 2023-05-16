@@ -23,13 +23,28 @@ $$SHORTCODE$$.alert = function _alert(msg) {  // Use `_alert`, instead of `alert
     $endif
 }
 
+$$SHORTCODE$$.checkLinux = function checkLinux() {    
+    var retVal = false;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+};
+
 $$SHORTCODE$$.checkMac = function checkMac() {    
+
+    var retVal;
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    var retVal = $.os.substr(0,3) == "Mac";
+    retVal = $.os.substr(0,3) == "Mac";
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
@@ -48,6 +63,20 @@ $$SHORTCODE$$.checkWindows = function checkWindows() {
 
     retVal = $.os.substr(0,3) == "Win";
 
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+    $$SHORTCODE$$.logExit(arguments);
+
+    $endif
+    return retVal;
+}
+
+$$SHORTCODE$$.checkLinux = function checkLinux() {    
+
+    var retVal = false;
+    $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
+
+    $$SHORTCODE$$.logEntry(arguments);
+    $endif
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
     $$SHORTCODE$$.logExit(arguments);
 

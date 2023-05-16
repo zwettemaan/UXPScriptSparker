@@ -31,7 +31,7 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "./fileio.js",
     
     "../api/compat.js",
-    "./compat.idjs",
+    "./compat.js",
 
     "../shared/init.js",
     "../../$$DESPACED_TARGET_NAME$$.js"
@@ -69,7 +69,7 @@ $$SHORTCODE$$.initDirsScript = function initDirsScript() {
             }
 
             $$SHORTCODE$$.dirs.TEMP = 
-                $$SHORTCODE$$.path.addTrailingSeparator(os.tmpdir());
+                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.os.tmpdir());
 
             $$SHORTCODE$$.dirs.HOME = 
                 $$SHORTCODE$$.path.addTrailingSeparator(process.env.HOME);
@@ -134,7 +134,10 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
             for (var testEntryName in testCollection) {
                 var testEntry = testCollection[testEntryName];
                 if ("function" == typeof testEntry) {
-                    if (! testEntry()) {
+                    if (testEntry()) {
+                        $$SHORTCODE$$.logNote("Passed test " + testEntryName);
+                    }
+                    else {
                         $$SHORTCODE$$.criticalError("Failed test " + testEntryName);
                         failedTests++;
                     }
@@ -153,10 +156,14 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
 
     $$SHORTCODE$$.initDirsScript();
 
+    $$SHORTCODE$$.C.APP_ID = "$$TARGETCONTEXT$$";
+    $$SHORTCODE$$.C.APP_NAME = "$$TARGETCONTEXT$$";
+
     $$SHORTCODE$$.sharedInitScript();
 
     for (var member in $$SHORTCODE$$) {
-        nameSpace[member] = $$SHORTCODE$$[member];        
+        nameSpace[member] = $$SHORTCODE$$[member]; 
+        exports[member] = $$SHORTCODE$$[member];       
     }
 
     if ($$SHORTCODE$$.S.RUN_TESTS) {

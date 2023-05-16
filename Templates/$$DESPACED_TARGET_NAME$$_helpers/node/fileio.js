@@ -11,7 +11,7 @@ $$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, 
     var retVal;
 
     try {
-        retVal = fs.appendFileSync(filePath, text + (handleNewLine ? "\n" : ""), { encoding: "utf8" });
+        retVal = $$SHORTCODE$$.fs.appendFileSync(filePath, text + (handleNewLine ? "\n" : ""), { encoding: "utf8" });
     }
     catch (err) {       
     }
@@ -22,7 +22,7 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = function readUTF8TextFile(filePath) {
     var retVal;
 
     try {
-        retVal = fs.readFileSync(filePath,{ encoding: "utf8" });
+        retVal = $$SHORTCODE$$.fs.readFileSync(filePath,{ encoding: "utf8" });
     }
     catch (err) {        
     }
@@ -33,7 +33,7 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = function readUTF8TextFile(filePath) {
 $$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, text, handleNewLine) {
 
     try {
-        fs.writeFileSync(filePath, text + (handleNewLine ? "\n" : ""), { encoding: "utf8" });
+        $$SHORTCODE$$.fs.writeFileSync(filePath, text + (handleNewLine ? "\n" : ""), { encoding: "utf8" });
     }
     catch (err) {        
     }

@@ -3,7 +3,7 @@
 #
 
 if [ "${UXPS_COMMANDS_DIR}" == "" -o ! -d "${UXPS_COMMANDS_DIR}" ]; then
-	export UXPS_COMMANDS_DIR=`dirname "$0"`/
+    export UXPS_COMMANDS_DIR=`dirname "$0"`/
 fi
 
 pushd "${UXPS_COMMANDS_DIR}" > /dev/null
@@ -36,9 +36,23 @@ echo ""
 echo Copying script files and readme file
 echo ""
 
+if [ -f "${PROJECT_ROOT_DIR}run_as_UXPScript.${TARGET_FILENAME_EXTENSION}" ]; then
+    cp "${PROJECT_ROOT_DIR}run_as_UXPScript.${TARGET_FILENAME_EXTENSION}" "${BUILD_SCRIPT_ROOT_DIR}"
+fi
+
+if [ -f "${PROJECT_ROOT_DIR}run.${TARGET_FILENAME_EXTENSION}" ]; then
+    cp "${PROJECT_ROOT_DIR}run.${TARGET_FILENAME_EXTENSION}" "${BUILD_SCRIPT_ROOT_DIR}"
+fi
+
+if [ -f "${PROJECT_ROOT_DIR}run_as_ExtendScript.jsx" ]; then
+    cp "${PROJECT_ROOT_DIR}run_as_ExtendScript.jsx" "${BUILD_SCRIPT_ROOT_DIR}"
+fi
+
+if [ -f "${PROJECT_ROOT_DIR}run.jsx" ]; then
+    cp "${PROJECT_ROOT_DIR}run.jsx" "${BUILD_SCRIPT_ROOT_DIR}"
+fi
+
 cp "${PROJECT_ROOT_DIR}${DESPACED_TARGET_NAME}.js" "${BUILD_SCRIPT_ROOT_DIR}"
-cp "${PROJECT_ROOT_DIR}run_as_UXPScript.${TARGET_FILENAME_EXTENSION}" "${BUILD_SCRIPT_ROOT_DIR}"
-cp "${PROJECT_ROOT_DIR}run_as_ExtendScript.jsx" "${BUILD_SCRIPT_ROOT_DIR}"
 cp "${PROJECT_ROOT_DIR}ReadMe for ${DESPACED_TARGET_NAME}.md" "${BUILD_SCRIPT_ROOT_DIR}"
 cp -R "${PROJECT_ROOT_DIR}${DESPACED_TARGET_NAME}_helpers" "${BUILD_SCRIPT_ROOT_DIR}"
 
