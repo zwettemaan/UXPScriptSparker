@@ -216,6 +216,8 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         require(path);
     }
 
+    $$SHORTCODE$$.C.APP_NAME = $$SHORTCODE$$.mapAppId($$SHORTCODE$$.C.APP_ID);
+
     await $$SHORTCODE$$.initDirsScript();
 
     $$SHORTCODE$$.sharedInitScript();

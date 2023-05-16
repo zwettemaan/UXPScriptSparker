@@ -5,8 +5,6 @@ $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
     do {
         try {
 
-            $$SHORTCODE$$.C.APP_NAME = $$SHORTCODE$$.mapAppId($$SHORTCODE$$.C.APP_ID);
-
             if (! $$SHORTCODE$$.dirs.HOME) {
                 $$SHORTCODE$$.criticalError("sharedInitScript needs dirs.HOME");
                 break;

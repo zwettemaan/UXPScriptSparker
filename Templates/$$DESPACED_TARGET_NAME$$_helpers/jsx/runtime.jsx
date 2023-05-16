@@ -158,6 +158,9 @@ $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) 
     }
 
     $$SHORTCODE$$.initDirsScript();
+
+    $$SHORTCODE$$.C.APP_NAME = $$SHORTCODE$$.mapAppId($$SHORTCODE$$.C.APP_ID);
+    
     $$SHORTCODE$$.sharedInitScript();
 
     for (var member in $$SHORTCODE$$) {
