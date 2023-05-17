@@ -152,7 +152,7 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
             {          
                 timedFunctionList = [];
 
-                timedFunctionIdleTask = app.idleTasks.add();
+                timedFunctionIdleTask = $$SHORTCODE$$.G.app.idleTasks.add();
                 timedFunctionIdleTask.addEventListener(
                     IdleTask.ON_IDLE,
                     function() {

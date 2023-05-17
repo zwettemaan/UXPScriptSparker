@@ -50,12 +50,12 @@ const kLogOfMaxSteps = Math.log(kMaxSteps);
 
 var swatches = {};
 
-var document = app.documents.add();
+var document = $$SHORTCODE$$.G.app.documents.add();
 
 //
 // Give the user something to watch while it's happening.
 //
-app.scriptPreferences.enableRedraw = true;
+$$SHORTCODE$$.G.app.scriptPreferences.enableRedraw = true;
 
 document.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
 document.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
@@ -122,7 +122,13 @@ function calculateMandelbrot() {
                     //
                     // Make a gray RGB swatch, and use a logartihmic scale to calculate the grayscale value
                     //
-                    swatch = document.colors.add({ name: swatchName, model: ColorModel.PROCESS, space: ColorSpace.RGB});
+                    swatch = document.colors.add(
+                        { 
+                            name: swatchName, 
+                            model: $$SHORTCODE$$.G.ColorModel.PROCESS, 
+                            space: $$SHORTCODE$$.G.ColorSpace.RGB
+                        }
+                    );
                     var grayScaleValue = 255 * Math.log(n) / kLogOfMaxSteps;
                     swatch.colorValue = [grayScaleValue, grayScaleValue, grayScaleValue];
                 }

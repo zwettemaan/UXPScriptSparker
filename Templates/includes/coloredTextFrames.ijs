@@ -17,7 +17,7 @@ function main() {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    app.scriptPreferences.enableRedraw = false;
+    $$SHORTCODE$$.G.app.scriptPreferences.enableRedraw = false;
 
     var start = new Date().getTime();
 
@@ -26,7 +26,7 @@ function main() {
     var framesPerRow = 5;
     var framesPerColumn = 7;
 
-    var curDoc = app.documents.add();
+    var curDoc = $$SHORTCODE$$.G.app.documents.add();
     var curPage = curDoc.pages.firstItem();
 
     var curPageBounds = curPage.bounds;
@@ -62,8 +62,8 @@ function main() {
 
         var curColor = curDoc.colors.add({
             colorValue: randomColorValue, 
-            space: ColorSpace.RGB,
-            model: ColorModel.SPOT,
+            space: $$SHORTCODE$$.G.ColorSpace.RGB,
+            model: $$SHORTCODE$$.G.ColorModel.SPOT,
             name: "C" + textFrameIdx
         });
 

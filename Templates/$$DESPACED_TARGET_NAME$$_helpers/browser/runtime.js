@@ -133,7 +133,7 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                 $$SHORTCODE$$.dirs.HOME = 
                     $$SHORTCODE$$.path.addTrailingSeparator(
                         eval(
-                            app.doScript(
+                            $$SHORTCODE$$.G.app.doScript(
                                 ES_SCRIPT_getHomeDir, 
                                 ScriptLanguage.JAVASCRIPT)));
             }

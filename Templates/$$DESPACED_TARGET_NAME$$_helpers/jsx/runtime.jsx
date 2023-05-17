@@ -119,6 +119,17 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
 
 $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) {
 
+    if ("undefined" == typeof app) {
+        var id = require("indesign");
+        $$SHORTCODE$$.G = id;
+    }
+    else if ("undefined" == typeof $ || ! $.global) {
+        $$SHORTCODE$$.G = window;
+    }
+    else {
+        $$SHORTCODE$$.G = $.global;
+    }
+
     var failedTests = 0;
     var missingImplementations = 0;
 

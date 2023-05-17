@@ -17,7 +17,7 @@ function main() {
 
     $endif    
 
-    var newDoc = app.documents.add();
+    var newDoc = $$SHORTCODE$$.G.app.documents.add();
     newDoc.save(
         $$SHORTCODE$$.dirs.DIR_DESKTOP + 
         "SampleDocumentFrom$$SHORTCODE$$.indd");
