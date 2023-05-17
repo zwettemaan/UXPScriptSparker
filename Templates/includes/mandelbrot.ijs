@@ -57,8 +57,8 @@ var document = $$SHORTCODE$$.G.app.documents.add();
 //
 $$SHORTCODE$$.G.app.scriptPreferences.enableRedraw = true;
 
-document.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.POINTS;
-document.viewPreferences.verticalMeasurementUnits = MeasurementUnits.POINTS;
+document.viewPreferences.horizontalMeasurementUnits = $$SHORTCODE$$.G.MeasurementUnits.POINTS;
+document.viewPreferences.verticalMeasurementUnits = $$SHORTCODE$$.G.MeasurementUnits.POINTS;
 
 var firstPage = document.pages.item(0);
 
