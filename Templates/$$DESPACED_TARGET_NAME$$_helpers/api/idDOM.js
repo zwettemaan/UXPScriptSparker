@@ -27,7 +27,7 @@ $$SHORTCODE$$.tests.instanceof = function tests_instanceof() {
                 retVal = false;
             }
 
-            var tempDoc = app.documents.add(false);
+            var tempDoc = $$SHORTCODE$$.G.app.documents.add(false);
             if (! $$SHORTCODE$$.instanceof(tempDoc, "Document")) {
                 retVal = false;
             }

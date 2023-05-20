@@ -50,7 +50,7 @@ $$SHORTCODE$$.fileio.appendUTF8TextFile = async function appendUTF8TextFile(file
                 $$SHORTCODE$$.dQ("a") + "," +
                 (handleNewLine == $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE ? "true" : "false") +
             ")";
-        await app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+        await $$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
     }
     catch (err) {       
     }
@@ -65,7 +65,7 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = async function readUTF8TextFile(filePath
             ES_SCRIPT_readUTF8TextFile + "(" +
                 $$SHORTCODE$$.dQ(filePath) + 
             ")";
-        retVal = await eval(app.doScript(extendScript, ScriptLanguage.JAVASCRIPT));
+        retVal = await eval($$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT));
     }
     catch (err) {        
     }
@@ -83,7 +83,7 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = async function writeUTF8TextFile(filePa
                 $$SHORTCODE$$.dQ("w") + "," +
                 (handleNewLine == $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE ? "true" : "false") +
             ")";
-        await app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+        await $$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
     }
     catch (err) {        
     }

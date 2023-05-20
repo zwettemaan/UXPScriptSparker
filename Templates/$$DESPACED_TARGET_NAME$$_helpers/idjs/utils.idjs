@@ -15,7 +15,7 @@ $$SHORTCODE$$.alert = function alert(msg) {
     $$SHORTCODE$$.logEntry(arguments);
     $endif
 
-    const theDialog = app.dialogs.add();
+    const theDialog = $$SHORTCODE$$.G.app.dialogs.add();
     const col = theDialog.dialogColumns.add();
     const colText = col.staticTexts.add();
     colText.staticLabel = "" + msg;

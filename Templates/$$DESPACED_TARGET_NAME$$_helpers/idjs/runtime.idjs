@@ -135,7 +135,7 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                 $$SHORTCODE$$.dirs.HOME = 
                     $$SHORTCODE$$.path.addTrailingSeparator(
                         eval(
-                            app.doScript(
+                            $$SHORTCODE$$.G.app.doScript(
                                 ES_SCRIPT_getHomeDir, 
                                 ScriptLanguage.JAVASCRIPT)));
             }
@@ -178,6 +178,17 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
 })();
 
 exports.loadModules = async function loadModules(nameSpace, completionCallback) {
+
+    if ("undefined" == typeof app) {
+        var id = require("indesign");
+        $$SHORTCODE$$.G = id;
+    }
+    else if ("undefined" == typeof $ || ! $.global) {
+        $$SHORTCODE$$.G = window;
+    }
+    else {
+        $$SHORTCODE$$.G = $.global;
+    }
 
     var failedTests = 0;
     var missingImplementations = 0;
