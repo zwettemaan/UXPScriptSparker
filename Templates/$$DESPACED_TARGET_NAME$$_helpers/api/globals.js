@@ -2,10 +2,6 @@
 
 function declareAPI() {
 
-    $$SHORTCODE$$.C.APP_ID               = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.APP_NAME             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.DIRNAME_PREFERENCES  = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.FILENAME_PREFERENCES = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
     $$SHORTCODE$$.C.LOG_NONE             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
     $$SHORTCODE$$.C.LOG_ERROR            = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
     $$SHORTCODE$$.C.LOG_WARN             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
@@ -13,6 +9,8 @@ function declareAPI() {
     $$SHORTCODE$$.C.LOG_TRACE            = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
 
 }
+
+declareAPI();
 
 //------------------- Tests
 
@@ -54,24 +52,6 @@ $$SHORTCODE$$.tests.checkGlobals = function tests_checkGlobals() {
     $endif
     return retVal;
 }
-
-//-------------------
-
-if (! $$SHORTCODE$$.C) {
-    $$SHORTCODE$$.C = {}; // stash constants here   
-}
-
-if (! $$SHORTCODE$$.IMPLEMENTATION_MISSING) {
-    $$SHORTCODE$$.IMPLEMENTATION_MISSING = function IMPLEMENTATION_MISSING() {
-        $$SHORTCODE$$.logError("Implementation is missing");        
-    };
-}
-
-if (! $$SHORTCODE$$.VALUE_NOT_INITIALIZED) {
-    $$SHORTCODE$$.VALUE_NOT_INITIALIZED = { VALUE_NOT_INITIALIZED: true };
-}
-
-declareAPI();
 
 })();
 

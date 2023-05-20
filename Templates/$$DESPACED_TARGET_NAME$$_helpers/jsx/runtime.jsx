@@ -13,6 +13,7 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
 
     "../api/globals.js",
     "../shared/globals.js",
+    "./api/globals.jsx",
     "./globals.jsx",
 
     "../api/tweakableSettings.js",
@@ -22,9 +23,9 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/utils.js",
     "./utils.jsx",
 
-    "../api/pathUtils.js",
-    "../shared/pathUtils.js",
-    "./pathUtils.jsx",
+    "../api/path.js",
+    "../shared/path.js",
+    "./path.jsx",
 
     "../api/fileio.js",
     "../shared/fileio.js",
@@ -48,6 +49,16 @@ if (! $$SHORTCODE$$.S) {
 
 if (! $$SHORTCODE$$.C) {
     $$SHORTCODE$$.C = {};
+}
+
+if (! $$SHORTCODE$$.IMPLEMENTATION_MISSING) {
+    $$SHORTCODE$$.IMPLEMENTATION_MISSING = function IMPLEMENTATION_MISSING() {
+        $$SHORTCODE$$.logError("Implementation is missing");        
+    };
+}
+
+if (! $$SHORTCODE$$.VALUE_NOT_INITIALIZED) {
+    $$SHORTCODE$$.VALUE_NOT_INITIALIZED = { VALUE_NOT_INITIALIZED: true };
 }
 
 if (! $$SHORTCODE$$.tests) {

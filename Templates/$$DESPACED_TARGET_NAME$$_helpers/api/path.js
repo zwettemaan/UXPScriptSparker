@@ -23,6 +23,8 @@ if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
+declareAPI();
+
 //----------- Tests
 
 if (! $$SHORTCODE$$.tests.path) {
@@ -491,42 +493,42 @@ $$SHORTCODE$$.tests.path.pathReduce = function tests_pathReduce() {
             {
                 filePath: "./relative/path/../somewhere/",
                 reduce: "./relative/somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "./relative/path/../somewhere",
                 reduce: "./relative/somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "relative/path/../somewhere/",
                 reduce: "./relative/somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "relative/path/../somewhere",
                 reduce: "./relative/somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "C:\\Users\\Path\\..\\somewhere",
                 reduce: "C:\\Users\\somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "C:\\Users\\Path\\..\\somewhere\\",
                 reduce: "C:\\Users\\somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "C:/Users/Path/../somewhere",
                 reduce: "./C:/Users/somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "C:/Users/Path/../somewhere/",
                 reduce: "./C:/Users/somewhere",
-                separator: UXES.path.GUESS_SEPARATOR
+                separator: $$SHORTCODE$$.path.GUESS_SEPARATOR
             },
             {
                 filePath: "./relative/path/../somewhere/",
@@ -599,9 +601,5 @@ $$SHORTCODE$$.tests.path.pathReduce = function tests_pathReduce() {
 
     return retVal;
 }
-
-//-------------------
-
-declareAPI();
 
 })();

@@ -20,14 +20,12 @@ if (! $$SHORTCODE$$.fileio) {
     $$SHORTCODE$$.fileio = {};
 }
 
+declareAPI();
+
 //----------- Tests
 
 if (! $$SHORTCODE$$.tests.fileio) {
     $$SHORTCODE$$.tests.fileio = {};
 }
-
-//-------------------
-
-declareAPI();
 
 })();

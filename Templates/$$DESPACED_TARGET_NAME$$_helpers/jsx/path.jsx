@@ -1,6 +1,6 @@
 ﻿//
 // This code is exclusively ExtendScript. It provides ExtendScript-specific 
-// implementations of the pathutils API.
+// implementations of the path API.
 //
 // utils.js depends on these functions being implemented
 // When adding new functionality here, make sure to also 

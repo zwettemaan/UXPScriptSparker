@@ -1,0 +1,13 @@
+{
+  "name": "TightenerRegistry",
+  "version": "1.0.0",
+  "description": "Tightener Registry",
+  "author": "Firstname Lastname <email@addre.ss>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}

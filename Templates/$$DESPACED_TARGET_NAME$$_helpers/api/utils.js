@@ -27,6 +27,8 @@ function declareAPI() {
 
 }
 
+declareAPI();
+
 //--------- Tests
 
 var GUID_REGEX = /^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/;
@@ -491,9 +493,5 @@ $$SHORTCODE$$.tests.toHex = function tests_toHex() {
     $endif
     return retVal;
 }
-
-//------------
-
-declareAPI();
 
 })();

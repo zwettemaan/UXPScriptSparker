@@ -1,11 +1,10 @@
 ﻿'use strict';
 
+global.$$SHORTCODE$$ = {};
+var $$SHORTCODE$$ = global.$$SHORTCODE$$;
+
 const express = require('express');
 const runtime = require('./$$DESPACED_TARGET_NAME$$_helpers/node/runtime.js');
-
-if ("undefined" == $$SHORTCODE$$) {
-  $$SHORTCODE$$ = {};
-}
 
 runtime.loadModules($$SHORTCODE$$);
 

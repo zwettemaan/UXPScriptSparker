@@ -1,8 +1,8 @@
 ﻿//
 // This code is exclusively UXPScript. It provides UXPScript-specific 
-// implementations of the pathutils API.
+// implementations of the path API.
 //
-// pathutils.js depends on these functions being implemented
+// path.js depends on these functions being implemented
 // When adding new functionality here, make sure to also 
 // add corresponding tests to the utils_verifyDependencies()
 //

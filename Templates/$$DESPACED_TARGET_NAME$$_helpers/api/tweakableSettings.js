@@ -13,6 +13,8 @@ function declareAPI() {
 
 }
 
+declareAPI();
+
 //--------------- Tests
 
 $$SHORTCODE$$.tests.checkTweakableSettings = function test_checkTweakableSettings() {
@@ -58,18 +60,6 @@ $$SHORTCODE$$.tests.checkTweakableSettings = function test_checkTweakableSetting
     $endif
     return retVal;
 }
-
-//------------
-
-if (! $$SHORTCODE$$.S) {
-    $$SHORTCODE$$.S = {}; // stash global settings here
-}
-
-if (! $$SHORTCODE$$.VALUE_NOT_INITIALIZED) {
-    $$SHORTCODE$$.VALUE_NOT_INITIALIZED = { VALUE_NOT_INITIALIZED: true };
-}
-
-declareAPI();
 
 })();
 

@@ -10,6 +10,8 @@ function declareAPI() {
 
 }
 
+declareAPI();
+
 //----------- Tests
 
 $$SHORTCODE$$.tests.instanceof = function tests_instanceof() {
@@ -63,9 +65,5 @@ $$SHORTCODE$$.tests.instanceof = function tests_instanceof() {
     
     return retVal;
 }
-
-//-------------------
-
-declareAPI();
 
 })();

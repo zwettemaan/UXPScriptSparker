@@ -22,9 +22,9 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/utils.js",
     "./utils.idjs",
 
-    "../api/pathUtils.js",
-    "../shared/pathUtils.js",
-    "./pathUtils.idjs",
+    "../api/path.js",
+    "../shared/path.js",
+    "./path.idjs",
 
     "../api/fileio.js",
     "../shared/fileio.js",

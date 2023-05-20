@@ -1,0 +1,11 @@
+(function() {
+
+function declareAPI() {
+
+}
+
+declareAPI();
+
+})();
+
+
