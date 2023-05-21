@@ -1,16 +1,12 @@
 ﻿//
 // This code is exclusively Node.js. It provides Node-specific 
-// implementations of the pathutils API.
+// implementations of the path API.
 //
-// pathutils.js depends on these functions being implemented
+// path.js depends on these functions being implemented
 // When adding new functionality here, make sure to also 
 // add corresponding tests to the utils_verifyDependencies()
 //
 (function() {
-
-if (! $$SHORTCODE$$.path) {
-    $$SHORTCODE$$.path = {};
-}
 
 $$SHORTCODE$$.path.exists = function exists(filePath) {
 

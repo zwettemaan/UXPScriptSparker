@@ -1,9 +1,5 @@
 ﻿(function() {
 
-if (! $$SHORTCODE$$.path) {
-    $$SHORTCODE$$.path = {};
-}
-
 if ($$SHORTCODE$$.checkMac()) {
     $$SHORTCODE$$.path.SEPARATOR = "/";
     $$SHORTCODE$$.path.OTHER_SEPARATOR = "\\";
@@ -24,10 +20,6 @@ else {
     $$SHORTCODE$$.isLinux = false;
     $$SHORTCODE$$.isMac = false;
     $$SHORTCODE$$.isWindows = true;
-}
-
-if (! $$SHORTCODE$$.tests.path) {
-    $$SHORTCODE$$.tests.path = {};
 }
 
 $$SHORTCODE$$.path.REGEXP_KEEP_SLASH = /[^\/]*/g;

@@ -12,6 +12,7 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/appMapper.js",
 
     "../api/globals.js",
+    "./api/globals.idjs",
     "../shared/globals.js",
     "./globals.idjs",
 
@@ -39,38 +40,6 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/init.js",
     "../../$$DESPACED_TARGET_NAME$$.js"
 ];
-
-// require() and global.require() are different functions. I've come up with a mix-and-match
-// using both. Below, I fetch $$SHORTCODE$$.fs and $$SHORTCODE$$.g_fs which are different 'fs-like'
-// entities
-
-if (! $$SHORTCODE$$.S) {
-    $$SHORTCODE$$.S = {};
-}
-
-if (! $$SHORTCODE$$.C) {
-    $$SHORTCODE$$.C = {};
-}
-
-if (! $$SHORTCODE$$.tests) {
-    $$SHORTCODE$$.tests = {};
-}
-
-if (! $$SHORTCODE$$.uxp) {
-    $$SHORTCODE$$.uxp = require("uxp");
-}
-
-if (! $$SHORTCODE$$.storage) {
-    $$SHORTCODE$$.storage = $$SHORTCODE$$.uxp.storage;
-}
-
-if (! $$SHORTCODE$$.fs) {
-    $$SHORTCODE$$.fs = $$SHORTCODE$$.storage.localFileSystem;
-}
-
-if (! $$SHORTCODE$$.g_fs) {
-    $$SHORTCODE$$.g_fs = global.require("fs");
-}
 
 var ES_SCRIPT_getHomeDir = 
     "(function() {" +

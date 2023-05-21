@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+$if "$$TARGETCONTEXT$$" != "Node Express Server"
         {
             "type": "extendscript-debug",
             "request": "launch",
@@ -11,5 +12,16 @@ $endif
             "script": "${workspaceFolder}/run_as_ExtendScript.jsx",
             "engineName": "$$SHORTCODE$$.extendScriptEngine"
         }
+$else        
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/server.js"
+        }        
+$endif
     ]
 }

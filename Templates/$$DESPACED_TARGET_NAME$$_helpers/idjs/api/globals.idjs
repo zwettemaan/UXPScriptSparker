@@ -1,0 +1,36 @@
+(function() {
+
+function declareAPI() {
+
+    $$SHORTCODE$$.C.APP_ID               = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+    $$SHORTCODE$$.C.APP_NAME             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+    $$SHORTCODE$$.C.DIRNAME_PREFERENCES  = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+    $$SHORTCODE$$.C.FILENAME_PREFERENCES = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+
+}
+
+// require() and global.require() are different functions. I've come up with a mix-and-match
+// using both. Below, I fetch $$SHORTCODE$$.fs and $$SHORTCODE$$.g_fs which are different 'fs-like'
+// entities
+
+if (! $$SHORTCODE$$.uxp) {
+    $$SHORTCODE$$.uxp = require("uxp");
+}
+
+if (! $$SHORTCODE$$.storage) {
+    $$SHORTCODE$$.storage = $$SHORTCODE$$.uxp.storage;
+}
+
+if (! $$SHORTCODE$$.fs) {
+    $$SHORTCODE$$.fs = $$SHORTCODE$$.storage.localFileSystem;
+}
+
+if (! $$SHORTCODE$$.g_fs) {
+    $$SHORTCODE$$.g_fs = global.require("fs");
+}
+
+declareAPI();
+
+})();
+
+

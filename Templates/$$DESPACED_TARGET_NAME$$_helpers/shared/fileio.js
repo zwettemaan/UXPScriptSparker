@@ -1,9 +1,5 @@
 (function() {
 
-if (! $$SHORTCODE$$.fileio) {
-    $$SHORTCODE$$.fileio = {};
-}
-
 // Symbolic constants for text file IO functions
 
 $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE = "APPEND_NL";

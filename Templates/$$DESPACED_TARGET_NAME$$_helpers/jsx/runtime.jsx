@@ -12,8 +12,8 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../shared/appMapper.js",
 
     "../api/globals.js",
-    "../shared/globals.js",
     "./api/globals.jsx",
+    "../shared/globals.js",
     "./globals.jsx",
 
     "../api/tweakableSettings.js",
@@ -43,38 +43,12 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "../../$$DESPACED_TARGET_NAME$$.js"
 ];
 
-if (! $$SHORTCODE$$.S) {
-    $$SHORTCODE$$.S = {};
-}
-
-if (! $$SHORTCODE$$.C) {
-    $$SHORTCODE$$.C = {};
-}
-
-if (! $$SHORTCODE$$.IMPLEMENTATION_MISSING) {
-    $$SHORTCODE$$.IMPLEMENTATION_MISSING = function IMPLEMENTATION_MISSING() {
-        $$SHORTCODE$$.logError("Implementation is missing");        
-    };
-}
-
-if (! $$SHORTCODE$$.VALUE_NOT_INITIALIZED) {
-    $$SHORTCODE$$.VALUE_NOT_INITIALIZED = { VALUE_NOT_INITIALIZED: true };
-}
-
-if (! $$SHORTCODE$$.tests) {
-    $$SHORTCODE$$.tests = {};
-}
-
 $$SHORTCODE$$.initDirsScript = function initDirsScript() {
 
     var retVal = false;
 
     do {
         try {
-
-            if (! $$SHORTCODE$$.dirs) {
-                $$SHORTCODE$$.dirs = {};
-            }
 
             $$SHORTCODE$$.dirs.HOME = $$SHORTCODE$$.path.addTrailingSeparator(Folder("~").fsName);
             $$SHORTCODE$$.dirs.DESKTOP = $$SHORTCODE$$.path.addTrailingSeparator(Folder.desktop.fsName);

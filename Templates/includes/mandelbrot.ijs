@@ -14,7 +14,7 @@ $else
 //
 // Do not run this code directly. 
 // Instead, this code can be launched either in ExtendScript or in UXPScript,
-// by running either the run_as_ExtendScript.jsx or the run_as_UXPScript.idjs 
+// by running either the run...jsx or the run...idjs 
 // scripts from the Scripts Panel
 //
 // Mandelbrot set visualization in Adobe InDesign (tested with CS5 and above)

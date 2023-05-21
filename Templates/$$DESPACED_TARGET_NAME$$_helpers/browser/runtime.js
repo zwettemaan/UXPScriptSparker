@@ -10,6 +10,7 @@ if ("undefined" == typeof $$SHORTCODE$$) {
 $$SHORTCODE$$.relativeFilePathsToLoad = [
 
     "../api/globals.js",
+    "./api/globals.js",
     "../shared/globals.js",
     "./globals.js",
 

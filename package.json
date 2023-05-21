@@ -1,7 +1,7 @@
 {
-  "name": "TightenerRegistry",
+  "name": "UXPScriptSparker",
   "version": "1.0.0",
-  "description": "Tightener Registry",
+  "description": "UXPScript Sparker",
   "author": "Firstname Lastname <email@addre.ss>",
   "main": "server.js",
   "scripts": {
