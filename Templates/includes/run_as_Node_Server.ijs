@@ -1,5 +1,8 @@
 'use strict';
 
+$include "infoheader.ijs"
+$include "nodeExpressServerOnly.ijs"
+
 // Generic launcher. Running this script will run the script in $$DESPACED_TARGET_NAME$$.js 
 // in the Node Express Server environment
 
@@ -12,3 +15,4 @@ var $$SHORTCODE$$ = global.$$SHORTCODE$$;
 const runtime = require('./$$DESPACED_TARGET_NAME$$_helpers/node/runtime.js');
 
 runtime.loadModules($$SHORTCODE$$);
+
