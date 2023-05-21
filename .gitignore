@@ -3,8 +3,10 @@
 /*.jsx
 /*.js
 /ReadMe for *.md
+/NODE_README.md
+/package*.json
 /BuildSettings/
 /*_helpers/
 /VSCode/
 /.vscode/
-/node_modules
+/node_modules/
