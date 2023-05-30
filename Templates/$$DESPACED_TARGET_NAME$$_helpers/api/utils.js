@@ -17,7 +17,7 @@ $$SHORTCODE$$.checkLinux   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 * @return a deep clone of the object
 */
 
-$$SHORTCODE$$.deepClone = function(obj) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.deepClone = function(obj) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Wrap a string in double quotes, so that eval($$SHORTCODE$$.dQ(x)) == x 
@@ -28,7 +28,22 @@ $$SHORTCODE$$.deepClone = function(obj) { return $$SHORTCODE$$.IMPLEMENTATION_MI
 * @return a copy of s wrapped in quotes
 */
 
-$$SHORTCODE$$.dQ = function(s) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.dQ = function(s) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
+
+/**
+* Pad a string with padChar by adding characters to the left
+* until the desired length is reached. If the string is longer than
+* the desired length, then the string is truncated on the left.
+* 
+* @function UXES.leftPad
+* 
+* @param {string} s - string to be quoted
+* @param {string} padChar - single character used for padding
+* @param {number} len - desired length
+* @return {string} string of length len
+*/
+
+$$SHORTCODE$$.leftPad = function(s, padChar, len) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Call this function when entering any function. A typical usage is 
@@ -45,7 +60,7 @@ $$SHORTCODE$$.dQ = function(s) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
 * 
 * @param {array} args - pass in the arguments of the calling function
 */
-$$SHORTCODE$$.logEntry = function(args) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.logEntry = function(args) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Call this function when reporting an error condition 
@@ -60,7 +75,7 @@ $$SHORTCODE$$.logEntry = function(args) { return $$SHORTCODE$$.IMPLEMENTATION_MI
 * @param {string} msg - an error message
 */
 
-$$SHORTCODE$$.logError = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.logError = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Call this function when exiting any function. A typical usage is 
@@ -95,7 +110,7 @@ $$SHORTCODE$$.logMessage   = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 * @param {string} msg - an note
 */
 
-$$SHORTCODE$$.logNote      = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.logNote      = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Call this function when reporting some verbose, tracing info
@@ -110,7 +125,7 @@ $$SHORTCODE$$.logNote      = function(args, msg) { return $$SHORTCODE$$.IMPLEMEN
 * @param {string} msg - an trace message
 */
 
-$$SHORTCODE$$.logTrace     = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.logTrace     = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Call this function when reporting an unexpected, non-lethal condition
@@ -125,7 +140,7 @@ $$SHORTCODE$$.logTrace     = function(args, msg) { return $$SHORTCODE$$.IMPLEMEN
 * @param {string} msg - an trace message
 */
 
-$$SHORTCODE$$.logWarning   = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.logWarning   = function(args, msg) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Change the log level and restore what it was set to before the preceding call to pushLogLevel()
@@ -136,7 +151,7 @@ $$SHORTCODE$$.logWarning   = function(args, msg) { return $$SHORTCODE$$.IMPLEMEN
 *          
 */
 
-$$SHORTCODE$$.popLogLevel  = function() { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.popLogLevel  = function() { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Change the log level and save the previous log level on a
@@ -149,7 +164,7 @@ $$SHORTCODE$$.popLogLevel  = function() { return $$SHORTCODE$$.IMPLEMENTATION_MI
 *          
 */
 
-$$SHORTCODE$$.pushLogLevel = function(newLogLevel) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.pushLogLevel = function(newLogLevel) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Generate some GUID. This is not really a 'proper' GUID generator, as Math.random() is not
@@ -164,7 +179,22 @@ $$SHORTCODE$$.pushLogLevel = function(newLogLevel) { return $$SHORTCODE$$.IMPLEM
 *          
 */
 
-$$SHORTCODE$$.randomGUID   = function() { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.randomGUID   = function() { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
+
+/**
+* Pad a string with padChar by adding characters to the right
+* until the desired length is reached. If the string is longer than
+* the desired length, then the string is truncated on the right.
+* 
+* @function UXES.rightPad
+* 
+* @param {string} s - string to be quoted
+* @param {string} padChar - single character used for padding
+* @param {number} len - desired length
+* @return {string} string of length len
+*/
+
+$$SHORTCODE$$.rightPad = function(s, padChar, len) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Make a copy of an object so it is equivalent, but does not share any references. 
@@ -176,7 +206,7 @@ $$SHORTCODE$$.randomGUID   = function() { return $$SHORTCODE$$.IMPLEMENTATION_MI
 * @return a shallow clone of the object
 */
 
-$$SHORTCODE$$.shallowClone = function(obj) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.shallowClone = function(obj) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Wrap a string in single quotes, so that eval($$SHORTCODE$$.sQ(x)) == x 
@@ -187,7 +217,7 @@ $$SHORTCODE$$.shallowClone = function(obj) { return $$SHORTCODE$$.IMPLEMENTATION
 * @return a copy of s wrapped in quotes
 */
 
-$$SHORTCODE$$.sQ           = function(s) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.sQ           = function(s) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 /**
 * Convert a positive integer to a fixed-length hexadecimal number
@@ -199,7 +229,7 @@ $$SHORTCODE$$.sQ           = function(s) { return $$SHORTCODE$$.IMPLEMENTATION_M
 * @return a hexadecimal string or undefined
 */
 
-$$SHORTCODE$$.toHex        = function(value, numDigits) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING };
+$$SHORTCODE$$.toHex        = function(value, numDigits) { return $$SHORTCODE$$.IMPLEMENTATION_MISSING; };
 
 //--------- Tests
 

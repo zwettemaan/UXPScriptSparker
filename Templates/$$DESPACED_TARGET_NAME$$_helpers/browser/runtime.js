@@ -24,7 +24,6 @@ $$SHORTCODE$$.relativeFilePathsToLoad = [
     "./path.idjs",
 
     "../api/fileio.js",
-    "../shared/fileio.js",
     "./fileio.idjs",
     
     "../api/idDOM.js",
