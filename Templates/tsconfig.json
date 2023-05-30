@@ -6,7 +6,7 @@
         "declaration": true,
         "emitDeclarationOnly": true, 
         "outDir": "./types",       
-        "module": "commonjs",
+        "module": "none",
         "allowJs": true,
         "checkJs": true,
         "strict": true,
@@ -14,8 +14,12 @@
         "esModuleInterop": true,        
         "allowSyntheticDefaultImports": true
     },
-    "include":
-        [
-            "$$DESPACED_TARGET_NAME$$_helpers/**/*"
-        ]
+    "typeRoots": [
+        "./node_modules/@types",
+        "./node_modules/types-for-adobe/InDesign/2018"
+    ],
+    "include": [
+        "$$DESPACED_TARGET_NAME$$_helpers/**/*",
+        "node_modules/types-for-adobe/**/*"
+    ]
 }
