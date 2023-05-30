@@ -2,13 +2,7 @@
 // This is the idDOM API. It is available in ExtendScript, CEP/JavaScript and UXPScript 
 //
 
-function declareAPI() {
-
-    $$SHORTCODE$$.instanceof = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-
-}
-
-declareAPI();
+$$SHORTCODE$$.instanceof = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
 //----------- Tests
 

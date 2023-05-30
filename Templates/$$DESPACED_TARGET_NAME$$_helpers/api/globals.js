@@ -1,13 +1,3 @@
-function declareAPI() {
-
-    $$SHORTCODE$$.C.LOG_NONE             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.LOG_ERROR            = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.LOG_WARN             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.LOG_NOTE             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-    $$SHORTCODE$$.C.LOG_TRACE            = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
-
-}
-
 if (! $$SHORTCODE$$.S) {
     $$SHORTCODE$$.S = {};
 }
@@ -34,7 +24,11 @@ if (! $$SHORTCODE$$.dirs) {
     $$SHORTCODE$$.dirs = {};
 }
 
-declareAPI();
+$$SHORTCODE$$.C.LOG_NONE             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+$$SHORTCODE$$.C.LOG_ERROR            = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+$$SHORTCODE$$.C.LOG_WARN             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+$$SHORTCODE$$.C.LOG_NOTE             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
+$$SHORTCODE$$.C.LOG_TRACE            = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
 
 //------------------- Tests
 

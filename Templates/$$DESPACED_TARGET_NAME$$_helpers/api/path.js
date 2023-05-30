@@ -3,25 +3,19 @@
 //
 
 
-function declareAPI() {
-
-
-    $$SHORTCODE$$.path.addTrailingSeparator = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.basename             = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.dirname              = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.exists               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.filenameExtension    = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.guessSeparator       = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.isDir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.mkdir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-    $$SHORTCODE$$.path.reduce               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
-}
-
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
 
-declareAPI();
+$$SHORTCODE$$.path.addTrailingSeparator = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.basename             = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.dirname              = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.exists               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.filenameExtension    = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.guessSeparator       = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.isDir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.mkdir                = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
+$$SHORTCODE$$.path.reduce               = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
 
 //----------- Tests
 
