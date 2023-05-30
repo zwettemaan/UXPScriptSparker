@@ -1,5 +1,3 @@
-(function() {
-
 // Don't use `var $$SHORTCODE$$`
 // By using `var` we will end up defining this in the wrong scope
 
@@ -80,12 +78,6 @@ if (! $$SHORTCODE$$.fs) {
 if (! $$SHORTCODE$$.g_fs) {
     $$SHORTCODE$$.g_fs = global.require("fs");
 }
-
-var ES_SCRIPT_getHomeDir = 
-    "(function() {" +
-        "function dQ(s){\nreturn'\"'+s.replace(/\\\\/g,\"\\\\\\\\\").replace(/\"/g,'\\\\\"')+'\"';\n}" +
-        "return dQ(Folder('~').fsName)" +
-    "})()";
 
 $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
 
@@ -183,8 +175,6 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
         }
     }
 }
-
-})();
 
 exports.loadModules = async function loadModules(nameSpace, completionCallback) {
 

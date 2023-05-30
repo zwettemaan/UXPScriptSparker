@@ -76,6 +76,10 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
             DEL "server.js"
         )
 
+        IF EXIST "tsconfig.json" (
+            DEL "tsconfig.json"
+        )
+
         IF EXIST "ReadMe for !DESPACED_TARGET_NAME!.md" (
             DEL "ReadMe for !DESPACED_TARGET_NAME!.md"
         )

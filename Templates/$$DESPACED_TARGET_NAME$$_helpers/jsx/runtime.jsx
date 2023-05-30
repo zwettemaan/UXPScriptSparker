@@ -1,5 +1,3 @@
-(function() {
-
 // Don't use `var $$SHORTCODE$$`
 // By using `var` we will end up defining this in the wrong scope
 
@@ -99,8 +97,6 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
         }
     }
 }
-
-})();
 
 $$SHORTCODE$$.loadModules = function loadModules(nameSpace, completionCallback) {
 

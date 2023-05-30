@@ -1,5 +1,3 @@
-(function() {
-
 $$SHORTCODE$$ = global.$$SHORTCODE$$;
 if (! $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
@@ -89,8 +87,6 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
         }
     }
 }
-
-})();
 
 exports.loadModules = async function loadModules(nameSpace, completionCallback) {
 

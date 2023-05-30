@@ -1,5 +1,3 @@
-(function() {
-
 function declareAPI() {
 
     $$SHORTCODE$$.C.APP_ID               = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
@@ -10,7 +8,3 @@ function declareAPI() {
 }
 
 declareAPI();
-
-})();
-
-

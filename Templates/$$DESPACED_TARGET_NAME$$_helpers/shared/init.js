@@ -1,6 +1,4 @@
-﻿(function() {
-
-$$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
+﻿$$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
 
     do {
         try {
@@ -67,5 +65,3 @@ $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
 
 
 }
-
-})();

@@ -1,6 +1,4 @@
-﻿(function() {
-
-if ($$SHORTCODE$$.checkMac()) {
+﻿if ($$SHORTCODE$$.checkMac()) {
     $$SHORTCODE$$.path.SEPARATOR = "/";
     $$SHORTCODE$$.path.OTHER_SEPARATOR = "\\";
     $$SHORTCODE$$.isLinux = false;
@@ -399,5 +397,3 @@ $$SHORTCODE$$.path.splitPath = function splitPath(filePath, separator) {
     $endif
     return retVal;
 }
-
-})();

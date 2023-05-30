@@ -2,8 +2,6 @@
 // This is the utils API. It is available in ExtendScript, CEP/JavaScript and UXPScript 
 //
 
-(function(){
-
 function declareAPI() {
 
     $$SHORTCODE$$.alert        = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
@@ -493,5 +491,3 @@ $$SHORTCODE$$.tests.toHex = function tests_toHex() {
     $endif
     return retVal;
 }
-
-})();

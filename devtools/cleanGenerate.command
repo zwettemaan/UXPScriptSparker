@@ -58,6 +58,7 @@ else
         rm -f server.js
         rm -f NODE_README.md
         rm -f package*.json
+        rm -f tsconfig.json
         rm -f "ReadMe for $DESPACED_TARGET_NAME.md"
         rm -rf ${DESPACED_TARGET_NAME}_helpers
         rm -rf BuildSettings

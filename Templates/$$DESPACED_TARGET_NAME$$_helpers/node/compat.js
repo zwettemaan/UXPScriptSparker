@@ -2,7 +2,6 @@
 // This code is exclusively Node.js. It provides Node-specific 
 // implementations of the utils API.
 //
-(function() {
 
 $$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
@@ -96,5 +95,3 @@ $$SHORTCODE$$.setTimeout = function _setTimeout(taskFtn, timeoutMilliseconds) {
     $endif
     return retVal;
 }
-
-})();

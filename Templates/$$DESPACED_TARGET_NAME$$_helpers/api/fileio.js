@@ -2,9 +2,6 @@
 // This is the fileio API. It is available in ExtendScript, CEP/JavaScript and UXPScript 
 //
 
-(function(){
-
-
 function declareAPI() {
 
     $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE      = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
@@ -27,5 +24,3 @@ declareAPI();
 if (! $$SHORTCODE$$.tests.fileio) {
     $$SHORTCODE$$.tests.fileio = {};
 }
-
-})();

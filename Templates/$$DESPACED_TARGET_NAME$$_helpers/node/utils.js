@@ -7,8 +7,6 @@
 // add corresponding tests to the utils_verifyDependencies()
 //
 
-(function() {
-
 $$SHORTCODE$$.alert = function alert(msg) {    
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
@@ -170,5 +168,3 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, levelPrefix, mes
 
     $$SHORTCODE$$.inLogger = savedInLogger;
 }
-
-})();

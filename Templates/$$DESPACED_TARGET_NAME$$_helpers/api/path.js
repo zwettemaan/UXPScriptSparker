@@ -2,8 +2,6 @@
 // This is the utils API. It is available in ExtendScript, CEP/JavaScript and UXPScript 
 //
 
-(function(){
-
 
 function declareAPI() {
 
@@ -601,5 +599,3 @@ $$SHORTCODE$$.tests.path.pathReduce = function tests_pathReduce() {
 
     return retVal;
 }
-
-})();

@@ -1,5 +1,3 @@
-(function() {
-
 if (! $$SHORTCODE$$.fileio) {
     $$SHORTCODE$$.fileio = {};
 }
@@ -26,7 +24,7 @@ $$SHORTCODE$$.fileio.appendUTF8TextFile = function appendUTF8TextFile(filePath, 
 
 $$SHORTCODE$$.fileio.readUTF8TextFile = function readUTF8TextFile(filePath) {
 
-	var retVal = "";
+    var retVal = "";
 
     try {
         var textFile = File(filePath);
@@ -58,5 +56,3 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, te
     catch (err) {        
     }
 }
-
-})();

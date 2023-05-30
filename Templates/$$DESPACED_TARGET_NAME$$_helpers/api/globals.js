@@ -1,5 +1,3 @@
-(function() {
-
 function declareAPI() {
 
     $$SHORTCODE$$.C.LOG_NONE             = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
@@ -78,7 +76,5 @@ $$SHORTCODE$$.tests.checkGlobals = function tests_checkGlobals() {
     $endif
     return retVal;
 }
-
-})();
 
 

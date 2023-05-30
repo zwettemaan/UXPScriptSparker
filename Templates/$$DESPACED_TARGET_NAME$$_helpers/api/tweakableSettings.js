@@ -1,6 +1,4 @@
-﻿(function() {
-
-function declareAPI() {
+﻿function declareAPI() {
 
     $$SHORTCODE$$.S.LOG_ENTRY_EXIT                = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
     $$SHORTCODE$$.S.LOG_CRITICAL_ERRORS           = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
@@ -60,6 +58,3 @@ $$SHORTCODE$$.tests.checkTweakableSettings = function test_checkTweakableSetting
     $endif
     return retVal;
 }
-
-})();
-

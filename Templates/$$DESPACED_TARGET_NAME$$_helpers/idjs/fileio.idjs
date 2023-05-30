@@ -1,5 +1,3 @@
-(function() {
-
 if (! $$SHORTCODE$$.fileio) {
     $$SHORTCODE$$.fileio = {};
 }
@@ -88,5 +86,3 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = async function writeUTF8TextFile(filePa
     catch (err) {        
     }
 }
-
-})();

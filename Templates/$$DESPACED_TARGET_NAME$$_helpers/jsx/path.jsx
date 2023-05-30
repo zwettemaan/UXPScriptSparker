@@ -7,8 +7,6 @@
 // add corresponding tests to the utils_verifyDependencies()
 //
 
-(function() {
-
 if (! $$SHORTCODE$$.path) {
     $$SHORTCODE$$.path = {};
 }
@@ -92,5 +90,3 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     $endif  
     return success;
 }
-
-})();

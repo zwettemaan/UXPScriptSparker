@@ -1,5 +1,3 @@
-(function() {
-
 function declareAPI() {
 
     $$SHORTCODE$$.C.HOST                 = $$SHORTCODE$$.VALUE_NOT_INITIALIZED;
@@ -22,7 +20,5 @@ if (! $$SHORTCODE$$.app) {
 }
 
 declareAPI();
-
-})();
 
 

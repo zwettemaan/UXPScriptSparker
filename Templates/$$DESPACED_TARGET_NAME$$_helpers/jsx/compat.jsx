@@ -2,7 +2,6 @@
 // This code is exclusively ExtendScript. It provides ExtendScript-specific 
 // implementations of the utils API.
 //
-(function() {
 
 var timedFunctionList = undefined;
 var nextIdleAfter = undefined;
@@ -250,5 +249,3 @@ function timedFunction(taskFtn, timeOutMilliseconds, isRepeat) {
     $endif
     return retVal;
 }
-
-})();

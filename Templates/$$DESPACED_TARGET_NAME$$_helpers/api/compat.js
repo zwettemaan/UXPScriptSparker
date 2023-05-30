@@ -2,9 +2,6 @@
 // This is the compat API. It is available in ExtendScript, CEP/JavaScript and UXPScript 
 //
 
-(function(){
-
-
 function declareAPI() {
 
     $$SHORTCODE$$.clearImmediate         = $$SHORTCODE$$.IMPLEMENTATION_MISSING;
@@ -19,6 +16,3 @@ function declareAPI() {
 declareAPI();
 
 //----------- Tests
-
-
-})();

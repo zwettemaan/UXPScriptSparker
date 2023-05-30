@@ -1,12 +1,13 @@
 .DS_Store
+node_modules/
 /*.idjs
 /*.jsx
 /*.js
 /ReadMe for *.md
 /NODE_README.md
 /package*.json
+/tsconfig.json
 /BuildSettings/
 /*_helpers/
 /VSCode/
 /.vscode/
-/node_modules/

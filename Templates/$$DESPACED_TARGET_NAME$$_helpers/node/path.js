@@ -6,7 +6,6 @@
 // When adding new functionality here, make sure to also 
 // add corresponding tests to the utils_verifyDependencies()
 //
-(function() {
 
 $$SHORTCODE$$.path.exists = function exists(filePath) {
 
@@ -111,5 +110,3 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     $endif  
     return success;
 }
-
-})();

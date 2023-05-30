@@ -1,11 +1,5 @@
-(function() {
-
 function declareAPI() {
 
 }
 
 declareAPI();
-
-})();
-
-

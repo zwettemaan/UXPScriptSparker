@@ -1,5 +1,3 @@
-(function() {
-
 if (! $$SHORTCODE$$.fileio) {
     $$SHORTCODE$$.fileio = {};
 }
@@ -38,5 +36,3 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, te
     catch (err) {        
     }
 }
-
-})();

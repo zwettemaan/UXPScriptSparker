@@ -2,8 +2,6 @@
 // This code can be shared between CEP/JavaScript, ExtendScript and UXPScript
 //
 
-(function(){
-
 /**
 * Make a copy of an object or array so it is equivalent, but does not share any references.
 * Do this recursively on all nested objects 
@@ -85,7 +83,6 @@ $$SHORTCODE$$.deepClone = function deepClone(obj) {
 $$SHORTCODE$$.dQ = function(s) {
     return '"' + s.toString().replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g,"\\n").replace(/\r/g,"\\r") + '"';
 }
-
 
 $$SHORTCODE$$.leftPad = function leftPad(s, padChar, len) {
 
@@ -515,5 +512,3 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits)
     $endif
     return retVal;
 }
-
-})();

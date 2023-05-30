@@ -2,7 +2,6 @@
 // This code is exclusively UXPScript. It provides UXPScript-specific 
 // implementations of the utils API.
 //
-(function() {
 
 $$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
@@ -102,5 +101,3 @@ $$SHORTCODE$$.setTimeout = function _setTimeout(taskFtn, timeoutMilliseconds) {
     $endif
     return retVal;
 }
-
-})();
