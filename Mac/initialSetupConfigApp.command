@@ -3,7 +3,7 @@
 #
 
 if [ "${UXPS_COMMANDS_DIR}" == "" -o ! -d "${UXPS_COMMANDS_DIR}" ]; then
-	export UXPS_COMMANDS_DIR=`dirname "$0"`/
+    export UXPS_COMMANDS_DIR=`dirname "$0"`/
 fi
 
 pushd "${UXPS_COMMANDS_DIR}" > /dev/null

@@ -48,61 +48,20 @@ IF NOT EXIST "%PROJECT_ROOT_DIR%BuildSettings%" (
         ECHO Removing generated files
         ECHO.
 
-        IF EXIST "!DESPACED_TARGET_NAME!.js" (
-            DEL "!DESPACED_TARGET_NAME!.js"
-        )
-
-        IF EXIST "run_as_UXPScript.!TARGET_FILENAME_EXTENSION!" (
-            DEL "run_as_UXPScript.!TARGET_FILENAME_EXTENSION!"
-        )
-
-        IF EXIST "run_as_ExtendScript.jsx" (
-            DEL "run_as_ExtendScript.jsx"
-        )
-
-        IF EXIST "run.!TARGET_FILENAME_EXTENSION!" (
-            DEL "run.!TARGET_FILENAME_EXTENSION!"
-        )
-
-        IF EXIST "run.jsx" (
-            DEL "run.jsx"
-        )
-
-        IF EXIST "package*.json" (
-            DEL "package*.json"
-        )
-
-        IF EXIST "server.js" (
-            DEL "server.js"
-        )
-
-        IF EXIST "tsconfig.json" (
-            DEL "tsconfig.json"
-        )
-
-        IF EXIST "ReadMe for !DESPACED_TARGET_NAME!.md" (
-            DEL "ReadMe for !DESPACED_TARGET_NAME!.md"
-        )
-
-        IF EXIST "!DESPACED_TARGET_NAME!_helpers" (
-            RD /s /q "!DESPACED_TARGET_NAME!_helpers" >NUL 2>&1
-        )
-
-        IF EXIST "BuildSettings" (
-            RD /s /q BuildSettings >NUL 2>&1  
-        )
-
-        IF EXIST ".vscode" (
-                RD /s /q .vscode >NUL 2>&1
-        )
-
-        IF EXIST "node_modules" (
-                RD /s /q node_modules >NUL 2>&1
-        )
-
-        IF EXIST "VSCode" (
-                RD /s /q VSCode >NUL 2>&1
-        )
+        DEL "!DESPACED_TARGET_NAME!.js" >NUL 2>&1
+        DEL "run_as_UXPScript.!TARGET_FILENAME_EXTENSION!" >NUL 2>&1
+        DEL "run_as_ExtendScript.jsx" >NUL 2>&1
+        DEL "run.!TARGET_FILENAME_EXTENSION!" >NUL 2>&1
+        DEL "run.jsx" >NUL 2>&1
+        DEL "server.js" >NUL 2>&1
+        DEL "tsconfig.json" >NUL 2>&1
+        DEL "ReadMe for !DESPACED_TARGET_NAME!.md" >NUL 2>&1
+        DEL /q "package*.json" >NUL 2>&1
+        RD /s /q "!DESPACED_TARGET_NAME!_helpers" >NUL 2>&1
+        RD /s /q BuildSettings >NUL 2>&1  
+        RD /s /q .vscode >NUL 2>&1
+        RD /s /q node_modules >NUL 2>&1
+        RD /s /q VSCode >NUL 2>&1
 
         ECHO.
         ECHO This project has been reset to an unconfigured, blank state.
