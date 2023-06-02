@@ -3,9 +3,9 @@
 *** Note: this is work-in-progress. Documentation is quite incomplete. ***
 
 On Mac, don't forget to run the `initialSetupConfigApp.command` after pulling this 
-repository, or after downloading andf unzipping the repo's .zip file.
+repository, or after downloading and unzipping the repo's .zip file.
 
-Also, on more recent versions of Mac OS you must allow the Terminal program the 
+On more recent versions of Mac OS, you must allow the Terminal program the 
 needed privileges, otherwise nothing will seem to work!
 
 --
