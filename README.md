@@ -2,6 +2,9 @@
 
   *** Note: this is work-in-progress. Documentation is quite incomplete.
 
+NOTE: at the moment, things don't work on Mac due to security issues. I'm working 
+on that - stay tuned!
+
 --
 
 Starter project for running and debugging UXPScript with Adobe InDesign and the 
