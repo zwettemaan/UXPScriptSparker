@@ -1,9 +1,12 @@
 # UXPScriptSparker
 
-  *** Note: this is work-in-progress. Documentation is quite incomplete.
+*** Note: this is work-in-progress. Documentation is quite incomplete. ***
 
-NOTE: at the moment, things don't work on Mac due to security issues. I'm working 
-on that - stay tuned!
+On Mac, don't forget to run the `initialSetupConfigApp.command` after pulling this 
+repository, or downloading the .zip file.
+
+Also, on more recent versions of Mac OS you must allow the Terminal program the 
+needed privileges, otherwise nothing will seem to work!
 
 --
 
