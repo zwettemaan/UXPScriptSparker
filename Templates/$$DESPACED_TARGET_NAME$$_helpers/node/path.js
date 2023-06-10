@@ -7,6 +7,8 @@
 // add corresponding tests to the utils_verifyDependencies()
 //
 
+(function(){
+
 $$SHORTCODE$$.path.exists = function exists(filePath) {
 
     var retVal = false;
@@ -110,3 +112,5 @@ $$SHORTCODE$$.path.mkdir = function mkdir(folderPath, separator) {
     $endif  
     return success;
 }
+
+})();

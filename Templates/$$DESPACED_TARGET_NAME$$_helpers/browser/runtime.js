@@ -5,6 +5,8 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
+(function() {
+
 $$SHORTCODE$$.relativeFilePathsToLoad = [
 
     "../api/globals.js",
@@ -229,3 +231,5 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
 
     await $$SHORTCODE$$.main();
 }
+
+})();

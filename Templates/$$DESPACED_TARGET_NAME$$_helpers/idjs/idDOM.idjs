@@ -1,4 +1,6 @@
-﻿$$SHORTCODE$$.instanceof = function _instanceof(object, domClassName) {
+﻿(function(){
+
+$$SHORTCODE$$.instanceof = function _instanceof(object, domClassName) {
   
     var retVal = false;
 
@@ -29,3 +31,5 @@
     $endif
     return retVal;
 }
+
+})();

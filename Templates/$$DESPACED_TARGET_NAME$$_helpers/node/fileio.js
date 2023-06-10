@@ -1,6 +1,4 @@
-if (! $$SHORTCODE$$.fileio) {
-    $$SHORTCODE$$.fileio = {};
-}
+(function(){
 
 // No logging in these functions - they are themselves used by the logging functions
 
@@ -36,3 +34,5 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = function writeUTF8TextFile(filePath, te
     catch (err) {        
     }
 }
+
+})();

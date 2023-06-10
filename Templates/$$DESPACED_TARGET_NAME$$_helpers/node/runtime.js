@@ -1,3 +1,5 @@
+(function(){
+
 $$SHORTCODE$$ = global.$$SHORTCODE$$;
 if (! $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
@@ -147,3 +149,5 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
 
     $$SHORTCODE$$.main();
 }
+
+})();

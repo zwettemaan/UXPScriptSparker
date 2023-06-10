@@ -3,6 +3,8 @@
 // implementations of the utils API.
 //
 
+(function(){
+
 $$SHORTCODE$$.clearImmediate = function _clearImmediate(taskId) {
 
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
@@ -95,3 +97,5 @@ $$SHORTCODE$$.setTimeout = function _setTimeout(taskFtn, timeoutMilliseconds) {
     $endif
     return retVal;
 }
+
+})();

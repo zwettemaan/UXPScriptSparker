@@ -2,6 +2,8 @@
 // Tweakable Settings
 //
 
+(function(){
+
 $if "$$ENABLE_LOG_ENTRY_EXIT$$" == "ON_ENABLED"
 $$SHORTCODE$$.S.LOG_LEVEL                     = $$SHORTCODE$$.C.LOG_TRACE;
 $else
@@ -38,3 +40,4 @@ $endif
 
 /* ... */
 
+})();

@@ -2,6 +2,8 @@
 // This code can be shared between CEP/JavaScript, ExtendScript and UXPScript
 //
 
+(function(){
+
 var logLevelStack = [];
 
 $$SHORTCODE$$.deepClone = function deepClone(obj) {
@@ -347,3 +349,5 @@ $$SHORTCODE$$.toHex = function toHex(value, numDigits)
     $endif
     return retVal;
 }
+
+})();

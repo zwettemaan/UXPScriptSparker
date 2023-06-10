@@ -2,6 +2,8 @@ if (! $$SHORTCODE$$.fileio) {
     $$SHORTCODE$$.fileio = {};
 }
 
+(function(){
+
 var ES_SCRIPT_readUTF8TextFile = 
     "(function(filePath) {" +
         "var result = '';" +
@@ -86,3 +88,5 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = async function writeUTF8TextFile(filePa
     catch (err) {        
     }
 }
+
+})();

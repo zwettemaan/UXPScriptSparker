@@ -7,6 +7,8 @@
 // add corresponding tests to the utils_verifyDependencies()
 //
 
+(function(){
+
 $$SHORTCODE$$.alert = function _alert(msg) {  // Use `_alert`, instead of `alert` to avoid infinite recursion
     $if "$$ENABLE_LOG_ENTRY_EXIT$$" != "OFF"
 
@@ -162,3 +164,5 @@ $$SHORTCODE$$.logMessage = function(reportingFunctionArguments, levelPrefix, mes
 
     $$SHORTCODE$$.inLogger = savedInLogger;
 }
+
+})();
