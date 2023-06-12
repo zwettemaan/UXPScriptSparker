@@ -4,5 +4,18 @@
             "path": ".."
         }
     ],
-    "settings": {}
+    "settings": {},
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "extendscript-debug",
+                "request": "launch",
+                "script": "${workspaceFolder}/run_as_ExtendScript.jsx",
+                "engineName": "$$SHORTCODE$$.extendScriptEngine",
+                "name": "Run script. Select, then click 'Play' to run in IDS 2023",
+                "hostAppSpecifier": "indesign-18.064"
+            }
+        ]
+    }
 }

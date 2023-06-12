@@ -8,4 +8,4 @@ if ("undefined" == typeof $$SHORTCODE$$) {
     $$SHORTCODE$$ = {};
 }
 
-await global.require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$);
+$$AWAIT$$global.require("./$$DESPACED_TARGET_NAME$$_helpers/idjs/runtime.idjs").loadModules($$SHORTCODE$$);

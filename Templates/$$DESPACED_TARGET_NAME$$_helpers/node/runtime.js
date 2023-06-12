@@ -53,9 +53,11 @@ $$SHORTCODE$$.initDirsScript = function initDirsScript() {
             $$SHORTCODE$$.dirs.HOME = 
                 $$SHORTCODE$$.path.addTrailingSeparator(process.env.HOME);
 
-            $$SHORTCODE$$.dirs.DESKTOP = 
-                $$SHORTCODE$$.dirs.HOME + "Desktop" + $$SHORTCODE$$.path.SEPARATOR;
-
+            $$SHORTCODE$$.dirs.HELPERS = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.PROJECT_ROOT);
+                
+            $$SHORTCODE$$.dirs.PROJECT_ROOT = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.HELPERS);
         }
         catch (err) { 
             $$SHORTCODE$$.criticalError("initScript throws " + err);
@@ -89,7 +91,7 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
     }
 }
 
-exports.loadModules = async function loadModules(nameSpace, completionCallback) {
+exports.loadModules = $$ASYNC$$function loadModules(nameSpace, completionCallback) {
 
     var failedTests = 0;
     var missingImplementations = 0;

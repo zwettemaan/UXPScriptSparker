@@ -45,19 +45,34 @@ $$SHORTCODE$$.sharedInitScript = function sharedInitScript() {
                     $$SHORTCODE$$.path.SEPARATOR;
             }
 
-            if (! $$SHORTCODE$$.dirs.ADOBE_SCRIPTS) {
-                $$SHORTCODE$$.dirs.ADOBE_SCRIPTS = 
-                    $$SHORTCODE$$.dirs.DOCUMENTS + 
-                    "Adobe Scripts" + 
-                    $$SHORTCODE$$.path.SEPARATOR;
+            $$SHORTCODE$$.dirs.ADOBE_SCRIPTS = 
+                $$SHORTCODE$$.dirs.DOCUMENTS + 
+                "Adobe Scripts" + 
+                $$SHORTCODE$$.path.SEPARATOR;
+
+            $$SHORTCODE$$.dirs.APP_SCRIPTS = 
+                $$SHORTCODE$$.dirs.ADOBE_SCRIPTS + 
+                $$SHORTCODE$$.C.APP_NAME + 
+                $$SHORTCODE$$.path.SEPARATOR;
+
+            if ($$SHORTCODE$$.checkMac()) {
+                $$SHORTCODE$$.dirs.APPLICATION_SUPPORT = $$SHORTCODE$$.dirs.HOME + "Library/Application Support/"
+                $$SHORTCODE$$.dirs.EXTENSIONS = $$SHORTCODE$$.dirs.APPLICATION_SUPPORT + "Adobe/CEP/extensions/";
+                $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES = $$SHORTCODE$$.dirs.HOME + "Library/";
+                $$SHORTCODE$$.dirs.ADOBE_APPLICATION = "/Applications/Adobe " + $$SHORTCODE$$.C.APP_NAME + " " + $$SHORTCODE$$.C.VERSION_INDESIGN + "/";
+            }
+            else {
+                $$SHORTCODE$$.dirs.APPLICATION_SUPPORT = $$SHORTCODE$$.dirs.HOME + "AppData\\Roaming\\"
+                $$SHORTCODE$$.dirs.EXTENSIONS = $$SHORTCODE$$.dirs.APPLICATION_SUPPORT + "Adobe\\CEP\\extensions\\";
+                $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES = $$SHORTCODE$$.dirs.APPLICATION_SUPPORT;
+                $$SHORTCODE$$.dirs.ADOBE_APPLICATION = "C:\\Program Files\\Adobe\\Adobe " + $$SHORTCODE$$.C.APP_NAME + " " + $$SHORTCODE$$.C.VERSION_INDESIGN + "\\";
             }
 
-            if (! $$SHORTCODE$$.dirs.APP_SCRIPTS) {
-                $$SHORTCODE$$.dirs.APP_SCRIPTS = 
-                    $$SHORTCODE$$.dirs.ADOBE_SCRIPTS + 
-                    $$SHORTCODE$$.C.APP_NAME + 
-                    $$SHORTCODE$$.path.SEPARATOR;
-            }
+            $$SHORTCODE$$.dirs.PREFERENCES = 
+                $$SHORTCODE$$.dirs.SYSTEM_PREFERENCES +
+                $$SHORTCODE$$.C.DIRNAME_PREFERENCES +
+                $$SHORTCODE$$.path.SEPARATOR;
+
         }
         catch (err) {
             $$SHORTCODE$$.logError(arguments, "throws " + err);

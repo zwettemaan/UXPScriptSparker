@@ -46,7 +46,7 @@ var ES_SCRIPT_getHomeDir =
         "return dQ(Folder('~').fsName)" +
     "})()";
 
-$$SHORTCODE$$.initDirsScript = async function initDirsScript() {
+$$SHORTCODE$$.initDirsScript = $$ASYNC$$function initDirsScript() {
 
     var retVal = false;
 
@@ -57,7 +57,7 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                 $$SHORTCODE$$.dirs = {};
             }
 
-            var appLocalTemp = await $$SHORTCODE$$.fs.getTemporaryFolder();
+            var appLocalTemp = $$AWAIT$$$$SHORTCODE$$.fs.getTemporaryFolder();
             $$SHORTCODE$$.dirs.TEMP = 
                 $$SHORTCODE$$.path.addTrailingSeparator(appLocalTemp.nativePath);
 
@@ -143,7 +143,7 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
     }
 }
 
-exports.loadModules = async function loadModules(nameSpace, completionCallback) {
+exports.loadModules = $$ASYNC$$function loadModules(nameSpace, completionCallback) {
 
     if ("undefined" == typeof app) {
         var id = require("indesign");
@@ -198,7 +198,7 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
 
     $$SHORTCODE$$.C.APP_NAME = $$SHORTCODE$$.mapAppId($$SHORTCODE$$.C.APP_ID);
 
-    await $$SHORTCODE$$.initDirsScript();
+    $$AWAIT$$$$SHORTCODE$$.initDirsScript();
 
     $$SHORTCODE$$.sharedInitScript();
 
@@ -211,7 +211,7 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         runTests($$SHORTCODE$$.tests);
     }
 
-    await $$SHORTCODE$$.main();
+    $$AWAIT$$$$SHORTCODE$$.main();
 }
 
 })();

@@ -42,16 +42,29 @@ $$SHORTCODE$$.initDirsScript = function initDirsScript() {
     do {
         try {
 
-            $$SHORTCODE$$.dirs.HOME = $$SHORTCODE$$.path.addTrailingSeparator(Folder("~").fsName);
-            $$SHORTCODE$$.dirs.DESKTOP = $$SHORTCODE$$.path.addTrailingSeparator(Folder.desktop.fsName);
-            $$SHORTCODE$$.dirs.TEMP = $$SHORTCODE$$.path.addTrailingSeparator(Folder.temp.fsName);
+            $$SHORTCODE$$.dirs.HOME = 
+                $$SHORTCODE$$.path.addTrailingSeparator(Folder("~").fsName);
+            
+            $$SHORTCODE$$.dirs.DESKTOP = 
+                $$SHORTCODE$$.path.addTrailingSeparator(Folder.desktop.fsName);
+            
+            $$SHORTCODE$$.dirs.TEMP = 
+                $$SHORTCODE$$.path.addTrailingSeparator(Folder.temp.fsName);
 
+            $$SHORTCODE$$.dirs.HELPERS = 
+                File($.fileName).parent.fsName + 
+                $$SHORTCODE$$.path.SEPARATOR;
+
+            $$SHORTCODE$$.dirs.PROJECT_ROOT = 
+                File($.fileName).parent.parent.fsName + 
+                $$SHORTCODE$$.path.SEPARATOR;
 
             if ($$SHORTCODE$$.isMac) {
                 $$SHORTCODE$$.dirs.DRIVE_PREFIX = "";
             }
             else {
-                var splitHomePath = $$SHORTCODE$$.dirs.HOME.split($$SHORTCODE$$.path.SEPARATOR);
+                var splitHomePath = 
+                    $$SHORTCODE$$.dirs.HOME.split($$SHORTCODE$$.path.SEPARATOR);
                 if (splitHomePath.length > 0) {
                     $$SHORTCODE$$.dirs.DRIVE_PREFIX = splitHomePath[0] + $$SHORTCODE$$.path.SEPARATOR;
                 }

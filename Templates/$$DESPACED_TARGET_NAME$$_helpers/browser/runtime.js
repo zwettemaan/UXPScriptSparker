@@ -80,7 +80,7 @@ if (! $$SHORTCODE$$.g_fs) {
     $$SHORTCODE$$.g_fs = global.require("fs");
 }
 
-$$SHORTCODE$$.initDirsScript = async function initDirsScript() {
+$$SHORTCODE$$.initDirsScript = $$ASYNC$$function initDirsScript() {
 
     var retVal = false;
 
@@ -91,9 +91,15 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
                 $$SHORTCODE$$.dirs = {};
             }
 
-            var appLocalTemp = await $$SHORTCODE$$.fs.getTemporaryFolder();
+            var appLocalTemp = $$AWAIT$$$$SHORTCODE$$.fs.getTemporaryFolder();
             $$SHORTCODE$$.dirs.TEMP = 
                 $$SHORTCODE$$.path.addTrailingSeparator(appLocalTemp.nativePath);
+
+            $$SHORTCODE$$.dirs.HELPERS = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.PROJECT_ROOT);
+
+            $$SHORTCODE$$.dirs.PROJECT_ROOT = 
+                $$SHORTCODE$$.path.dirname($$SHORTCODE$$.dirs.HELPERS);
 
             // At the moment, on Windows, the temp path seems to give us relevant data 
             // regarding the user's context. This can break at any new UXPScript
@@ -177,7 +183,7 @@ $$SHORTCODE$$.criticalError = function criticalError(error) {
     }
 }
 
-exports.loadModules = async function loadModules(nameSpace, completionCallback) {
+exports.loadModules = $$ASYNC$$function loadModules(nameSpace, completionCallback) {
 
     var failedTests = 0;
     var missingImplementations = 0;
@@ -216,7 +222,7 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         require(path);
     }
 
-    await $$SHORTCODE$$.initDirsScript();
+    $$AWAIT$$$$SHORTCODE$$.initDirsScript();
 
     $$SHORTCODE$$.sharedInitScript();
 
@@ -229,7 +235,7 @@ exports.loadModules = async function loadModules(nameSpace, completionCallback) 
         runTests($$SHORTCODE$$.tests);
     }
 
-    await $$SHORTCODE$$.main();
+    $$AWAIT$$$$SHORTCODE$$.main();
 }
 
 })();

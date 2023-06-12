@@ -6,6 +6,16 @@ SPARKER_PROJECT_NAME="UXPScript Sparker"
 # will use search-and-replace to create the actual files needed for the project
 #
 
+ASYNC=""
+IS_INTERNAL_ASYNC=1
+
+AWAIT=""
+IS_INTERNAL_AWAIT=1
+
+USE_ASYNC="0"
+HELP_USE_ASYNC="UXPScript uses async/await (InDesign 18.3) or not (InDesign > 18.4)"
+SELECT_USE_ASYNC="1,0"
+
 PROJECT_VERSION="1.0.0"
 HELP_PROJECT_VERSION="Initial version number for the script"
 IS_BUILDSETTING_PROJECT_VERSION=1

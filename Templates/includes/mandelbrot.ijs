@@ -40,10 +40,7 @@ var swatches = {};
 
 var document = $$SHORTCODE$$.G.app.documents.add();
 
-//
-// Give the user something to watch while it's happening.
-//
-$$SHORTCODE$$.G.app.scriptPreferences.enableRedraw = true;
+$$SHORTCODE$$.G.app.scriptPreferences.enableRedraw = false;
 
 document.viewPreferences.horizontalMeasurementUnits = $$SHORTCODE$$.G.MeasurementUnits.POINTS;
 document.viewPreferences.verticalMeasurementUnits = $$SHORTCODE$$.G.MeasurementUnits.POINTS;

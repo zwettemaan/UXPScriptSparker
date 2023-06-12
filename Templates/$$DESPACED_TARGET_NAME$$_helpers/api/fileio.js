@@ -13,7 +13,6 @@ $$SHORTCODE$$.fileio.FILEIO_DONT_APPEND_NEWLINE = "DONT_APPEND_NL";
 
 /**
 * Append some text to a text file. If the file does not exist, it is created.
-* This function is async in idjs, but sync in ExtendScript and Node/JS
 * 
 * @function $$SHORTCODE$$.fileio.appendUTF8TextFile
 * 
@@ -26,7 +25,6 @@ $$SHORTCODE$$.fileio.appendUTF8TextFile = function(filePath, text, handleNewLine
 
 /**
 * Read a text file into memory. If the file does not exist, "" is returned.
-* This function is async in idjs, but sync in ExtendScript and Node/JS
 * 
 * @function $$SHORTCODE$$.fileio.readUTF8TextFile
 * 
@@ -38,7 +36,6 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = function(filePath) { return $$SHORTCODE$
 
 /**
 * Write out a string. 
-* This function is async in idjs, but sync in ExtendScript and Node/JS
 * 
 * @function $$SHORTCODE$$.fileio.writeUTF8TextFile
 * 

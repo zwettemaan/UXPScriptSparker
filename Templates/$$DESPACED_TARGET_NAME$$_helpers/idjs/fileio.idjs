@@ -40,7 +40,7 @@ var ES_SCRIPT_outputToUTF8TextFile =
 
 // No logging in these functions - they are themselves used by the logging functions
 
-$$SHORTCODE$$.fileio.appendUTF8TextFile = async function appendUTF8TextFile(filePath, text, handleNewLine) {
+$$SHORTCODE$$.fileio.appendUTF8TextFile = $$ASYNC$$function appendUTF8TextFile(filePath, text, handleNewLine) {
 
     try {
         var extendScript = 
@@ -50,13 +50,13 @@ $$SHORTCODE$$.fileio.appendUTF8TextFile = async function appendUTF8TextFile(file
                 $$SHORTCODE$$.dQ("a") + "," +
                 (handleNewLine == $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE ? "true" : "false") +
             ")";
-        await $$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+        $$AWAIT$$$$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
     }
     catch (err) {       
     }
 }
 
-$$SHORTCODE$$.fileio.readUTF8TextFile = async function readUTF8TextFile(filePath) {
+$$SHORTCODE$$.fileio.readUTF8TextFile = $$ASYNC$$function readUTF8TextFile(filePath) {
 
     var retVal;
 
@@ -65,7 +65,7 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = async function readUTF8TextFile(filePath
             ES_SCRIPT_readUTF8TextFile + "(" +
                 $$SHORTCODE$$.dQ(filePath) + 
             ")";
-        retVal = await eval($$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT));
+        retVal = $$AWAIT$$eval($$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT));
     }
     catch (err) {        
     }
@@ -73,7 +73,7 @@ $$SHORTCODE$$.fileio.readUTF8TextFile = async function readUTF8TextFile(filePath
     return retVal;
 }
 
-$$SHORTCODE$$.fileio.writeUTF8TextFile = async function writeUTF8TextFile(filePath, text, handleNewLine) {
+$$SHORTCODE$$.fileio.writeUTF8TextFile = $$ASYNC$$function writeUTF8TextFile(filePath, text, handleNewLine) {
 
     try {
         var extendScript = 
@@ -83,7 +83,7 @@ $$SHORTCODE$$.fileio.writeUTF8TextFile = async function writeUTF8TextFile(filePa
                 $$SHORTCODE$$.dQ("w") + "," +
                 (handleNewLine == $$SHORTCODE$$.fileio.FILEIO_APPEND_NEWLINE ? "true" : "false") +
             ")";
-        await $$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
+        $$AWAIT$$$$SHORTCODE$$.G.app.doScript(extendScript, ScriptLanguage.JAVASCRIPT);
     }
     catch (err) {        
     }
