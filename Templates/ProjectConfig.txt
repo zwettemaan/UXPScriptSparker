@@ -13,7 +13,7 @@ AWAIT=""
 IS_INTERNAL_AWAIT=1
 
 USE_ASYNC="0"
-HELP_USE_ASYNC="UXPScript uses async/await (InDesign 18.3) or not (InDesign > 18.4)"
+HELP_USE_ASYNC="Generate async/await constructs into UXPScript. Not generating async/await makes code run much faster in IDSN >= 18.4"
 SELECT_USE_ASYNC="1,0"
 
 PROJECT_VERSION="1.0.0"
