@@ -52,10 +52,37 @@ $$SHORTCODE$$.initDirsScript = function initDirsScript() {
                 $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.os.tmpdir());
 
             $$SHORTCODE$$.dirs.HOME = 
-                $$SHORTCODE$$.path.addTrailingSeparator(process.env.HOME);
+                $$SHORTCODE$$.path.addTrailingSeparator($$SHORTCODE$$.os.homedir());
 
             $$SHORTCODE$$.dirs.DESKTOP = 
                 $$SHORTCODE$$.dirs.HOME + "Desktop" + $$SHORTCODE$$.path.SEPARATOR;
+
+            if (! $$SHORTCODE$$.isWindows) {
+
+                $$SHORTCODE$$.dirs.DRIVE_PREFIX = "";
+
+            }
+            else {
+
+                var splitTempPath = $$SHORTCODE$$.dirs.TEMP.split($$SHORTCODE$$.path.SEPARATOR);
+
+                if (splitTempPath.length > 0) {
+                    $$SHORTCODE$$.dirs.DRIVE_PREFIX = splitTempPath[0] + $$SHORTCODE$$.path.SEPARATOR;
+                }
+
+                if (splitTempPath.length > 1) {
+                    $$SHORTCODE$$.dirs.USERS = 
+                        $$SHORTCODE$$.dirs.DRIVE_PREFIX + 
+                        splitTempPath[1] + $$SHORTCODE$$.path.SEPARATOR;
+                }
+
+                if (splitTempPath.length > 2) {
+                    $$SHORTCODE$$.dirs.HOME = 
+                        $$SHORTCODE$$.dirs.USERS + 
+                        splitTempPath[2] + $$SHORTCODE$$.path.SEPARATOR;
+                }
+
+            }
 
         }
         catch (err) { 

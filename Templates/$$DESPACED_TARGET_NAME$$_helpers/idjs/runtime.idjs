@@ -68,9 +68,9 @@ $$SHORTCODE$$.initDirsScript = async function initDirsScript() {
 
             try {
 
-                var splitTempPath = $$SHORTCODE$$.dirs.TEMP.split($$SHORTCODE$$.path.SEPARATOR);
-
                 if ($$SHORTCODE$$.isWindows) {
+
+                    var splitTempPath = $$SHORTCODE$$.dirs.TEMP.split($$SHORTCODE$$.path.SEPARATOR);
 
                     if (splitTempPath.length > 0) {
                         $$SHORTCODE$$.dirs.DRIVE_PREFIX = splitTempPath[0] + $$SHORTCODE$$.path.SEPARATOR;

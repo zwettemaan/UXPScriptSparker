@@ -163,6 +163,7 @@ $$SHORTCODE$$.tests.path.basename = function tests_basename() {
                 separator: undefined,
                 basename: "Desktop",
                 macDirname: "/Users/kris/",
+                linuxDirname: "/Users/kris/",
                 winDirname: "\\Users\\kris\\"
             },
             {
@@ -176,6 +177,7 @@ $$SHORTCODE$$.tests.path.basename = function tests_basename() {
                 separator: $$SHORTCODE$$.path.EITHER_SEPARATOR,
                 basename: "Desktop",
                 macDirname: "/Users/kris/",
+                linuxDirname: "/Users/kris/",
                 winDirname: "\\Users\\kris\\"
             },
             {
@@ -218,16 +220,20 @@ $$SHORTCODE$$.tests.path.basename = function tests_basename() {
                 filePath: "C:\\Users\\kris/Desktop/t.txt",
                 separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
                 macBasename: "t.txt",
+                linuxBasename: "t.txt",
                 winBasename: "kris/Desktop/t.txt",
                 macDirname: "C:\\Users\\kris/Desktop/",
+                linuxDirname: "C:\\Users\\kris/Desktop/",
                 winDirname: "C:\\Users\\"
             },
             {
                 filePath: "/Users/kris\\Desktop\\t.txt",
                 separator: $$SHORTCODE$$.path.GUESS_SEPARATOR,
                 macBasename: "kris\\Desktop\\t.txt",
+                linuxBasename: "kris\\Desktop\\t.txt",
                 winBasename: "t.txt",
                 macDirname: "/Users/",
+                linuxDirname: "/Users/",
                 winDirname: "/Users/kris\\Desktop\\"
             }
         ]
@@ -236,40 +242,40 @@ $$SHORTCODE$$.tests.path.basename = function tests_basename() {
             var test = tests[testIdx];
             var basename = $$SHORTCODE$$.path.basename(test.filePath, test.separator);
             var dirname = $$SHORTCODE$$.path.dirname(test.filePath, test.separator);
-            var expectedBasename;
-            var expectedDirname;
+
+            var expectedBasename = test.basename;
+            var expectedDirname = test.dirname;
+            
             if ($$SHORTCODE$$.isMac) {
                 if ("macBasename" in test) {
                     expectedBasename = test.macBasename;
                 }
-                else {
-                    expectedBasename = test.basename;
-                }
                 if ("macDirname" in test) {
                     expectedDirname = test.macDirname;
                 }
-                else {
-                    expectedDirname = test.dirname;
+            } 
+            else if ($$SHORTCODE$$.isLinux) {
+                if ("linuxBasename" in test) {
+                    expectedBasename = test.linuxBasename;
+                }
+                if ("linuxDirname" in test) {
+                    expectedDirname = test.linuxDirname;
                 }
             } 
             else if ($$SHORTCODE$$.isWindows) {
                 if ("winBasename" in test) {
                     expectedBasename = test.winBasename;
                 }
-                else {
-                    expectedBasename = test.basename;
-                }
                 if ("winDirname" in test) {
                     expectedDirname = test.winDirname;
                 }
-                else {
-                    expectedDirname = test.dirname;
-                }
             }
+
             if (expectedBasename != basename) {
                 retVal = false;
                 $$SHORTCODE$$.logError(arguments, "basename(" + test.filePath + "," + test.separator + ") returned '" + basename + "' but expected '" + expectedBasename + "'");
             }
+
             if (expectedDirname != dirname) {
                 retVal = false;
                 $$SHORTCODE$$.logError(arguments, "dirname(" + test.filePath + "," + test.separator + ") returned '" + dirname + "' but expected '" + expectedDirname + "'");
@@ -296,44 +302,44 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function tests_checkLowLev
             if ($$SHORTCODE$$.isWindows) {
 
                 // Directory
-                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users")) {
-                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Users")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Users should exist");
                     break;
                 }
 
                 // Directory with trailing separator
-                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/")) {
-                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/ should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Users\\")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Users\\ should exist");
                     break;
                 }
 
                 // Directory with spaces in the name
-                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files")) {
-                    $$SHORTCODE$$.logError(arguments, "'" + $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files' should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Program Files")) {
+                    $$SHORTCODE$$.logError(arguments, "'" + $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Program Files' should exist");
                     break;
                 }
 
                 // Directory with spaces in the name and trailing slash
-                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files/")) {
-                    $$SHORTCODE$$.logError(arguments, "'" + $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Program Files/' should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Program Files\\")) {
+                    $$SHORTCODE$$.logError(arguments, "'" + $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Program Files\\' should exist");
                     break;
                 }
 
                 // A file
-                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts")) {
-                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Windows\\System32\\Drivers\\etc\\hosts")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Windows\\System32\\Drivers\\etc\\hosts should exist");
                     break;
                 }
 
                 // A file with a trailing slash should exist
-                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts/")) {
-                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Windows/System32/Drivers/etc/hosts/ should exist");
+                if (! $$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Windows\\System32\\Drivers\\etc\\hosts\\")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Windows\\System32\\Drivers\\etc\\hosts\\ should exist");
                     break;
                 }
 
                 // A non-existent file
-                if ($$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/file_does_not_exist_no_way.txt")) {
-                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "/Users/file_does_not_exist_no_way.txt should not exist");
+                if ($$SHORTCODE$$.path.exists($$SHORTCODE$$.dirs.DRIVE_PREFIX + "Users\\file_does_not_exist_no_way.txt")) {
+                    $$SHORTCODE$$.logError(arguments, $$SHORTCODE$$.dirs.DRIVE_PREFIX + "Users\\file_does_not_exist_no_way.txt should not exist");
                     break;
                 }
             }
@@ -359,8 +365,41 @@ $$SHORTCODE$$.tests.path.checkLowLevelPathFunctions = function tests_checkLowLev
                 }
 
                 // Directory with spaces in the name and trailing slash
-                if (! $$SHORTCODE$$.path.exists("/Library//Application Support/")) {
+                if (! $$SHORTCODE$$.path.exists("/Library/Application Support/")) {
                     $$SHORTCODE$$.logError(arguments, "/Library/Application Support/ should exist");
+                    break;
+                }
+
+                // A file
+                if (! $$SHORTCODE$$.path.exists("/etc/hosts")) {
+                    $$SHORTCODE$$.logError(arguments, "/etc/hosts should exist");
+                    break;
+                }
+
+                // A file with a trailing slash should exist
+                if (! $$SHORTCODE$$.path.exists("/etc/hosts/")) {
+                    $$SHORTCODE$$.logError(arguments, "/etc/hosts/ should exist");
+                    break;
+                }
+
+                // A non-existent file
+                if ($$SHORTCODE$$.path.exists("/etc/file_does_not_exist_no_way.txt")) {
+                    $$SHORTCODE$$.logError(arguments, "/etc/file_does_not_exist_no_way.txt should not exist");
+                    break;
+                }
+            }
+
+            if ($$SHORTCODE$$.isLinux) {
+
+                // Directory
+                if (! $$SHORTCODE$$.path.exists("/home")) {
+                    $$SHORTCODE$$.logError(arguments, "/home should exist");
+                    break;
+                }
+
+                // Directory with trailing separator
+                if (! $$SHORTCODE$$.path.exists("/home/")) {
+                    $$SHORTCODE$$.logError(arguments, "/home/ should exist");
                     break;
                 }
 
@@ -574,21 +613,20 @@ $$SHORTCODE$$.tests.path.pathReduce = function tests_pathReduce() {
         for (var testIdx = 0; testIdx < tests.length; testIdx++) {
             var test = tests[testIdx];
             var reduce = $$SHORTCODE$$.path.reduce(test.filePath, test.separator);
-            var expectedReduce;
+            var expectedReduce = test.reduce;
             if ($$SHORTCODE$$.isMac) {
                 if ("macReduce" in test) {
                     expectedReduce = test.macReduce;
                 }
-                else {
-                    expectedReduce = test.reduce;
+            } 
+            else if ($$SHORTCODE$$.isLinux) {
+                if ("linuxReduce" in test) {
+                    expectedReduce = test.linuxReduce;
                 }
             } 
             else if ($$SHORTCODE$$.isWindows) {
-                if ("winBasename" in test) {
-                    expectedReduce = test.winBasename;
-                }
-                else {
-                    expectedReduce = test.basename;
+                if ("winReduce" in test) {
+                    expectedReduce = test.winReduce;
                 }
             }
             if (expectedReduce != reduce) {

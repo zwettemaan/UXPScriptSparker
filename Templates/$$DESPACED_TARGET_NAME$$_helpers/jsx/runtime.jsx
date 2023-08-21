@@ -60,6 +60,7 @@ $$SHORTCODE$$.initDirsScript = function initDirsScript() {
             }
             else {
                 var splitHomePath = $$SHORTCODE$$.dirs.HOME.split($$SHORTCODE$$.path.SEPARATOR);
+                
                 if (splitHomePath.length > 0) {
                     $$SHORTCODE$$.dirs.DRIVE_PREFIX = splitHomePath[0] + $$SHORTCODE$$.path.SEPARATOR;
                 }
