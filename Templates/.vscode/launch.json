@@ -8,7 +8,7 @@ $if "$$TARGETCONTEXT$$" != "Node Express Server"
             "name": "$$TARGET_NAME$$",
 $if "$$TARGET_APP_FULL_SPECIFIER$$" != ""
             "hostAppSpecifier": "$$TARGET_APP_FULL_SPECIFIER$$",
-$endif            
+$endif
             "script": "${workspaceFolder}/run_as_ExtendScript.jsx",
             "engineName": "$$SHORTCODE$$.extendScriptEngine"
         }
